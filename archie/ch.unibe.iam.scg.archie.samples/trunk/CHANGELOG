@@ -1,0 +1,16 @@
+ARCHIE SAMPLES - CHANGELOG
+==========================
+
+0.7
+---
+
+- Initial implementation
+
+0.8
+---
+
+- Converted from plugin to fragment
+- Minor refactorings
+- Added Person wrapper class
+- Added custom label provider for person entries
+- Added service statistics

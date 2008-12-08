@@ -1,0 +1,16 @@
+CHANGELOG
+=========
+
+0.7
+---
+
+- Initial implementation
+
+0.8
+---
+
+- Minor code refactorings
+- Fixed date bugs in dashboard charts
+- Added on-demand chart creation in dashboard
+- Added actions instead of buttons for dashboard functions
+- Refactored dashboard composites and messages
