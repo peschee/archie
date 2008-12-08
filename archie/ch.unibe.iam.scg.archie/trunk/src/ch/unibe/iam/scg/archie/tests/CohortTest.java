@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import ch.unibe.iam.scg.archie.model.Cohort;
@@ -32,21 +34,21 @@ import ch.unibe.iam.scg.archie.model.Cohort;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class CohortTest {
+public class CohortTest extends TestCase {
 
-	private static Cohort cohort;
-	private static Cohort cohortSame;
-	private static Cohort cohortSmall;
-	private static Cohort cohortLarge;
-	private static Cohort cohortStrange;
+	private Cohort cohort;
+	private Cohort cohortSame;
+	private Cohort cohortSmall;
+	private Cohort cohortLarge;
+	private Cohort cohortStrange;
 
-	@BeforeClass
-	public static void setUpClass() {
-		cohort = new Cohort(5, 30, "Hello World");
-		cohortSame = new Cohort(5, 30, "Something else");
-		cohortSmall = new Cohort(10, 15, new Integer(3));
-		cohortLarge = new Cohort(10, 30, new Integer(5));
-		cohortStrange = new Cohort(-30, -10, cohort);
+	@Before
+	public void setUp() {
+		this.cohort = new Cohort(5, 30, "Hello World");
+		this.cohortSame = new Cohort(5, 30, "Something else");
+		this.cohortSmall = new Cohort(10, 15, new Integer(3));
+		this.cohortLarge = new Cohort(10, 30, new Integer(5));
+		this.cohortStrange = new Cohort(-30, -10, cohort);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -58,30 +60,30 @@ public class CohortTest {
 
 	@Test
 	public void testCompareTo() {
-		Assert.assertEquals(cohortSmall.compareTo(cohortLarge), -1);
-		Assert.assertEquals(cohortLarge.compareTo(cohortSmall), 1);
-		Assert.assertEquals(cohortLarge.compareTo(cohortLarge), 0);
+		Assert.assertEquals(this.cohortSmall.compareTo(this.cohortLarge), -1);
+		Assert.assertEquals(this.cohortLarge.compareTo(this.cohortSmall), 1);
+		Assert.assertEquals(this.cohortLarge.compareTo(this.cohortLarge), 0);
 		ArrayList<Cohort> cohorts = new ArrayList<Cohort>(5);
-		cohorts.add(cohort);
-		cohorts.add(cohortSame);
-		cohorts.add(cohortStrange);
-		cohorts.add(cohortLarge);
-		cohorts.add(cohortSmall);
+		cohorts.add(this.cohort);
+		cohorts.add(this.cohortSame);
+		cohorts.add(this.cohortStrange);
+		cohorts.add(this.cohortLarge);
+		cohorts.add(this.cohortSmall);
 		Collections.sort(cohorts);
-		Assert.assertTrue(cohorts.get(0).equals(cohortStrange));
-		Assert.assertTrue(cohorts.get(1).equals(cohortSame));
-		Assert.assertTrue(cohorts.get(2).equals(cohort));
-		Assert.assertTrue(cohorts.get(3).equals(cohortSmall));
-		Assert.assertTrue(cohorts.get(4).equals(cohortLarge));
+		Assert.assertTrue(cohorts.get(0).equals(this.cohortStrange));
+		Assert.assertTrue(cohorts.get(1).equals(this.cohortSame));
+		Assert.assertTrue(cohorts.get(2).equals(this.cohort));
+		Assert.assertTrue(cohorts.get(3).equals(this.cohortSmall));
+		Assert.assertTrue(cohorts.get(4).equals(this.cohortLarge));
 	}
 
 	@Test
 	public void testEquals() {
-		Assert.assertTrue(cohort.equals(cohort));
-		Assert.assertTrue(cohortStrange.getValue().equals(cohort));
-		Assert.assertTrue(cohort.equals(cohortSame));
-		Assert.assertFalse(cohort.equals(cohortLarge));
-		Assert.assertFalse(cohort.equals(cohortSmall));
+		Assert.assertTrue(this.cohort.equals(this.cohort));
+		Assert.assertTrue(this.cohortStrange.getValue().equals(this.cohort));
+		Assert.assertTrue(this.cohort.equals(this.cohortSame));
+		Assert.assertFalse(this.cohort.equals(this.cohortLarge));
+		Assert.assertFalse(this.cohort.equals(this.cohortSmall));
 	}
 
 	@Test

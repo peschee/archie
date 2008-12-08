@@ -14,13 +14,16 @@ package ch.unibe.iam.scg.archie.tests;
 import java.util.ArrayList;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import ch.unibe.iam.scg.archie.model.DataSet;
 
 /**
- * <p>Tests <code>DataSet</code></p>
+ * <p>
+ * Tests <code>DataSet</code>
+ * </p>
+ * 
  * <pre>
  * SampleDataSet:
  * ==============
@@ -32,7 +35,9 @@ import ch.unibe.iam.scg.archie.model.DataSet;
  * 1   | Vreni      | Müller    | Musterstrasse 1 | Switzerland
  * 2   | Jakob      | Meier     | Ottweg 3        | Switzerland
  * </pre>
- * <p>E.g getCell(2,1) == Meier (Matrix notation)</p>
+ * <p>
+ * E.g getCell(2,1) == Meier (Matrix notation)
+ * </p>
  * 
  * $Id$
  * 
@@ -42,105 +47,105 @@ import ch.unibe.iam.scg.archie.model.DataSet;
  */
 public class DataSetTest {
 
-	private static DataSet sampleDataSet;
-	private static DataSet emptyDataSet;
-	private static ArrayList<String> sampleHeadings  = new ArrayList<String>();
-	private static ArrayList<String> sampleHeadingsTooFew = new ArrayList<String>();
-	private static ArrayList<Comparable<?>[]> sampleContent = new ArrayList<Comparable<?>[]>();
-	
-	private static String[] sampleRow1 = {"Hans", "Muster", "Superstrasse 1", "Switzerland"};
-	private static String[] sampleRow2 = {"Vreni", "Müller", "Musterstrasse 1", "Switzerland"};
-	private static String[] sampleRow3 = {"Jakob", "Meier", "Ottweg 3", "Switzerland"};
-	private static String[] smallRow = {"Jakob", "Meier", "Ottweg 3"};
-	
-	@BeforeClass 
-	public static void setUpClass() {
-		sampleHeadings.add("First Name");
-		sampleHeadings.add("Last Name");
-		sampleHeadings.add("Address");
-		sampleHeadings.add("Country");
-		
-		sampleHeadingsTooFew.add("First Name");
-		sampleHeadingsTooFew.add("Last Name");
-		sampleHeadingsTooFew.add("Address");
-		
-		sampleContent.add(sampleRow1);
-		sampleContent.add(sampleRow2);
-		sampleContent.add(sampleRow3);
-		
-		sampleDataSet = new DataSet(sampleContent, sampleHeadings);
-		emptyDataSet = new DataSet();
+	private DataSet sampleDataSet;
+	private DataSet emptyDataSet;
+	private ArrayList<String> sampleHeadings = new ArrayList<String>();
+	private ArrayList<String> sampleHeadingsTooFew = new ArrayList<String>();
+	private ArrayList<Comparable<?>[]> sampleContent = new ArrayList<Comparable<?>[]>();
+
+	private String[] sampleRow1 = { "Hans", "Muster", "Superstrasse 1", "Switzerland" };
+	private String[] sampleRow2 = { "Vreni", "Müller", "Musterstrasse 1", "Switzerland" };
+	private String[] sampleRow3 = { "Jakob", "Meier", "Ottweg 3", "Switzerland" };
+	private String[] smallRow = { "Jakob", "Meier", "Ottweg 3" };
+
+	@Before
+	public void setUp() {
+		this.sampleHeadings.add("First Name");
+		this.sampleHeadings.add("Last Name");
+		this.sampleHeadings.add("Address");
+		this.sampleHeadings.add("Country");
+
+		this.sampleHeadingsTooFew.add("First Name");
+		this.sampleHeadingsTooFew.add("Last Name");
+		this.sampleHeadingsTooFew.add("Address");
+
+		this.sampleContent.add(this.sampleRow1);
+		this.sampleContent.add(this.sampleRow2);
+		this.sampleContent.add(this.sampleRow3);
+
+		this.sampleDataSet = new DataSet(this.sampleContent, this.sampleHeadings);
+		this.emptyDataSet = new DataSet();
 	}
-	
+
 	@Test
 	public void testClone() {
-		DataSet clonedSet = (DataSet) DataSetTest.sampleDataSet.clone();
-		Assert.assertNotSame(clonedSet, DataSetTest.sampleDataSet);
-		Assert.assertNotSame(clonedSet.getContent(), DataSetTest.sampleDataSet.getContent());
-		Assert.assertNotSame(clonedSet.getHeadings(), DataSetTest.sampleDataSet.getHeadings());
+		DataSet clonedSet = (DataSet) this.sampleDataSet.clone();
+		Assert.assertNotSame(clonedSet, this.sampleDataSet);
+		Assert.assertNotSame(clonedSet.getContent(), this.sampleDataSet.getContent());
+		Assert.assertNotSame(clonedSet.getHeadings(), this.sampleDataSet.getHeadings());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void constructorWithNullAsArguments() {
 		new DataSet(null, null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void constructorWithEmptyArguments() {
 		new DataSet(new ArrayList<Comparable<?>[]>(), new ArrayList<String>());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void constructorWithTooFewHeaders() {
-		new DataSet(sampleContent, sampleHeadingsTooFew);
+		new DataSet(this.sampleContent, this.sampleHeadingsTooFew);
 	}
 
 	@Test
 	public void testGetters() {
-		Assert.assertEquals(sampleContent, sampleDataSet.getContent());
-		Assert.assertEquals(sampleHeadings, sampleDataSet.getHeadings());
-		Assert.assertArrayEquals(sampleRow1, sampleDataSet.getRow(0));
-		Assert.assertArrayEquals(sampleRow2, sampleDataSet.getRow(1));
-		Assert.assertArrayEquals(sampleRow3, sampleDataSet.getRow(2));
-		Assert.assertEquals("Hans", sampleDataSet.getCell(0, 0));
-		Assert.assertEquals("Meier", sampleDataSet.getCell(2, 1));
-		Assert.assertEquals("Vreni", sampleDataSet.getCell(1, 0));
+		Assert.assertEquals(this.sampleContent, this.sampleDataSet.getContent());
+		Assert.assertEquals(this.sampleHeadings, this.sampleDataSet.getHeadings());
+		Assert.assertArrayEquals(this.sampleRow1, this.sampleDataSet.getRow(0));
+		Assert.assertArrayEquals(this.sampleRow2, this.sampleDataSet.getRow(1));
+		Assert.assertArrayEquals(this.sampleRow3, this.sampleDataSet.getRow(2));
+		Assert.assertEquals("Hans", this.sampleDataSet.getCell(0, 0));
+		Assert.assertEquals("Meier", this.sampleDataSet.getCell(2, 1));
+		Assert.assertEquals("Vreni", this.sampleDataSet.getCell(1, 0));
 		Object[] column1 = new Object[3];
 		column1[0] = "Muster";
 		column1[1] = "Müller";
 		column1[2] = "Meier";
-		Assert.assertArrayEquals(column1, sampleDataSet.getColumn(1));
+		Assert.assertArrayEquals(column1, this.sampleDataSet.getColumn(1));
 	}
-	
-	@Test(expected=IndexOutOfBoundsException.class)
+
+	@Test(expected = IndexOutOfBoundsException.class)
 	public void testGetWithEmptyDataSet() {
-		emptyDataSet.getCell(3, 4);
+		this.emptyDataSet.getCell(3, 4);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testSetWithEmptyDataSet() {
-		emptyDataSet.setCell(2, 4, "Some String");
+		this.emptyDataSet.setCell(2, 4, "Some String");
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void addTooSmallRowTest() {
-		sampleDataSet.addRow(smallRow);
+		this.sampleDataSet.addRow(this.smallRow);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void settingContentBeforeHeadings() {
 		DataSet dataSet = new DataSet();
-		dataSet.setContent(sampleContent);
+		dataSet.setContent(this.sampleContent);
 	}
-	
+
 	@Test
 	public void toStringTest() {
 		String desiredOutput = 
-		"| First Name | Last Name  | Address         | Country     \n" +
-		"----------------------------------------------------------\n" +
-		"| Hans       | Muster     | Superstrasse 1  | Switzerland \n" +
-		"| Vreni      | Müller     | Musterstrasse 1 | Switzerland \n" +
-		"| Jakob      | Meier      | Ottweg 3        | Switzerland \n";
-		Assert.assertEquals(desiredOutput, sampleDataSet.toString());
+				  "| First Name | Last Name  | Address         | Country     \n"
+				+ "----------------------------------------------------------\n"
+				+ "| Hans       | Muster     | Superstrasse 1  | Switzerland \n"
+				+ "| Vreni      | Müller     | Musterstrasse 1 | Switzerland \n"
+				+ "| Jakob      | Meier      | Ottweg 3        | Switzerland \n";
+		Assert.assertEquals(desiredOutput, this.sampleDataSet.toString());
 	}
 }

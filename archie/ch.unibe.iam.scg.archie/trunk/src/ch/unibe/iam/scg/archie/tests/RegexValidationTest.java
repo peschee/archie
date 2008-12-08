@@ -12,7 +12,7 @@
 package ch.unibe.iam.scg.archie.tests;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import ch.unibe.iam.scg.archie.utils.RegexValidation;
@@ -27,32 +27,33 @@ import ch.unibe.iam.scg.archie.utils.RegexValidation;
  * @version $Rev$
  */
 public class RegexValidationTest {
-	
-	private static RegexValidation someRegexVal;
+
+	private RegexValidation someRegexVal;
+
 	private static final String SOME_PATTERN = "\\d{3,}";
 	private static final String SOME_MESSAGE = "Some Regex Validation Message";
 	private static final String ANOTHER_PATTERN = "\\d{1,}";
 	private static final String ANOTHER_MESSAGE = "Another Regex Validation Message";
-	
-	@BeforeClass 
-	public static void setUpClass() {
-		someRegexVal = new RegexValidation(SOME_PATTERN, SOME_MESSAGE);
+
+	@Before
+	public void setUp() {
+		this.someRegexVal = new RegexValidation(SOME_PATTERN, SOME_MESSAGE);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void constructorArgumentsTest() {
 		new RegexValidation(null, null);
 	}
 
 	@Test
 	public void getterAndSetterTest() {
-		Assert.assertNotNull(someRegexVal.getMessage());
-		Assert.assertNotNull(someRegexVal.getPattern());
-		Assert.assertEquals(someRegexVal.getMessage(), SOME_MESSAGE);
-		Assert.assertEquals(someRegexVal.getPattern(), SOME_PATTERN);
-		someRegexVal.setMessage(ANOTHER_MESSAGE);
-		someRegexVal.setPattern(ANOTHER_PATTERN);
-		Assert.assertEquals(someRegexVal.getMessage(), ANOTHER_MESSAGE);
-		Assert.assertEquals(someRegexVal.getPattern(), ANOTHER_PATTERN);
+		Assert.assertNotNull(this.someRegexVal.getMessage());
+		Assert.assertNotNull(this.someRegexVal.getPattern());
+		Assert.assertEquals(this.someRegexVal.getMessage(), SOME_MESSAGE);
+		Assert.assertEquals(this.someRegexVal.getPattern(), SOME_PATTERN);
+		this.someRegexVal.setMessage(ANOTHER_MESSAGE);
+		this.someRegexVal.setPattern(ANOTHER_PATTERN);
+		Assert.assertEquals(this.someRegexVal.getMessage(), ANOTHER_MESSAGE);
+		Assert.assertEquals(this.someRegexVal.getPattern(), ANOTHER_PATTERN);
 	}
 }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import ch.rgw.tools.Money;
@@ -50,17 +50,17 @@ import ch.unibe.iam.scg.archie.utils.DatasetHelper;
  */
 public class DatasetHelperTest {
 
-	private static DataSet sampleDataSet;
+	private DataSet sampleDataSet;
 
-	private static ArrayList<String> sampleHeadings = new ArrayList<String>();
-	private static ArrayList<Comparable<?>[]> sampleContent = new ArrayList<Comparable<?>[]>();
+	private ArrayList<String> sampleHeadings = new ArrayList<String>();
+	private ArrayList<Comparable<?>[]> sampleContent = new ArrayList<Comparable<?>[]>();
 
-	private static Comparable<?>[] sampleRow1 = { "Hans", 24, new Money(3500.70), 0.03 };
-	private static Comparable<?>[] sampleRow2 = { "Vreni", 16, new Money(6400.00), 0.12 };
-	private static Comparable<?>[] sampleRow3 = { "Jakob", 54, new Money(7891.23), 0.98 };
+	private Comparable<?>[] sampleRow1 = { "Hans", 24, new Money(3500.70), 0.03 };
+	private Comparable<?>[] sampleRow2 = { "Vreni", 16, new Money(6400.00), 0.12 };
+	private Comparable<?>[] sampleRow3 = { "Jakob", 54, new Money(7891.23), 0.98 };
 
-	@BeforeClass
-	public static void setUpClass() {
+	@Before
+	public void setUp() {
 		sampleHeadings.add("First Name");
 		sampleHeadings.add("Age");
 		sampleHeadings.add("Salary");
@@ -74,8 +74,8 @@ public class DatasetHelperTest {
 	}
 
 	@Test
-	public void testSortingDataset() {	
-		DataSet clonedDataset = (DataSet) DatasetHelperTest.sampleDataSet.clone();
+	public void testSortingDataset() {
+		DataSet clonedDataset = (DataSet) this.sampleDataSet.clone();
 
 		Assert.assertEquals("Hans", clonedDataset.getCell(0, 0));
 		Assert.assertEquals("Vreni", clonedDataset.getCell(1, 0));
@@ -94,30 +94,30 @@ public class DatasetHelperTest {
 		Assert.assertEquals("Hans", clonedDataset.getCell(2, 0));
 
 		DatasetHelper.sortDataSet(clonedDataset, "Salary", SWT.DOWN);
-		
+
 		Assert.assertEquals(new Money(7891.23), clonedDataset.getCell(0, 2));
 		Assert.assertEquals(new Money(6400.00), clonedDataset.getCell(1, 2));
-		Assert.assertEquals(new Money(3500.70), clonedDataset.getCell(2, 2));	
+		Assert.assertEquals(new Money(3500.70), clonedDataset.getCell(2, 2));
 	}
-	
+
 	@Test
-	public void testNumericColumns() {	
-		DataSet dataset = DatasetHelperTest.sampleDataSet;
-		
+	public void testNumericColumns() {
+		DataSet dataset = this.sampleDataSet;
+
 		Assert.assertFalse(DatasetHelper.isNumericColumn(dataset, 0));
 		Assert.assertTrue(DatasetHelper.isNumericColumn(dataset, 1));
-		
+
 		Assert.assertFalse(DatasetHelper.isNumericColumn(dataset, 2));
-		Assert.assertTrue(DatasetHelper.isMoneyColumn(dataset, 2));		
-		
+		Assert.assertTrue(DatasetHelper.isMoneyColumn(dataset, 2));
+
 		Assert.assertTrue(DatasetHelper.isNumericColumn(dataset, 3));
-		
+
 		Assert.assertFalse(DatasetHelper.isNumericColumn(dataset, "First Name"));
 		Assert.assertTrue(DatasetHelper.isNumericColumn(dataset, "Age"));
-		
+
 		Assert.assertFalse(DatasetHelper.isNumericColumn(dataset, "Salary"));
 		Assert.assertTrue(DatasetHelper.isMoneyColumn(dataset, "Salary"));
-		
-		Assert.assertTrue(DatasetHelper.isNumericColumn(dataset, "Happyness"));	
+
+		Assert.assertTrue(DatasetHelper.isNumericColumn(dataset, "Happyness"));
 	}
 }
