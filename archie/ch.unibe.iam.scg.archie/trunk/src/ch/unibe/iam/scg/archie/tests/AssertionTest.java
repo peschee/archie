@@ -11,11 +11,10 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.tests;
 
+import org.junit.Test;
 
 /**
- * <p>
- * Tests the ChartModel
- * </p>
+ * Tests that assertions are enabled in the currently set java compiler.
  * 
  * $Id$
  * 
@@ -23,6 +22,10 @@ package ch.unibe.iam.scg.archie.tests;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class ChartModelTest {
+public class AssertionTest {
 
+	@Test(expected = AssertionError.class)
+	public void assertionsEnabled() {
+		assert false;
+	}
 }
