@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="ch.unibe.iam.scg.elexis_statistics.datasource" name="Statistics Data Source" schema="schema/ch.unibe.iam.scg.elexis_statictics.datasource.exsd"/>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="ch.unibe.iam.scg.elexis_statistics.ui.views.StatisticsView"
+            icon="icons/chart_pie.png"
+            id="ch.unibe.iam.scg.elexis_statistics.views.StatisticsView"
+            name="%VIEW_MAIN"
+            restorable="true">
+      </view>
+      <view
+            class="ch.unibe.iam.scg.elexis_statistics.ui.views.StatisticsSidebarView"
+            icon="icons/application_form_edit.png"
+            id="ch.unibe.iam.scg.elexis_statistics.views.StatisticsSidebarView"
+            name="%VIEW_SIDEBAR"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="ch.unibe.iam.scg.elexis_statistics.ui.perspectives.StatisticsPerspective"
+            icon="icons/chart_bar.png"
+            id="ch.unibe.iam.scg.elexis_statistics.StatisticsPerspective"
+            name="%PERSPECTIVE"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="ch.unibe.iam.scg.elexis_statistics.actionSet"
+            label="Elexis Statistics ActionSet"
+            visible="true">
+         <action
+               class="ch.unibe.iam.scg.elexis_statistics.actions.OpenStatisticsPerspective"
+               icon="icons/chart_line.png"
+               id="ch.unibe.iam.scg.elexis_statistics.actions.OpenStatisticsPerspective"
+               label="Open Statistics Perspective"
+               toolbarPath="Statistics"
+               tooltip="Open Statistics Perspective">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Users Plug-in
+Bundle-SymbolicName: ch.unibe.iam.scg.elexis_statistics.users;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: ch.unibe.iam.scg.elexis_statistics.users.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ ch.elexis,
+ ch.unibe.iam.scg.elexis_statistics
+Eclipse-LazyStart: true

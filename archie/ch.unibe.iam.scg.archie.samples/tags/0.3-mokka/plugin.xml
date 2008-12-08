@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="ch.unibe.iam.scg.elexis_statistics.datasource">
+      <DataSource
+            class="ch.unibe.iam.scg.elexis_statistics.samples.UserStats"
+            name="User Statistik">
+      </DataSource>
+      <DataSource
+            class="ch.unibe.iam.scg.elexis_statistics.samples.PatientCosts"
+            name="Patientenkosten">
+      </DataSource>
+      <DataSource
+            class="ch.unibe.iam.scg.elexis_statistics.samples.ConsultationStats"
+            name="Konsultationen">
+      </DataSource>
+   </extension>
+
+</plugin>
