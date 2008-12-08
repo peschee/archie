@@ -76,6 +76,16 @@ public final class Messages extends NLS {
 	public static String SERVICES_HEADING_INCOME;
 	public static String SERVICES_HEADING_PROFITS;
 	
+	// Diagnoses Statistics
+	public static String DIAGNOSES_TITLE;
+	public static String DIAGNOSES_DESCRIPTION;
+	public static String DIAGNOSES_HEADING_DIAGNOSE;
+	public static String DIAGNOSES_HEADING_COUNT;
+	public static String DIAGNOSES_HEADING_AGE_MIN;
+	public static String DIAGNOSES_HEADING_AGE_MAX;
+	public static String DIAGNOSES_HEADING_AGE_AVG;
+	public static String DIAGNOSES_HEADING_AGE_MED;
+
 	static {
 		// load message values from bundle file
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
