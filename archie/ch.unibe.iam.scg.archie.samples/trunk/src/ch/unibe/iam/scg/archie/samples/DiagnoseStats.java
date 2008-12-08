@@ -35,7 +35,7 @@ import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
- * TODO: DOCUMENT ME!
+ * Provides statistics about diagnoses count and age distribution.
  * 
  * $Id$
  * 
@@ -56,17 +56,14 @@ public class DiagnoseStats extends AbstractTimeSeries {
 	 * Constructs DiagnoseStats
 	 */
 	public DiagnoseStats() {
-		super("Diagnose Statistics");
+		super(Messages.DIAGNOSES_TITLE);
 		this.currentMandatorOnly = true;
 	}
 
 	@Override
 	protected IStatus createContent(IProgressMonitor monitor) {
-		// result list
-		final ArrayList<Comparable<?>[]> content = new ArrayList<Comparable<?>[]>();
-		final TreeMap<String, List<Patient>> diagnoseMap = new TreeMap<String, List<Patient>>();
 
-		// form query
+		// Form query.
 		final SimpleDateFormat databaseFormat = new SimpleDateFormat(DATE_DB_FORMAT);
 		final Query<Konsultation> query = new Query<Konsultation>(Konsultation.class);
 
@@ -81,11 +78,13 @@ public class DiagnoseStats extends AbstractTimeSeries {
 
 		this.size = consults.size();
 		monitor.beginTask(Messages.DB_QUERYING, this.size);
-
-		// get consultations and their patient and diagnoses stats and put them
-		// all in a map that we can process later
+		
+		final TreeMap<String, List<Patient>> diagnoseMap = new TreeMap<String, List<Patient>>();
+		
+		// Get consultations and their patient and diagnoses stats and put them
+		// all in a map that we can process later.
 		for (Konsultation consult : consults) {
-			// check for cancelation
+			// Check for Cancellation.
 			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
 			
 			List<IDiagnose> diagnoses = consult.getDiagnosen();
@@ -105,9 +104,11 @@ public class DiagnoseStats extends AbstractTimeSeries {
 			monitor.worked(1);
 		}
 
-		// build up result list from diagnose map
+		final ArrayList<Comparable<?>[]> result = new ArrayList<Comparable<?>[]>();
+		
+		// Build up result list from diagnose map.
 		for (Entry<String, List<Patient>> entry : diagnoseMap.entrySet()) {
-			// check for cancelation
+			// Check for cancellation.
 			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
 			
 			Comparable<?>[] row = new Comparable<?>[this.dataSet.getHeadings().size()];
@@ -117,7 +118,7 @@ public class DiagnoseStats extends AbstractTimeSeries {
 			row[column++] = entry.getKey();
 			row[column++] = patients.size();
 
-			// compute patient age stats
+			// Compute patient age stats
 			double ageMin = 10000, ageMax = 0, ageTotal = 0, ageMedian = 0;
 			ArrayList<Integer> ageList = new ArrayList<Integer>();
 			for (Patient patient : patients) {
@@ -128,7 +129,7 @@ public class DiagnoseStats extends AbstractTimeSeries {
 				ageTotal += age;
 			}
 
-			// sort ages and compute median
+			// Sort ages and compute median.
 			ageMedian = Statistics.calculateMedian(ageList);
 
 			final DecimalFormat df = new DecimalFormat("0.0");
@@ -139,35 +140,35 @@ public class DiagnoseStats extends AbstractTimeSeries {
 			row[column++] = ageAvg;
 			row[column++] = ageMedian;
 
-			content.add(row);
+			result.add(row);
 		}
 		
-		// set content
-		this.dataSet.setContent(content);
+		// Set content.
+		this.dataSet.setContent(result);
 
-		// job finished successfully
+		// Job finished successfully
 		monitor.done();
 		return Status.OK_STATUS;
 	}
 
 	@Override
 	protected List<String> createHeadings() {
-		final ArrayList<String> headings = new ArrayList<String>();
-		headings.add("Diagnose");
-		headings.add("Count");
-		headings.add("Age Min");
-		headings.add("Age Max");
-		headings.add("Age Avg");
-		headings.add("Age Median");
+		final ArrayList<String> headings = new ArrayList<String>(6);
+		headings.add(Messages.DIAGNOSES_HEADING_DIAGNOSE);
+		headings.add(Messages.DIAGNOSES_HEADING_COUNT);
+		headings.add(Messages.DIAGNOSES_HEADING_AGE_MIN);
+		headings.add(Messages.DIAGNOSES_HEADING_AGE_MAX);
+		headings.add(Messages.DIAGNOSES_HEADING_AGE_AVG);
+		headings.add(Messages.DIAGNOSES_HEADING_AGE_MED);
 		return headings;
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.model.AbstractDataProvider#getDescription()
 	 */
 	@Override
 	public String getDescription() {
-		return "Generates statistics about common diagnoses, their costs and age distribution.";
+		return Messages.DIAGNOSES_DESCRIPTION;
 	}
 
 	/**
