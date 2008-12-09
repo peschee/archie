@@ -57,7 +57,6 @@ public class ServiceStats extends AbstractTimeSeries {
 		super(Messages.SERVICES_TITLE);
 		this.currentMandatorOnly = true;
 		this.groupByServiceClass = false;
-
 	}
 
 	/** {@inheritDoc} */
