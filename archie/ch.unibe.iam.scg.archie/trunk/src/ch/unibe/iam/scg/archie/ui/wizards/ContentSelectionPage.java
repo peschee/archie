@@ -70,7 +70,7 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 	}
 
 	/**
-	 * (non-Javadoc)
+	 * Creates the control of this wizard page.
 	 * 
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -78,18 +78,21 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		composite.setLayout(new GridLayout());
-		
+
 		final DataSet dataset = ((ChartWizard) this.getWizard()).getModel().getDataSet();
 
-		// create table from the currently model dataset and use current data provider for label and content providers.
-		this.table = TableFactory.getInstance().createTableFromData(composite, dataset, ProviderManager.getInstance().getProvider().getLabelProvider(), ProviderManager.getInstance().getProvider().getContentProvider());
-		
+		// create table from the currently model dataset and use current data
+		// provider for label and content providers.
+		this.table = TableFactory.getInstance().createTableFromData(composite, dataset,
+				ProviderManager.getInstance().getProvider().getLabelProvider(),
+				ProviderManager.getInstance().getProvider().getContentProvider());
+
 		// add selection listener
 		this.table.addSelectionListener(this);
 		for (TableColumn column : this.table.getColumns()) {
 			column.addSelectionListener(this);
 		}
-		
+
 		// add dataset - table column sorter
 		new DatasetTableColumnSorter(this.table, dataset);
 
@@ -104,7 +107,7 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 	}
 
 	/**
-	 * (non-Javadoc)
+	 * Returns false, as this is the last page of the wizard.
 	 * 
 	 * @see org.eclipse.jface.wizard.WizardPage#canFlipToNextPage()
 	 */
@@ -114,7 +117,7 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 	}
 
 	/**
-	 * (non-Javadoc)
+	 * Does nothing.
 	 * 
 	 * @see org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org.eclipse.swt.events.SelectionEvent)
 	 */
@@ -123,7 +126,8 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 	}
 
 	/**
-	 * (non-Javadoc)
+	 * Retrieves the selected rows from the table and sets them as indexes of
+	 * the model.
 	 * 
 	 * @see org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse.swt.events.SelectionEvent)
 	 */
