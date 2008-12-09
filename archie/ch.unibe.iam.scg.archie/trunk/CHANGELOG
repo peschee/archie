@@ -14,3 +14,9 @@ CHANGELOG
 - Added on-demand chart creation in dashboard
 - Added actions instead of buttons for dashboard functions
 - Refactored dashboard composites and messages
+
+0.8.1
+-----
+
+- Fixed bug where the dataset would not be sorted along with
+  the table on the selection page in the chart builder wizard
