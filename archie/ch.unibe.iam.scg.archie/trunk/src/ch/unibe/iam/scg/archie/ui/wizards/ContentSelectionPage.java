@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import ch.unibe.iam.scg.archie.model.ChartModel;
 import ch.unibe.iam.scg.archie.model.DataSet;
+import ch.unibe.iam.scg.archie.model.DatasetTableColumnSorter;
 import ch.unibe.iam.scg.archie.model.ProviderManager;
 import ch.unibe.iam.scg.archie.model.TableFactory;
 import ch.unibe.iam.scg.archie.model.TableManager;
@@ -90,7 +91,7 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 		}
 		
 		// add dataset - table column sorter
-		//new DatasetTableColumnSorter(this.table, dataset);
+		new DatasetTableColumnSorter(this.table, dataset);
 
 		// check if the table manager has sort direction and column
 		TableManager manager = TableManager.getInstance();
