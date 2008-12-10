@@ -22,3 +22,4 @@ Export-Package: ch.unibe.iam.scg.archie.annotations,
  ch.unibe.iam.scg.archie.model,
  ch.unibe.iam.scg.archie.ui,
  org.jfree.data.statistics
+Bundle-Vendor: designchuchi.ch
