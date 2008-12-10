@@ -20,3 +20,5 @@ CHANGELOG
 
 - Fixed bug where the dataset would not be sorted along with
   the table on the selection page in the chart builder wizard
+- Added copy selected items command. Items from the main view's 
+  table can now be copied into the clipboard.
