@@ -22,14 +22,18 @@ import java.util.Observer;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import ch.elexis.Desk;
+import ch.elexis.Hub;
 import ch.elexis.util.Log;
 import ch.elexis.util.SWTHelper;
 import ch.unibe.iam.scg.archie.ArchieActivator;
@@ -186,12 +190,20 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 				} else {
 					// create result table
 					TableFactory tableFactory = TableFactory.getInstance();
-					Table table = tableFactory.createTableFromData(results, provider.getDataSet(), provider
+					TableViewer viewer = tableFactory.createTableFromData(results, provider.getDataSet(), provider
 							.getLabelProvider(), provider.getContentProvider());
 
 					// add column dataset sorter and add table to the manager
-					new DatasetTableColumnSorter(table, dataset);
-					TableManager.getInstance().setTable(table);
+					new DatasetTableColumnSorter(viewer.getTable(), dataset);
+					TableManager.getInstance().setTable(viewer.getTable());
+					
+					// add selection menu
+					MenuManager menuManager = new MenuManager();
+					Menu menu = menuManager.createContextMenu(viewer.getTable());
+					viewer.getTable().setMenu(menu);
+					
+					NewStatisticsAction.this.view.getSite().registerContextMenu(menuManager, viewer);
+					NewStatisticsAction.this.view.getSite().setSelectionProvider(viewer);
 				}
 
 				// remove old chart models

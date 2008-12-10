@@ -80,4 +80,26 @@
             name="%PERSPECTIVE">
       </Perspektive>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="ch.unibe.iam.scg.archie.commands.CopySelected"
+            description="Copies the currently selected items from the table to the system clipboard."
+            id="ch.unibe.iam.scg.archie.commands.CopySelected"
+            name="Copy Selected">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:ch.unibe.iam.scg.archie.ui.views.StatisticsView">
+         <command
+               commandId="ch.unibe.iam.scg.archie.commands.CopySelected"
+               icon="icons/clipboard__plus.png"
+               label="Copy Selected"
+               style="push"
+               tooltip="Copies the currently selected items from the table to the system clipboard.">
+         </command>
+      </menuContribution>
+   </extension>
 </plugin>
