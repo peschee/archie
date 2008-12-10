@@ -85,7 +85,7 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 		// provider for label and content providers.
 		this.table = TableFactory.getInstance().createTableFromData(composite, dataset,
 				ProviderManager.getInstance().getProvider().getLabelProvider(),
-				ProviderManager.getInstance().getProvider().getContentProvider());
+				ProviderManager.getInstance().getProvider().getContentProvider()).getTable();
 
 		// add selection listener
 		this.table.addSelectionListener(this);

@@ -71,7 +71,7 @@ public class TableFactory {
 	 * @param contentProvider 
 	 * @return Table
 	 */
-	public Table createTableFromData(final Composite parent, final DataSet dataset,
+	public TableViewer createTableFromData(final Composite parent, final DataSet dataset,
 			final ILabelProvider labelProvider, final IContentProvider contentProvider) {
 		Table table = this.createTable(parent, dataset);
 
@@ -88,7 +88,7 @@ public class TableFactory {
 		// add column sorters.
 		this.addColumnSort(tableViewer);
 
-		return table;
+		return tableViewer;
 	}
 
 	/**
