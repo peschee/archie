@@ -16,7 +16,7 @@
       <view
             category="ch.unibe.iam.scg.archie.views.Archie"
             class="ch.unibe.iam.scg.archie.ui.views.StatisticsSidebarView"
-            icon="icons/application_form_edit.png"
+            icon="icons/wand_pencil.png"
             id="ch.unibe.iam.scg.archie.ui.views.StatisticsSidebarView"
             name="%VIEW_SIDEBAR"
             restorable="true">
@@ -24,7 +24,7 @@
       <view
             category="ch.unibe.iam.scg.archie.views.Archie"
             class="ch.unibe.iam.scg.archie.ui.views.ChartView"
-            icon="icons/chart_pie.png"
+            icon="icons/palette.png"
             id="ch.unibe.iam.scg.archie.ui.views.ChartView"
             name="%VIEW_CHART"
             restorable="true">
