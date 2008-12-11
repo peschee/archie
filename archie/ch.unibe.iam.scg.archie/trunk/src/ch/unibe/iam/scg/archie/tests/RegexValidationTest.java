@@ -11,6 +11,8 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.tests;
 
+import junit.framework.JUnit4TestAdapter;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,5 +57,15 @@ public class RegexValidationTest {
 		this.someRegexVal.setPattern(ANOTHER_PATTERN);
 		Assert.assertEquals(this.someRegexVal.getMessage(), ANOTHER_MESSAGE);
 		Assert.assertEquals(this.someRegexVal.getPattern(), ANOTHER_PATTERN);
+	}
+	
+	/**
+	 * Static method for JUnit 4 test classes to make them accessible to a
+	 * TestRunner designed to work with earlier versions of JUnit.
+	 * 
+	 * @return A Test that can be used in test suites.
+	 */
+	public static junit.framework.Test suite() {
+		return new JUnit4TestAdapter(RegexValidationTest.class);
 	}
 }

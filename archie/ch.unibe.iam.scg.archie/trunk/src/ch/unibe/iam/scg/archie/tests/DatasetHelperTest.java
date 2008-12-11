@@ -13,6 +13,8 @@ package ch.unibe.iam.scg.archie.tests;
 
 import java.util.ArrayList;
 
+import junit.framework.JUnit4TestAdapter;
+
 import org.eclipse.swt.SWT;
 import org.junit.Assert;
 import org.junit.Before;
@@ -119,5 +121,15 @@ public class DatasetHelperTest {
 		Assert.assertTrue(DatasetHelper.isMoneyColumn(dataset, "Salary"));
 
 		Assert.assertTrue(DatasetHelper.isNumericColumn(dataset, "Happyness"));
+	}
+	
+	/**
+	 * Static method for JUnit 4 test classes to make them accessible to a
+	 * TestRunner designed to work with earlier versions of JUnit.
+	 * 
+	 * @return A Test that can be used in test suites.
+	 */
+	public static junit.framework.Test suite() {
+		return new JUnit4TestAdapter(DatasetHelperTest.class);
 	}
 }

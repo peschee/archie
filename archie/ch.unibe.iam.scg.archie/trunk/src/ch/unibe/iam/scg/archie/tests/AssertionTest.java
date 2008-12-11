@@ -11,10 +11,14 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.tests;
 
+import junit.framework.JUnit4TestAdapter;
+
 import org.junit.Test;
 
 /**
- * Tests that assertions are enabled in the currently set java compiler.
+ * Tests that assertions are enabled in the currently set java compiler. Make
+ * sure that your Java VM has the argument <code>-ea</code> set before running
+ * this test, otherwise it will always fail.
  * 
  * $Id$
  * 
@@ -27,5 +31,15 @@ public class AssertionTest {
 	@Test(expected = AssertionError.class)
 	public void assertionsEnabled() {
 		assert false;
+	}
+
+	/**
+	 * Static method for JUnit 4 test classes to make them accessible to a
+	 * TestRunner designed to work with earlier versions of JUnit.
+	 * 
+	 * @return A Test that can be used in test suites.
+	 */
+	public static junit.framework.Test suite() {
+		return new JUnit4TestAdapter(AssertionTest.class);
 	}
 }
