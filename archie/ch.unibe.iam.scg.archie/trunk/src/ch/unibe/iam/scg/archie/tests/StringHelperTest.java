@@ -11,6 +11,8 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.tests;
 
+import junit.framework.JUnit4TestAdapter;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,5 +42,15 @@ public class StringHelperTest {
 		String single = StringHelper.removeIllegalCharacters(good, true);
 		Assert.assertFalse(single.equals("I_am_an_ill!egal____String_containing_bad_characters!"));
 		Assert.assertTrue(single.equals("I_am_an_ill!egal_String_containing_bad_characters!"));
+	}
+	
+	/**
+	 * Static method for JUnit 4 test classes to make them accessible to a
+	 * TestRunner designed to work with earlier versions of JUnit.
+	 * 
+	 * @return A Test that can be used in test suites.
+	 */
+	public static junit.framework.Test suite() {
+		return new JUnit4TestAdapter(StringHelperTest.class);
 	}
 }

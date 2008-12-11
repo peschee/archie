@@ -28,12 +28,10 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import ch.elexis.Desk;
-import ch.elexis.Hub;
 import ch.elexis.util.Log;
 import ch.elexis.util.SWTHelper;
 import ch.unibe.iam.scg.archie.ArchieActivator;

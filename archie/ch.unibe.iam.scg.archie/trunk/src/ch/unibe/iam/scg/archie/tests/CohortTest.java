@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import junit.framework.JUnit4TestAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +33,7 @@ import ch.unibe.iam.scg.archie.model.Cohort;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class CohortTest extends TestCase {
+public class CohortTest {
 
 	private Cohort cohort;
 	private Cohort cohortSame;
@@ -106,5 +105,15 @@ public class CohortTest extends TestCase {
 		Assert.assertEquals(cohort.toString(), "2");
 		Assert.assertEquals(cohort.getCohortSize(), 1);
 		Assert.assertEquals(cohortStrange.getCohortSize(), 21);
+	}
+	
+	/**
+	 * Static method for JUnit 4 test classes to make them accessible to a
+	 * TestRunner designed to work with earlier versions of JUnit.
+	 * 
+	 * @return A Test that can be used in test suites.
+	 */
+	public static junit.framework.Test suite() {
+		return new JUnit4TestAdapter(CohortTest.class);
 	}
 }

@@ -13,6 +13,8 @@ package ch.unibe.iam.scg.archie.tests;
 
 import java.util.ArrayList;
 
+import junit.framework.JUnit4TestAdapter;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -147,5 +149,15 @@ public class DataSetTest {
 				+ "| Vreni      | Müller     | Musterstrasse 1 | Switzerland \n"
 				+ "| Jakob      | Meier      | Ottweg 3        | Switzerland \n";
 		Assert.assertEquals(desiredOutput, this.sampleDataSet.toString());
+	}
+	
+	/**
+	 * Static method for JUnit 4 test classes to make them accessible to a
+	 * TestRunner designed to work with earlier versions of JUnit.
+	 * 
+	 * @return A Test that can be used in test suites.
+	 */
+	public static junit.framework.Test suite() {
+		return new JUnit4TestAdapter(DataSetTest.class);
 	}
 }
