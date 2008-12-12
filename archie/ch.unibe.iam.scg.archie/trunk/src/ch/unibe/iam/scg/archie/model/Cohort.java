@@ -9,7 +9,6 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
 package ch.unibe.iam.scg.archie.model;
 
 /**
