@@ -14,3 +14,8 @@ ARCHIE SAMPLES - CHANGELOG
 - Added Person wrapper class
 - Added custom label provider for person entries
 - Added service statistics
+
+0.8.1
+-----
+
+- Fixed counting services in service statistics.
