@@ -74,7 +74,7 @@ public abstract class AbstractDataProvider extends Job {
 	public AbstractDataProvider(String jobName) {
 		super(jobName);
 		this.dataSet = new DataSet();
-		
+
 		// initialize providers
 		this.initializeProviders();
 		assert (this.labelProvider != null);
@@ -167,7 +167,7 @@ public abstract class AbstractDataProvider extends Job {
 	protected void initializeProviders() {
 		QueryContentProvider content = new QueryContentProvider(this.dataSet);
 		QueryLabelProvider label = new QueryLabelProvider();
-		
+
 		this.setContentProvider(content);
 		this.setLabelProvider(label);
 	}

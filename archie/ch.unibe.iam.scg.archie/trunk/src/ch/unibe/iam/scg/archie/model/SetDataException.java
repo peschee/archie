@@ -16,7 +16,7 @@
 package ch.unibe.iam.scg.archie.model;
 
 /**
- * <p>Custom Exception which handles malformed input Strings for queries</p>
+ * <p>Custom Exception which handles malformed input Strings for queries.</p>
  * 
  * $Id$
  * 

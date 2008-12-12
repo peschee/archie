@@ -27,8 +27,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 
 import ch.unibe.iam.scg.archie.ArchieActivator;
+import ch.unibe.iam.scg.archie.controller.ChartModelManager;
 import ch.unibe.iam.scg.archie.model.ChartModel;
-import ch.unibe.iam.scg.archie.model.ChartModelManager;
 import ch.unibe.iam.scg.archie.model.DataSet;
 import ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite;
 import ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite;

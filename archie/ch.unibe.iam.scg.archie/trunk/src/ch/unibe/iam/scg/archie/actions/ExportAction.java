@@ -23,9 +23,9 @@ import org.eclipse.swt.widgets.FileDialog;
 import ch.elexis.util.Log;
 import ch.elexis.util.SWTHelper;
 import ch.unibe.iam.scg.archie.ArchieActivator;
+import ch.unibe.iam.scg.archie.controller.ProviderManager;
 import ch.unibe.iam.scg.archie.export.CSVWriter;
 import ch.unibe.iam.scg.archie.i18n.Messages;
-import ch.unibe.iam.scg.archie.model.ProviderManager;
 import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 import ch.unibe.iam.scg.archie.utils.StringHelper;
 

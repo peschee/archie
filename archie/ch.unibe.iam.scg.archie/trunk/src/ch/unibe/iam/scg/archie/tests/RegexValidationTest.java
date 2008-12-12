@@ -58,7 +58,7 @@ public class RegexValidationTest {
 		Assert.assertEquals(this.someRegexVal.getMessage(), ANOTHER_MESSAGE);
 		Assert.assertEquals(this.someRegexVal.getPattern(), ANOTHER_PATTERN);
 	}
-	
+
 	/**
 	 * Static method for JUnit 4 test classes to make them accessible to a
 	 * TestRunner designed to work with earlier versions of JUnit.
