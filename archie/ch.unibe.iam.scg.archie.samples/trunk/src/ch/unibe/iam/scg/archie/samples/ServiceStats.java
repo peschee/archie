@@ -13,20 +13,23 @@ package ch.unibe.iam.scg.archie.samples;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
 import ch.elexis.Hub;
+import ch.elexis.data.IVerrechenbar;
 import ch.elexis.data.Konsultation;
 import ch.elexis.data.Query;
 import ch.elexis.data.Verrechnet;
 import ch.rgw.tools.Money;
+import ch.rgw.tools.StringTool;
 import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
@@ -34,7 +37,9 @@ import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
- * <p>Generates an overview of the services provided in a given timeframe.</p>
+ * <p>
+ * Generates an overview of the services provided in a given timeframe.
+ * </p>
  * 
  * $Id$
  * 
@@ -45,18 +50,18 @@ import ch.unibe.iam.scg.archie.ui.FieldTypes;
 public class ServiceStats extends AbstractTimeSeries {
 
 	private static final String DATE_DB_FORMAT = "yyyyMMdd";
-	private static final String SERVICE_CLASS_DB_FIELD = "Klasse";
 
 	private boolean currentMandatorOnly;
-	private boolean groupByServiceClass;
+	private boolean groupByCodeSystem;
 
 	/**
 	 * Costructs ServiceStats
 	 */
 	public ServiceStats() {
 		super(Messages.SERVICES_TITLE);
+
 		this.currentMandatorOnly = true;
-		this.groupByServiceClass = false;
+		this.groupByCodeSystem = false;
 	}
 
 	/** {@inheritDoc} */
@@ -78,7 +83,7 @@ public class ServiceStats extends AbstractTimeSeries {
 		this.size = consultations.size();
 		monitor.beginTask(Messages.DB_QUERYING, this.size); // monitoring
 
-		TreeMap<String, ArrayList<Verrechnet>> services = new TreeMap<String, ArrayList<Verrechnet>>();
+		final HashMap<IVerrechenbar, ServiceCounter> services = new HashMap<IVerrechenbar, ServiceCounter>();
 
 		// Go through all consultations.
 		for (Konsultation consultation : consultations) {
@@ -97,57 +102,48 @@ public class ServiceStats extends AbstractTimeSeries {
 					return Status.CANCEL_STATUS;
 				}
 
-				// Group by label...
-				String key = service.getLabel();
-
-				// ..or by service class?
-				if (this.groupByServiceClass) {
-
-					// Take the last token of the classname, delimited by a
-					// period.
-					StringTokenizer tokenizer = new StringTokenizer(service.get(SERVICE_CLASS_DB_FIELD), ".");
-					while (tokenizer.hasMoreTokens()) {
-						key = tokenizer.nextToken(); // The last one stays.
-					}
+				IVerrechenbar serviceBase = service.getVerrechenbar();
+				ServiceCounter counter = services.get(serviceBase);
+				if (counter == null) {
+					counter = new ServiceCounter(service);
+					services.put(serviceBase, counter);
+				} else {
+					counter.add(service);
 				}
 
-				ArrayList<Verrechnet> servicesList = !services.containsKey(key) ? new ArrayList<Verrechnet>()
-						: services.get(key);
-
-				servicesList.add(service);
-				services.put(key, servicesList);
 			}
 			monitor.worked(1);
 		}
 
 		// Create dataset result
 		final ArrayList<Comparable<?>[]> result = new ArrayList<Comparable<?>[]>();
+		final ArrayList<ServiceCounter> counters = this.isGroupByCodeSystem() ? this.groupServiceCounters(services
+				.values()) : new ArrayList<ServiceCounter>(services.values());
+
+		// sort the counters
+		Collections.sort(counters);
 
 		// Go over all services we stored and create actual dataset.
-		for (final Entry<String, ArrayList<Verrechnet>> entry : services.entrySet()) {
-			
+		for (ServiceCounter counter : counters) {
+
 			// Check for cancellation
 			if (monitor.isCanceled()) {
 				return Status.CANCEL_STATUS;
 			}
-			
-			double cost = 0, income = 0;
-			
-			// Sum up service list values
-			for(Verrechnet service : entry.getValue()) {
-				cost += service.getKosten().doubleValue();
-				income += service.getBruttoPreis().doubleValue();
-			}
 
 			final Comparable<?>[] row = new Comparable[this.dataSet.getHeadings().size()];
 			int i = 0;
-			
-			row[i++] = entry.getKey();
-			row[i++] = entry.getValue().size();
-			row[i++] = new Money(cost / 100);
-			row[i++] = new Money(income / 100);
-			row[i++] = new Money((income - cost) / 100);
-			
+
+			row[i++] = counter.getVerrechenbar().getCodeSystemName();
+			// add label if we don't group by code system
+			if (!this.isGroupByCodeSystem()) {
+				row[i++] = counter.getService().getLabel();
+			}
+			row[i++] = counter.getServiceCount();
+			row[i++] = new Money(counter.getCost());
+			row[i++] = new Money(counter.getIncome());
+			row[i++] = new Money(counter.getIncome().subtractMoney(counter.getCost()));
+
 			result.add(row);
 		}
 
@@ -158,11 +154,44 @@ public class ServiceStats extends AbstractTimeSeries {
 		return Status.OK_STATUS;
 	}
 
+	/**
+	 * This methods groups the given collection containing
+	 * <code>ServiceCounter</code> objects by the underlying code system name
+	 * their service objects belong to.
+	 * 
+	 * @return An <code>ArrayList</code> containing the grouped service
+	 *         counters.
+	 */
+	private ArrayList<ServiceCounter> groupServiceCounters(Collection<ServiceCounter> counters) {
+		TreeMap<String, ServiceCounter> groupedCounters = new TreeMap<String, ServiceCounter>();
+		for (ServiceCounter counter : counters) {
+			String codeSystem = counter.getVerrechenbar().getCodeSystemName();
+			ServiceCounter groupedCounter = groupedCounters.get(codeSystem);
+			// if there's no counter with that code system name
+			if (groupedCounter == null) {
+				groupedCounters.put(codeSystem, counter);
+			} else {
+				// else we start summing up
+				groupedCounter.add(counter);
+			}
+		}
+
+		return new ArrayList<ServiceCounter>(groupedCounters.values());
+	}
+
+	// /////////////////////////////////////////////////////////////////////////////
+	// ANNOTATION METHODS
+	// /////////////////////////////////////////////////////////////////////////////
+
 	/** {@inheritDoc} */
 	@Override
 	protected List<String> createHeadings() {
 		final ArrayList<String> headings = new ArrayList<String>(2);
-		headings.add(Messages.SERVICES_HEADING_SERVICE);
+		headings.add(Messages.SERVICES_HEADING_CODESYSTEM);
+		// if we don't group by code system, add service name
+		if (!this.isGroupByCodeSystem()) {
+			headings.add(Messages.SERVICES_HEADING_SERVICE);
+		}
 		headings.add(Messages.SERVICES_HEADING_AMOUNT);
 		headings.add(Messages.SERVICES_HEADING_COSTS);
 		headings.add(Messages.SERVICES_HEADING_INCOME);
@@ -193,19 +222,167 @@ public class ServiceStats extends AbstractTimeSeries {
 	}
 
 	/**
-	 * @return groupByServiceClass
+	 * @return groupByCodeSystem
 	 */
-	@GetProperty(name = "Groupy By Class", index = 5, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Groups Services by their general groups.")
-	public boolean getgroupByServiceClass() {
-		return this.groupByServiceClass;
+	@GetProperty(name = "Groupy By Codesystem", index = 5, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Groups services by code system.")
+	public boolean isGroupByCodeSystem() {
+		return this.groupByCodeSystem;
 	}
 
 	/**
-	 * @param groupByServiceClass
+	 * @param groupByCodeSystem
 	 */
-	@SetProperty(name = "Groupy By Class")
-	public void setgroupByServiceClass(final boolean groupByServiceClass) {
-		this.groupByServiceClass = groupByServiceClass;
+	@SetProperty(name = "Groupy By Codesystem")
+	public void setGroupByCodeSystem(final boolean groupByCodeSystem) {
+		this.groupByCodeSystem = groupByCodeSystem;
 	}
 
+	// /////////////////////////////////////////////////////////////////////////////
+	// PRIVATE HELPER CLASSES
+	// /////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * <p>
+	 * Simple service counter class. This counter takes a given service and adds
+	 * its values to the current values of this counter. It sums up the income
+	 * and costs for the given service.
+	 * </p>
+	 * 
+	 * $Id$
+	 * 
+	 * @author Peter Siska
+	 * @author Dennis Schenk
+	 * @version $Rev$
+	 */
+	private class ServiceCounter implements Comparable<ServiceCounter> {
+
+		private Verrechnet service;
+
+		private Money income;
+		private Money cost;
+
+		private int totalServices;
+
+		/**
+		 * Public constructor.
+		 * 
+		 * @param service
+		 */
+		public ServiceCounter(Verrechnet service) {
+			int serviceCount = service.getZahl();
+
+			this.service = service;
+			this.income = service.getNettoPreis().multiply(serviceCount);
+			this.cost = service.getKosten().multiply(serviceCount);
+			this.totalServices = serviceCount;
+		}
+
+		/**
+		 * Compares one service counter with an other. First the service group
+		 * name is compared, if that's equal, the service code is compared, if
+		 * that's equal, the total income in this service counter is compared.
+		 */
+		public int compareTo(ServiceCounter other) {
+			// compare service group
+			int serviceGroup = StringTool.compareWithNull(this.getVerrechenbar().getCodeSystemName(), other
+					.getVerrechenbar().getCodeSystemName());
+			if (serviceGroup != 0) {
+				return serviceGroup;
+			}
+
+			// compare service code
+			int serviceCode = StringTool.compareWithNull(this.getVerrechenbar().getCode(), other.getVerrechenbar()
+					.getCode());
+			if (serviceCode != 0) {
+				return serviceCode;
+			}
+
+			return this.getIncome().getCents() - other.getIncome().getCents();
+		}
+
+		/**
+		 * Adds a service to this counter. This means that this counter will sum
+		 * up the cost and income values of the given service and the values of
+		 * the counter. It also increments the internal counter for the service
+		 * type.
+		 * 
+		 * @param service
+		 */
+		protected void add(Verrechnet service) {
+			// increment counter
+			int serviceCount = service.getZahl();
+			this.totalServices += serviceCount;
+
+			// sum up moneys
+			Money totalIncome = service.getNettoPreis().multiply(serviceCount);
+			Money totalCost = service.getKosten().multiply(serviceCount);
+			this.cost.addMoney(totalCost);
+			this.income.addMoney(totalIncome);
+		}
+
+		/**
+		 * Adds a <code>ServiceCounter</code> counter object to this counter.
+		 * This means suming up the values of the given counter with these of
+		 * this object.
+		 * 
+		 * @param counter
+		 */
+		protected void add(ServiceCounter counter) {
+			int serviceCount = counter.getServiceCount();
+			this.totalServices += serviceCount;
+
+			// sum up money values
+			Money totalIncome = counter.getIncome();
+			Money totalCost = counter.getCost();
+			this.cost.addMoney(totalCost);
+			this.income.addMoney(totalIncome);
+		}
+
+		/**
+		 * Returns the
+		 * <code>IVerrechenbar<code> object for the service in this counter.
+		 * 
+		 * @return The <code>IVerrechenbar<code> object for the service in this
+		 *         counter.
+		 */
+		protected IVerrechenbar getVerrechenbar() {
+			return this.service.getVerrechenbar();
+		}
+
+		/**
+		 * Returns the service in this counter.
+		 * 
+		 * @return Returns the service in this counter.
+		 */
+		protected Verrechnet getService() {
+			return this.service;
+		}
+
+		/**
+		 * Returns the income.
+		 * 
+		 * @return Returns the income.
+		 */
+		protected Money getIncome() {
+			return this.income;
+		}
+
+		/**
+		 * Returns the cost.
+		 * 
+		 * @return Returns the cost.
+		 */
+		protected Money getCost() {
+			return this.cost;
+		}
+
+		/**
+		 * Returns the value of the internal service counter.
+		 * 
+		 * @return Total number of services for this counter.
+		 */
+		protected int getServiceCount() {
+			return this.totalServices;
+		}
+	}
 }
