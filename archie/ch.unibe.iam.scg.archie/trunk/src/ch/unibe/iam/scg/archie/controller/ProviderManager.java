@@ -13,9 +13,11 @@
 /**
  * TODO: Document.
  */
-package ch.unibe.iam.scg.archie.model;
+package ch.unibe.iam.scg.archie.controller;
 
 import java.util.Observable;
+
+import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 
 /**
  * <p>

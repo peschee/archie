@@ -13,8 +13,8 @@ package ch.unibe.iam.scg.archie.ui.wizards;
 
 import org.eclipse.jface.wizard.Wizard;
 
+import ch.unibe.iam.scg.archie.controller.ProviderManager;
 import ch.unibe.iam.scg.archie.model.ChartModel;
-import ch.unibe.iam.scg.archie.model.ProviderManager;
 
 /**
  * <p>

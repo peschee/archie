@@ -9,7 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.model;
+package ch.unibe.iam.scg.archie.controller;
 
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
