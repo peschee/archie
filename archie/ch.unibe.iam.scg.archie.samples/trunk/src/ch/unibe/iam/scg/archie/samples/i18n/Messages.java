@@ -70,6 +70,7 @@ public final class Messages extends NLS {
 	// Service Statistics
 	public static String SERVICES_TITLE;
 	public static String SERVICES_DESCRIPTION;
+	public static String SERVICES_HEADING_CODESYSTEM;
 	public static String SERVICES_HEADING_SERVICE;
 	public static String SERVICES_HEADING_AMOUNT;
 	public static String SERVICES_HEADING_COSTS;
