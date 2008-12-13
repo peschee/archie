@@ -19,11 +19,11 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
  * that that cannot be run concurrently but have to be run sequentially.
  * </p>
  * 
- * $Id:$
+ * $Id$
  * 
  * @author Peter Siska
  * @author Dennis Schenk
- * @version $Rev: 295 $
+ * @version $Rev$
  */
 public class MutexRule implements ISchedulingRule {
 
