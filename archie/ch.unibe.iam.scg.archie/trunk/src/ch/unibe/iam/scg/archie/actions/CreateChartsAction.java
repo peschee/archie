@@ -19,11 +19,11 @@ import ch.unibe.iam.scg.archie.ui.views.Dashboard;
 /**
  * <p>TODO: DOCUMENT ME!</p>
  * 
- * $Id:$
+ * $Id$
  * 
  * @author Peter Siska
  * @author Dennis Schenk
- * @version $Rev: 295 $
+ * @version $Rev$
  */
 public class CreateChartsAction extends Action {
 	

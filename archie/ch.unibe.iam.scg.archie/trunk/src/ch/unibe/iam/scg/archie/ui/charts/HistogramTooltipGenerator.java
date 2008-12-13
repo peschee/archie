@@ -24,11 +24,11 @@ import org.jfree.data.category.CategoryDataset;
  * TODO: DOCUMENT ME!
  * </p>
  * 
- * $Id:$
+ * $Id$
  * 
  * @author Peter Siska
  * @author Dennis Schenk
- * @version $Rev: 295 $
+ * @version $Rev$
  */
 public class HistogramTooltipGenerator extends AbstractCategoryItemLabelGenerator implements CategoryToolTipGenerator {
 

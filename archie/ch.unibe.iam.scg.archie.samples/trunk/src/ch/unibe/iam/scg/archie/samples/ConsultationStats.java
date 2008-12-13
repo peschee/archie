@@ -37,11 +37,11 @@ import ch.unibe.iam.scg.archie.ui.FieldTypes;
 /**
  * TODO: DOCUMENT ME!
  * 
- * $Id: $
+ * $Id$
  * 
  * @author Peter Siska
  * @author Dennis Schenk
- * @version $Rev: $
+ * @version $Rev$
  */
 public class ConsultationStats extends AbstractTimeSeries {
 

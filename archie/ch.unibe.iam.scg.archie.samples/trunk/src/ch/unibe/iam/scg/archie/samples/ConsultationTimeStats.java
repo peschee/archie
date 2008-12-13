@@ -38,7 +38,7 @@ import ch.unibe.iam.scg.archie.ui.FieldTypes;
  * TODO: DOCUMENT ME!
  * </p>
  * 
- * $Id: $
+ * $Id$
  * 
  * @author Peter Siska
  * @author Dennis Schenk
