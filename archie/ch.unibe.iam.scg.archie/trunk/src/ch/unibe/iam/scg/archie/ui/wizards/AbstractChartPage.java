@@ -16,7 +16,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.widgets.Composite;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>
  * TODO: DOCUMENT ME!
