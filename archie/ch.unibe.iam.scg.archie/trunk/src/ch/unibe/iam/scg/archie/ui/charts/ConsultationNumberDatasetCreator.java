@@ -36,7 +36,7 @@ import ch.elexis.data.Konsultation;
 import ch.elexis.data.Query;
 
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>Creates Dataset for ConsultationNumberChart.</p>
  * 
  * $Id$
  * 
