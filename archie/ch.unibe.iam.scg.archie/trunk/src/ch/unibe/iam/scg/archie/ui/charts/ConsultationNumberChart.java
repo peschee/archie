@@ -26,7 +26,7 @@ import org.jfree.ui.RectangleInsets;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Creates a Chart which shows number of consultations in the last six months.
  * </p>
  * 
  * $Id$
@@ -47,7 +47,7 @@ public class ConsultationNumberChart extends AbstractChartComposite {
 		super(parent, style);
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.charts.AbstractChartComposite#
 	 * initializeChart()
 	 */
@@ -86,7 +86,7 @@ public class ConsultationNumberChart extends AbstractChartComposite {
 		return chart;
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.charts.AbstractChartComposite#
 	 * initializeCreator()
 	 */

@@ -32,7 +32,7 @@ import ch.elexis.data.Query;
 import ch.unibe.iam.scg.archie.model.Cohort;
 
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>Creates dataset for PatientsConsHistChart.</p>
  * 
  * $Id$
  * 
@@ -77,7 +77,7 @@ public class PatientsConsHistDatasetCreator extends AbstractDatasetCreator {
 			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
 			
 			int age = 0;
-			// We get age as a string (thankyouverymuch) so we have to parse it
+			// We get age as a string, so we have to parse it
 			try {
 				age = Integer.parseInt(patient.getAlter());
 			} catch (NumberFormatException exception) {

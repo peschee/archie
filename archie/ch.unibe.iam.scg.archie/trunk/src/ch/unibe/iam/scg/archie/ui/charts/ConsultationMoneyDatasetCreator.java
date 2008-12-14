@@ -36,7 +36,7 @@ import ch.elexis.data.Konsultation;
 import ch.elexis.data.Query;
 
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>Creates dataset for ConsultationMoneyChart.</p>
  * 
  * $Id$
  * 
@@ -72,7 +72,7 @@ public class ConsultationMoneyDatasetCreator extends AbstractDatasetCreator {
 		now.add(Calendar.MONTH, -1);
 		now.set(Calendar.DAY_OF_MONTH, now.getMaximum(Calendar.DAY_OF_MONTH));
 		
-		// then, corrected by begining of that month
+		// then, corrected by beginning of that month
 		Calendar before = Calendar.getInstance();
 		before.add(Calendar.MONTH, -7);
 		before.set(Calendar.DAY_OF_MONTH, before.getMinimum(Calendar.DAY_OF_MONTH));

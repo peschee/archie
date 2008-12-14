@@ -26,7 +26,8 @@ import org.jfree.ui.RectangleInsets;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Creates a chart showing how much profit, income and costs we 
+ * had with consultations of the last six months.
  * </p>
  * 
  * $Id$
@@ -47,7 +48,7 @@ public class ConsultationMoneyChart extends AbstractChartComposite {
 		super(parent, style);
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.charts.AbstractChartComposite#
 	 * initializeChart()
 	 */
@@ -87,7 +88,7 @@ public class ConsultationMoneyChart extends AbstractChartComposite {
 		return chart;
 	}
 
-	/** (non-Javadoc)
+	/** 
 	 * @see ch.unibe.iam.scg.archie.ui.charts.AbstractChartComposite#
 	 * initializeCreator()
 	 */

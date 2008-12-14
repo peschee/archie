@@ -26,7 +26,7 @@ import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.preferences.PreferenceConstants;
 
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>Creates a chart showing costs of consultations, grouped by age-group and gender.</p>
  * 
  * $Id$
  * 
@@ -46,7 +46,7 @@ public class PatientsConsHistChart extends AbstractChartComposite {
 		super(parent, style);
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.charts.AbstractChartComposite#initializeChart()
 	 */
 	@Override
@@ -77,7 +77,7 @@ public class PatientsConsHistChart extends AbstractChartComposite {
 		return chart;
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.charts.AbstractChartComposite#initializeCreator()
 	 */
 	@Override
