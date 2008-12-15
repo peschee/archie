@@ -39,6 +39,7 @@ public final class Messages extends NLS {
 	public static String PAID;
 	public static String OPEN;
 	public static String OTHER;
+	public static String CANCEL;
 
 	// Export action
 	public static String ACTION_EXPORT_TITLE;
