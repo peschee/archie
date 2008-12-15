@@ -27,7 +27,7 @@ import ch.unibe.iam.scg.archie.ui.perspectives.StatisticsPerspective;
 import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 
 /**
- * This action opens the statistic view.
+ * <p>This action opens the statistic view.</p>
  * 
  * @see IWorkbenchWindowActionDelegate
  * @see StatisticsView $Id: OpenStatisticsPerspective.java 492 2008-11-18

@@ -29,6 +29,9 @@ public class CreateChartsAction extends Action {
 	
 	private Dashboard dashboard;
 	
+	/**
+	 * @param dashboard
+	 */
 	public CreateChartsAction(Dashboard dashboard) {
 		this.dashboard = dashboard;
 		

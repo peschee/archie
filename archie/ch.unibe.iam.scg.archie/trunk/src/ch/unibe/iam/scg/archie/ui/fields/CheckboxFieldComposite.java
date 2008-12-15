@@ -56,7 +56,7 @@ public class CheckboxFieldComposite extends AbstractFieldComposite {
 		return ((Button) this.control).getSelection();
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#getValue()
 	 */
 	@Override
@@ -73,7 +73,7 @@ public class CheckboxFieldComposite extends AbstractFieldComposite {
 	}
 
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#setValue(java.lang.Object)
 	 */
 	@Override
@@ -85,7 +85,7 @@ public class CheckboxFieldComposite extends AbstractFieldComposite {
 		}
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#setDescription(java.lang.String)
 	 */
 	@Override

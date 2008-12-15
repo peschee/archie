@@ -130,7 +130,7 @@ public class TextFieldComposite extends AbstractFieldComposite {
 		return this.smartField.isValid();
 	}
 	
-	/** (non-Javadoc)
+	/**
 	 * @see org.eclipse.swt.widgets.Widget#addListener(int, org.eclipse.swt.widgets.Listener)
 	 */
 	@Override
@@ -378,7 +378,7 @@ public class TextFieldComposite extends AbstractFieldComposite {
 		}
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#setDescription(java.lang.String)
 	 */
 	@Override

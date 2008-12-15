@@ -43,7 +43,7 @@ import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.ui.DetailsPanel;
 
 /**
- * TODO: DOCUMENT ME!
+ * <p>In this View a user can chose a statistic, set options for it and run it.</p>
  * 
  * $Id$
  * 
@@ -66,8 +66,6 @@ public class StatisticsSidebarView extends ViewPart implements IPropertyChangeLi
 	protected AutoCompleteField autoComplete;
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
@@ -185,7 +183,6 @@ public class StatisticsSidebarView extends ViewPart implements IPropertyChangeLi
 	}
 
 	/**
-	 * 
 	 * @see org.eclipse.jface.util.IPropertyChangeListener#propertyChange
 	 *      (org.eclipse.jface.util.PropertyChangeEvent)
 	 */

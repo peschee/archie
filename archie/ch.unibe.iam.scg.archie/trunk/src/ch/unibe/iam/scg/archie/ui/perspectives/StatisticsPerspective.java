@@ -27,7 +27,7 @@ import ch.unibe.iam.scg.archie.ui.views.StatisticsSidebarView;
 import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 
 /**
- * TODO: DOCUMENT ME!
+ * <p>The main Archie perspective. Here we layout the views that compose the GUI for archie.</p>
  * 
  * $Id$
  * 
@@ -44,7 +44,7 @@ public class StatisticsPerspective implements IPerspectiveFactory {
 
 	/**
 	 * Creates the initial perspective layout.
-	 * Ø
+	 * 
 	 * @param layout
 	 */
 	public void createInitialLayout(IPageLayout layout) {
@@ -53,7 +53,7 @@ public class StatisticsPerspective implements IPerspectiveFactory {
 		layout.setEditorAreaVisible(false);
 		layout.setFixed(false);
 
-		// add elexis sidebar
+		// Add elexis sidebar
 		if (Hub.localCfg.get(PreferenceConstants.SHOWSIDEBAR, "true").equals("true")) { //$NON-NLS-1$
 			layout.addStandaloneView(Starter.ID, false, SWT.LEFT, 0.1f, editorArea);
 		}
@@ -61,13 +61,13 @@ public class StatisticsPerspective implements IPerspectiveFactory {
 		IFolderLayout main = layout.createFolder("main", IPageLayout.LEFT, 1.0f, editorArea);
 		IFolderLayout sidebar = layout.createFolder("right", IPageLayout.RIGHT, 0.6f, "main");
 		
-		// main area
+		// Main area
 		main.addView(Dashboard.ID);
 		main.addView(StatisticsView.ID);
 		main.addPlaceholder(ChartView.ID);
 		main.addPlaceholder(IProgressConstants.PROGRESS_VIEW_ID);
 
-		// sidebar
+		// Sidebar
 		sidebar.addView(StatisticsSidebarView.ID);
 		
 		layout.getViewLayout(StatisticsView.ID).setCloseable(false);

@@ -23,9 +23,9 @@ import java.lang.annotation.Target;
 import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
- * Marks a method as getter. Used by the view to determine which elements can be
+ * <p>Marks a method as getter. Used by the view to determine which elements can be
  * changed by the user. This is a model driven design. The value of this
- * annotation is used to describe the field in the view.
+ * annotation is used to describe the field in the view.</p>
  * 
  * $Id$
  * 

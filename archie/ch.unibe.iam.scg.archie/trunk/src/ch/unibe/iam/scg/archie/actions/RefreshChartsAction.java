@@ -17,7 +17,7 @@ import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.ui.views.Dashboard;
 
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>Action which refreshed charts in the dashboard.</p>
  * 
  * $Id$
  * 
@@ -29,7 +29,10 @@ public class RefreshChartsAction extends Action {
 	
 	private Dashboard dashboard;
 	
-	public RefreshChartsAction(Dashboard dashboard) {
+	/**
+	 * @param dashboard
+	 */
+	public RefreshChartsAction(final Dashboard dashboard) {
 		this.dashboard = dashboard;
 		
 		this.setToolTipText("Refresh Charts");

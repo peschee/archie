@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>Manages Tables.</p>
  * 
  * $Id$
  * 

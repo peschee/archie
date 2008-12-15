@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Label;
 
 import ch.elexis.data.Person;
 import ch.elexis.data.RnStatus;
+import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.utils.DatabaseHelper;
 
 /**
@@ -43,9 +44,6 @@ public class DashboardOverview extends Composite {
 	/**
 	 * Public constructor.
 	 * 
-	 * @param dashboard
-	 *            The dashboard object containing the dashboard charts or their
-	 *            placeholders.
 	 * @param parent
 	 *            Parent composite.
 	 * @param style
@@ -89,7 +87,7 @@ public class DashboardOverview extends Composite {
 		container.setLayoutData(layoutData);
 	
 		Label introduction = new Label(container, SWT.NONE | SWT.WRAP);
-		introduction.setText("Welcome to Archie, the statistics analysis tool for Elexis.");
+		introduction.setText(Messages.DASHBOARD_WELCOME);
 		introduction.setLayoutData(layoutData);
 
 		return container;
@@ -129,17 +127,17 @@ public class DashboardOverview extends Composite {
 		int consultationsTotal = DatabaseHelper.getNumberOfConsultations();
 
 		Label patients = new Label(container, SWT.NONE | SWT.WRAP);
-		patients.setText("Patients: " + patientsTotal + "\n" + "Male: " + writePercent(patientsMale, patientsTotal)
-				+ "\n" + "Female: " + writePercent(patientsFemale, patientsTotal) + "\n" + "Unknown: "
+		patients.setText(Messages.PATIENTS +": " + patientsTotal + "\n" + Messages.MALE + ": " + writePercent(patientsMale, patientsTotal)
+				+ "\n" + Messages.FEMALE +": " + writePercent(patientsFemale, patientsTotal) + "\n" + Messages.UNKNOWN +": "
 				+ writePercent(patientsTotal - patientsFemale - patientsMale, patientsTotal));
 
 		Label invoices = new Label(container, SWT.NONE | SWT.WRAP);
-		invoices.setText("Invoices: " + invoicesTotal + "\n" + "Paid: " + writePercent(invoicesPaid, invoicesTotal)
-				+ "\n" + "Open: " + writePercent(invoicesOpen, invoicesTotal) + "\n" + "Other: "
+		invoices.setText(Messages.INVOICES +": " + invoicesTotal + "\n" + Messages.PAID +": " + writePercent(invoicesPaid, invoicesTotal)
+				+ "\n" + Messages.OPEN +": " + writePercent(invoicesOpen, invoicesTotal) + "\n" + Messages.OTHER + ": "
 				+ writePercent(invoicesTotal - invoicesOpen - invoicesPaid, invoicesTotal));
 
 		Label consultations = new Label(container, SWT.NONE | SWT.WRAP);
-		consultations.setText("Consultations: " + consultationsTotal + "\n");
+		consultations.setText(Messages.CONSULTATIONS + ": " + consultationsTotal + "\n");
 		consultations.setLayoutData(layoutData);
 
 		return container;
