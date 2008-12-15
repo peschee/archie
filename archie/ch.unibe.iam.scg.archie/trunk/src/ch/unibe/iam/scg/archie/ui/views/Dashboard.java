@@ -43,7 +43,8 @@ import ch.unibe.iam.scg.archie.ui.charts.PatientsConsHistChart;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * The Dashboard View gives a general Overview of the Elexis System. E.g. How many patients and 
+ * consultations are in the system, what is the age distribution of patients etc.
  * </p>
  * 
  * $Id$
@@ -211,8 +212,7 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 		assert (this.bottomPart != null);
 
 		this.chartsNotCreatedMessage = new GraphicalMessage(this.bottomPart, ArchieActivator
-				.getImage(ArchieActivator.IMG_INFO),
-				"Charts have not been created yet.\nUse the chart creation button on the top right side of this view.");
+				.getImage(ArchieActivator.IMG_INFO),Messages.DASHBOARD_CHARTS_NOT_CREATED);
 	}
 
 	/**
@@ -270,8 +270,6 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.elexis.actions.GlobalEvents.UserListener#UserChanged()
 	 */
 	public void UserChanged() {

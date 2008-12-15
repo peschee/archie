@@ -30,7 +30,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 
 /**
- * 
  * <p>
  * This handler copies selected items coming from a selection provider into the
  * system's clipboard. The selection has to be of type
@@ -47,7 +46,7 @@ import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 public class CopySelected extends AbstractHandler {
 
 	/**
-	 * @{inheritDoc
+	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
 	public Object execute(ExecutionEvent event) throws ExecutionException {

@@ -28,8 +28,8 @@ import ch.unibe.iam.scg.archie.ui.GraphicalMessage;
 import ch.unibe.iam.scg.archie.ui.ResultPanel;
 
 /**
- * This class contains all methods needed to display the output created by any
- * query.
+ * <p>This class contains all methods needed to display the output created by any
+ * query.</p>
  * 
  * $Id$
  * 
@@ -186,8 +186,6 @@ public class StatisticsView extends ViewPart implements UserListener {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.elexis.actions.GlobalEvents.UserListener#UserChanged()
 	 */
 	public void UserChanged() {

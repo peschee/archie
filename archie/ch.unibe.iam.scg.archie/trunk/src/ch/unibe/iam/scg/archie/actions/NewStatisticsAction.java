@@ -235,7 +235,7 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	}
 
 	/**
-	 * De-registers a change listener with this action.
+	 * Unregisters a change listener with this action.
 	 * 
 	 * @param listener
 	 * 
@@ -248,8 +248,6 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	public void update(Observable o, Object arg) {
@@ -274,8 +272,6 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	// //////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.core.runtime.jobs.IJobChangeListener#aboutToRun(org.eclipse.core.runtime.jobs.IJobChangeEvent)
 	 */
 	public void aboutToRun(final IJobChangeEvent event) {
@@ -283,8 +279,6 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.core.runtime.jobs.IJobChangeListener#awake(org.eclipse.core.runtime.jobs.IJobChangeEvent)
 	 */
 	public void awake(final IJobChangeEvent event) {
@@ -292,8 +286,6 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.core.runtime.jobs.IJobChangeListener#running(org.eclipse.core.runtime.jobs.IJobChangeEvent)
 	 */
 	public void running(final IJobChangeEvent event) {
@@ -301,8 +293,6 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.core.runtime.jobs.IJobChangeListener#scheduled(org.eclipse.core.runtime.jobs.IJobChangeEvent)
 	 */
 	public void scheduled(final IJobChangeEvent event) {
@@ -310,8 +300,6 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.core.runtime.jobs.IJobChangeListener#sleeping(org.eclipse.core.runtime.jobs.IJobChangeEvent)
 	 */
 	public void sleeping(final IJobChangeEvent event) {

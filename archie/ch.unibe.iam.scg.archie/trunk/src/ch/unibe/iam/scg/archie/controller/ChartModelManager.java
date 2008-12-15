@@ -19,7 +19,7 @@ import ch.unibe.iam.scg.archie.model.ChartModel;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Manages Chart Models.
  * </p>
  * 
  * $Id$
@@ -31,7 +31,7 @@ import ch.unibe.iam.scg.archie.model.ChartModel;
 public class ChartModelManager {
 
 	/**
-	 * Instance of this chart model manager. There's always only one thorugh the
+	 * Instance of this chart model manager. There's always only one through the
 	 * entire lifecycle of this application.
 	 */
 	private static ChartModelManager INSTANCE;

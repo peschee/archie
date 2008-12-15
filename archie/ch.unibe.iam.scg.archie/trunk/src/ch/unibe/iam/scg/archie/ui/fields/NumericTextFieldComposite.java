@@ -24,7 +24,7 @@ import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.utils.RegexValidation;
 
 /**
- * Implements <code>FieldComposite</code> with a <code>SmartNumericField</code>.
+ * <p>Implements <code>FieldComposite</code> with a <code>SmartNumericField</code>.</p>
  * 
  * $Id$
  * 

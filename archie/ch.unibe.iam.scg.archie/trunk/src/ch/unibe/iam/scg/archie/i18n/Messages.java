@@ -31,6 +31,17 @@ public final class Messages extends NLS {
 	private static final String BUNDLE_NAME = "ch.unibe.iam.scg.archie.i18n.messages"; //$NON-NLS-1$
 
 	public static String ARCHIE_STARTED;
+	
+	// Common
+	public static String PATIENTS;
+	public static String MALE;
+	public static String FEMALE;
+	public static String UNKNOWN;
+	public static String CONSULTATIONS;
+	public static String INVOICES;
+	public static String PAID;
+	public static String OPEN;
+	public static String OTHER;
 
 	// Export action
 	public static String ACTION_EXPORT_TITLE;
@@ -48,6 +59,8 @@ public final class Messages extends NLS {
 	public static String WORKING;
 	public static String NO_PLUGIN_SELECTED;
 	public static String RESULT_EMPTY;
+	public static String DASHBOARD_CHARTS_NOT_CREATED;
+	public static String DASHBOARD_WELCOME;
 	
 	// GUI parts
 	public static String STATISTICS_LIST_TITLE;

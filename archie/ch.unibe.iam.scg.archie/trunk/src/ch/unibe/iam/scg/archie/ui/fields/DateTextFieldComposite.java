@@ -247,10 +247,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 	}
 
 	/**
-	 * TODO: DOCUMENT ME!
-	 * 
-	 * @author dschenk
-	 * 
+	 * Smart Date Field: knows if its date is formated right.
 	 */
 	private class SmartDateField extends SmartField {
 
@@ -304,7 +301,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 			return true;
 		}
 		
-		/* (non-Javadoc)
+		/**
 		 * @see ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite.SmartField#hasQuickFix()
 		 */
 		@Override
@@ -312,7 +309,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 			return true;
 		}
 		
-		/* (non-Javadoc)
+		/**
 		 * @see ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite.SmartField#getQuickfixMessage()
 		 */
 		@Override

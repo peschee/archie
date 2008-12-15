@@ -17,8 +17,8 @@ import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.i18n.Messages;
 
 /**
- * Handles the access to Archie based on access control lists defined in Elexis
- * properties.
+ * <p>Handles the access to Archie based on access control lists defined in Elexis
+ * properties.</p>
  * 
  * $Id$
  * 

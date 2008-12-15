@@ -30,7 +30,7 @@ import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 import ch.unibe.iam.scg.archie.utils.StringHelper;
 
 /**
- * TODO: DOCUMENT ME!
+ * <p>Action to export result data to a CSV file.</p>
  * 
  * $Id$
  * 
@@ -43,7 +43,7 @@ public class ExportAction extends Action {
 	private StatisticsView view;
 
 	/**
-	 * Default extensions for cvs exports.
+	 * Default extensions for CSV exports.
 	 */
 	private static String DEFAULT_EXTENSION = "csv";
 
@@ -73,7 +73,7 @@ public class ExportAction extends Action {
 		this.view = view;
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
 	@Override

@@ -21,13 +21,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Marks a method as setter. Used by the view to determine which elements can be
+ * <p>Marks a method as setter. Used by the view to determine which elements can be
  * changed by the user. The index determines the order in which the setter
  * methods will be invoked. This is only important for exception handling. If
  * the validity of a setter value depends on another value (e.g. marking a
  * starting and ending point for a time period where the end point has to be
  * greater than the starting point) the index can be used to control the
- * invocation order.
+ * invocation order.</p>
  * 
  * $Id$
  * 

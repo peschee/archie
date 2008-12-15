@@ -29,8 +29,8 @@ import ch.unibe.iam.scg.archie.ui.fields.DateTextFieldComposite;
 import ch.unibe.iam.scg.archie.utils.ProviderHelper;
 
 /**
- * A simple CSV writer that takes care of exporting data from a given provider
- * into a CSV file.
+ * <p>A simple CSV writer that takes care of exporting data from a given provider
+ * into a CSV file.</p>
  * 
  * $Id$
  * 
