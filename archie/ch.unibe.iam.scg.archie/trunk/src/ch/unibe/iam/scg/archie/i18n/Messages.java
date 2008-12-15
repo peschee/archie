@@ -18,7 +18,7 @@ package ch.unibe.iam.scg.archie.i18n;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * Message class
+ * <p>Message class: used for i18n.</p>
  * 
  * $Id$
  * 
