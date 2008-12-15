@@ -29,7 +29,7 @@ import ch.unibe.iam.scg.archie.ui.FieldTypes;
 import ch.unibe.iam.scg.archie.ui.fields.DateTextFieldComposite;
 
 /**
- * TODO: DOCUMENT ME!
+ * <p>Can be used by any statistic that needs a time span defined.</p>
  * 
  * $Id$
  * 
@@ -40,12 +40,12 @@ import ch.unibe.iam.scg.archie.ui.fields.DateTextFieldComposite;
 public abstract class AbstractTimeSeries extends AbstractDataProvider {
 
 	/**
-	 * TODO: Document me.
+	 * The start date of the time span we are interested in.
 	 */
 	private Calendar startDate;
 
 	/**
-	 * TODO: Document me.
+	 * The end date of the time span we are interested in.
 	 */
 	private Calendar endDate;
 
@@ -97,7 +97,7 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 
 	/**
 	 * @return the start date of this query. Inclusive. 
-	 * */
+	 */
 	@GetProperty(name = "Start Date", index = -2, fieldType = FieldTypes.TEXT_DATE, validationRegex = "\\d{2}\\.\\d{2}\\.\\d{4}", validationMessage = "Datumsformat bla...")
 	public String metaGetStartDate() {
 		SimpleDateFormat format = new SimpleDateFormat(DateTextFieldComposite.VALID_DATE_FORMAT);

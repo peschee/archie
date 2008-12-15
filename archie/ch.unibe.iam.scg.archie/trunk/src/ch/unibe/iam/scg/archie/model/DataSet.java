@@ -27,7 +27,7 @@ import java.util.List;
  * </p>
  * 
  * <p>
- * <b>IMPORTANT</b>: The dataset's content has to be composed out of data types
+ * <strong>IMPORTANT</strong>: The dataset's content has to be composed out of data types
  * that implement the Comparable interface. This is to ensure that the contents
  * of the dataset can be sorted properly.
  * </p>

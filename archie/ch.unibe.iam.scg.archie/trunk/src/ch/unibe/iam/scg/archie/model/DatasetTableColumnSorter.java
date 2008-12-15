@@ -19,11 +19,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import ch.unibe.iam.scg.archie.utils.DatasetHelper;
 
 /**
- * Handles dataset sorting according to the table and it's sorting column and
+ * <p>Handles dataset sorting according to the table and it's sorting column and
  * direction. This class is used by the controller (action that starts a new
  * statistic) to attach this listener to the latest result table, so that
  * sorting the table is reflected on the dataset. This is needed in order to
- * have a properly sorted table (and the cloned dataset) in the chart wizard.
+ * have a properly sorted table (and the cloned dataset) in the chart wizard.</p>
  * 
  * $Id$
  * 

@@ -28,14 +28,14 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 public class MutexRule implements ISchedulingRule {
 
 	/**
-	 * @{inheritDoc
+	 * {@inheritDoc}
 	 */
 	public boolean contains(ISchedulingRule rule) {
 		return this == rule;
 	}
 
 	/**
-	 * @{inheritDoc
+	 * {@inheritDoc}
 	 */
 	public boolean isConflicting(ISchedulingRule rule) {
 		return this == rule;
