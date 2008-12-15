@@ -105,9 +105,7 @@ public abstract class AbstractDataProvider extends Job {
 	 */
 	protected abstract IStatus createContent(IProgressMonitor monitor);
 
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 		ArchieActivator.LOG.log("Job + " + this.getName(), Log.INFOS);

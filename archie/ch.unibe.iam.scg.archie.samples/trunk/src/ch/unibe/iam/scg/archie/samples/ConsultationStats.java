@@ -35,7 +35,7 @@ import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
- * TODO: DOCUMENT ME!
+ * <p>TODO: DOCUMENT ME!</p>
  * 
  * $Id$
  * 
