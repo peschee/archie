@@ -14,7 +14,7 @@ package ch.unibe.iam.scg.archie.samples.i18n;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * Message class
+ * <p>Message class. Used for i18n.</p>
  * 
  * $Id$
  * 
@@ -66,6 +66,9 @@ public final class Messages extends NLS {
 	// Prescription Overview
 	public static String PRESCRIPTIONS_OVERVIEW_TITLE;
 	public static String PRESCRIPTIONS_OVERVIEW_DESCRIPTION;
+	public static String PRESCRIPTIONS_OVERVIEW_HEADING_NAME;
+	public static String PRESCRIPTIONS_OVERVIEW_HEADING_COUNT;
+	public static String PRESCRIPTIONS_OVERVIEW_HEADING_AVG_TIME;
 	
 	// Service Statistics
 	public static String SERVICES_TITLE;
@@ -88,7 +91,7 @@ public final class Messages extends NLS {
 	public static String DIAGNOSES_HEADING_AGE_MED;
 
 	static {
-		// load message values from bundle file
+		// Load message values from bundle file.
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
 

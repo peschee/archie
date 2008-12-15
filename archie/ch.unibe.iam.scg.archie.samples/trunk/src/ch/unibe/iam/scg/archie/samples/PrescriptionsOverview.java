@@ -52,19 +52,19 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 		super(Messages.PRESCRIPTIONS_OVERVIEW_TITLE);
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.model.AbstractDataProvider#createHeadings()
 	 */
 	@Override
 	protected List<String> createHeadings() {
 		final ArrayList<String> headings = new ArrayList<String>(3);
-		headings.add("Name");
-		headings.add("Prescribed Count");
-		headings.add("Avarage Prescription Time");
+		headings.add(Messages.PRESCRIPTIONS_OVERVIEW_HEADING_NAME);
+		headings.add(Messages.PRESCRIPTIONS_OVERVIEW_HEADING_COUNT);
+		headings.add(Messages.PRESCRIPTIONS_OVERVIEW_HEADING_AVG_TIME);
 		return headings;
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see ch.unibe.iam.scg.archie.model.AbstractDataProvider#getDescription()
 	 */
 	@Override
@@ -88,8 +88,7 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 		List<Prescription> prescriptions = query.execute();
 
 		// set job size and begin task
-		this.size = prescriptions.size() * 2; // Double size because we have two
-												// loops.
+		this.size = prescriptions.size() * 2; // Double size because we have two loops.
 		monitor.beginTask(Messages.DB_QUERYING, this.size); // monitor
 
 		TreeMap<String, List<Prescription>> prescriptionCount = new TreeMap<String, List<Prescription>>();
@@ -113,7 +112,7 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 
 		// compute prescription stats in grouped list
 		for (final Entry<String, List<Prescription>> entry : prescriptionCount.entrySet()) {
-			// check for cancelation
+			// check for cancellation
 			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
 			
 			final Comparable<?>[] row = new Comparable<?>[this.dataSet.getHeadings().size()];
