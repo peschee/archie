@@ -10,9 +10,6 @@
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
 
-/**
- * TODO: Document.
- */
 package ch.unibe.iam.scg.archie.i18n;
 
 import org.eclipse.osgi.util.NLS;

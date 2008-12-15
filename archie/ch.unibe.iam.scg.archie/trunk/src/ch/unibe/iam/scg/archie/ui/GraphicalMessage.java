@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 /**
- * TODO: DOCUMENT ME!
+ * <p>Messages with a graphical symbol.</p>
  * 
  * $Id$
  * 

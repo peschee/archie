@@ -33,7 +33,8 @@ import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 
 /**
- * TODO: DOCUMENT ME!
+ * <p>Is displayed in the sidebar. Shows description and parameters for chosen statistic.
+ * Statistics can be run or canceled here.</p>
  * 
  * $Id$
  * 
@@ -179,8 +180,8 @@ public class DetailsPanel extends Composite implements Observer {
 	}
 
 	/**
-	 * Attache a propery change listener to this object. This actually forwards
-	 * the attachement to this panel's new query action.
+	 * Attache a property change listener to this object. This actually forwards
+	 * the attachment to this panel's new query action.
 	 * 
 	 * @param listener
 	 *            A property change listener.
@@ -190,8 +191,6 @@ public class DetailsPanel extends Composite implements Observer {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	public void update(Observable observable, Object arg) {

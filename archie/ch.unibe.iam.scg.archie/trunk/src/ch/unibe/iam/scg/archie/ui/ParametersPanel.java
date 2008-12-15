@@ -37,9 +37,9 @@ import ch.unibe.iam.scg.archie.utils.ProviderHelper;
 import ch.unibe.iam.scg.archie.utils.RegexValidation;
 
 /**
- * A composite panel which contains all the parameter fields for a data
+ * <p>A composite panel which contains all the parameter fields for a data
  * provider. The parameters of a provider are set accordingly. Parameter fields
- * and their content are determined at runtime through annotations.
+ * and their content are determined at runtime through annotations.</p>
  * 
  * $Id$
  * 
@@ -84,8 +84,6 @@ public class ParametersPanel extends Composite {
 	}
 
 	/**
-	 * TODO: Document.
-	 * 
 	 * @param provider
 	 */
 	public void updateParameterList(AbstractDataProvider provider) {
@@ -148,7 +146,7 @@ public class ParametersPanel extends Composite {
 	}
 
 	/**
-	 * TODO: Document.
+	 * Create Parameter Fields.
 	 */
 	private void createParameterFields() {
 		// get all getters
@@ -237,8 +235,6 @@ public class ParametersPanel extends Composite {
 	}
 
 	/**
-	 * TODO: Document.
-	 * 
 	 * @param setterList
 	 * @throws Exception
 	 */

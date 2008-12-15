@@ -22,7 +22,7 @@ import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.i18n.Messages;
 
 /**
- * TODO: DOCUMENT ME!
+ * <p>Shows the results of a statistics query.</p>
  * 
  * $Id$
  * 
@@ -72,7 +72,7 @@ public class ResultPanel extends Composite {
 	}
 
 	/**
-	 * 
+	 * Create Message Container.
 	 */
 	private void createMessageContainer() {
 		this.messageContainer = new Group(this, SWT.NONE);
@@ -89,7 +89,7 @@ public class ResultPanel extends Composite {
 	}
 
 	/**
-	 * 
+	 * Shows a message if the ResultPanel is empty.
 	 */
 	public void showEmptyMessage() {
 		this.createMessageContainer();
