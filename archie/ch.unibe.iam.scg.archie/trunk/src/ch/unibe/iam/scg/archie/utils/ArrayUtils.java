@@ -12,7 +12,7 @@
 package ch.unibe.iam.scg.archie.utils;
 
 /**
- * Array utility class providing convenience methods for arrays.
+ * <p>Array utility class providing convenience methods for arrays.</p>
  * 
  * $Id$
  * 
@@ -76,9 +76,8 @@ public class ArrayUtils {
 	}
 	
 	/**
-	 * 
 	 * @param interfaces
-	 * @param interfaceName
+	 * @param needle 
 	 * @return True if the given class is in the interfaces array.
 	 */
 	public static final boolean hasInterface(Class<?>[] interfaces, Class<?> needle) {

@@ -76,14 +76,13 @@ public class ArchiePreferencePage extends FieldEditorPreferencePage implements I
 		this.addField(cohortSizeEditor);
 	}
 
-	/** (non-Javadoc)
-	 * @see
-	 * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+	/**
+	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
 	public void init(IWorkbench workbench) {
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#performOk()
 	 */
 	@Override
