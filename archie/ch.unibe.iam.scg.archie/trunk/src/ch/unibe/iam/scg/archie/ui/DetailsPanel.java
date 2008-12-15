@@ -119,7 +119,7 @@ public class DetailsPanel extends Composite implements Observer {
 	 */
 	private void createCancelButton(Composite parent) {
 		this.cancelButton = new Button(parent, SWT.NONE);
-		this.cancelButton.setText("Cancel");
+		this.cancelButton.setText(Messages.CANCEL);
 		this.cancelButton.setImage(ArchieActivator.getImage(ArchieActivator.IMG_CANCEL));
 		this.cancelButton.addListener(SWT.MouseDown, new Listener() {
 			public void handleEvent(Event event) {
