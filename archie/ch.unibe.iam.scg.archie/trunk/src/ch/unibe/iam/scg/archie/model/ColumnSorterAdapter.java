@@ -23,8 +23,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 /**
- * Sorts the columns of a TableViewer in a simple manner. It does not consider
- * any sorting done before.
+ * <p>Sorts the columns of a TableViewer in a simple manner. It does not consider
+ * any sorting done before.</p>
  * 
  * $Id$
  * 
@@ -57,7 +57,7 @@ public class ColumnSorterAdapter extends SelectionAdapter {
 		this.index = index;
 	}
 
-	/** (non-Javadoc)
+	/**
 	 * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
 	 */
 	@Override

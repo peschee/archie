@@ -34,15 +34,15 @@ import ch.unibe.iam.scg.archie.ArchieActivator;
  * its data. The provider holds a <code>DataSet</code> object which provides
  * convenience methods for presenting and retrieving statistical data. Each
  * provider also has to set the size of its elements accordingly so the
- * <code>Job</code> progress information is being displayed accurately.
+ * <code>Job</code> so progress information is being displayed accurately.
  * </p>
  * 
  * <p>
- * Providers have to <b>initialize additional default values</b> of their
- * properties either in the constructor or as part of the class definition.
- * There is no abstract method that binds the implementors to initialize their
- * default values. An error will be thrown in the GUI when no default value has
- * been initialized for a provider property.
+ * Providers have to <strong>initialize additional default values</strong> 
+ * of their properties either in the constructor or as part of the class 
+ * definition. There is no abstract method that binds the implementors to 
+ * initialize their default values. An error will be thrown in the GUI 
+ * when no default value has been initialized for a provider property.
  * </p>
  * 
  * $Id: AbstractDataProvider.java 258 2008-10-06 17:51:15Z psiska
@@ -121,10 +121,10 @@ public abstract class AbstractDataProvider extends Job {
 	 * @return The status of the current job.
 	 */
 	public IStatus execute(final IProgressMonitor monitor) {
-		// set headings in the dataset
+		// Set headings in the dataset.
 		this.dataSet.setHeadings(this.createHeadings());
 
-		// return the status coming from the conten creation method
+		// Return the status coming from the content creation method.
 		return this.createContent(monitor);
 	}
 

@@ -28,9 +28,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 /**
- * Creates a <code>TableViewer</code> from data provided by an implementation of
- * AbstractDataprovider.<br/>
- * Uses singleton pattern.<br/>
+ * <p>Creates a <code>TableViewer</code> from data provided by an 
+ * implementation of <code>AbstractDataProvider</code>.<br/>
+ * Uses singleton pattern.</p>
  * 
  * $Id$
  * 

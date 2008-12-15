@@ -22,8 +22,8 @@ import org.eclipse.swt.SWT;
 import ch.unibe.iam.scg.archie.utils.ArrayUtils;
 
 /**
- * A ViewerSorter which can sort top down and bottom up depending on the setting
- * of the reverse boolean.
+ * <p>A ViewerSorter which can sort top down and bottom up depending on the setting
+ * of the reverse boolean.</p>
  * 
  * $Id$
  * 
@@ -47,8 +47,6 @@ public class ColumnSorter extends ViewerSorter {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.ViewerComparator#compare(org.eclipse.jface.viewers.Viewer,
 	 *      java.lang.Object, java.lang.Object)
 	 */

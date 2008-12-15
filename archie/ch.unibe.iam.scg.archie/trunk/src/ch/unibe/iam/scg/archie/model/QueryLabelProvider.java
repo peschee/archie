@@ -21,9 +21,9 @@ import org.eclipse.swt.graphics.Image;
 import ch.rgw.tools.Money;
 
 /**
- * Standard label provider for the queries. If no special labels or model is
+ * <p>Standard label provider for the queries. If no special labels or model is
  * required, this label provider will do nicely. It provides just the labels
- * given at the specific row/columns.
+ * given at the specific row/columns.</p>
  * 
  * $Id$
  * 
@@ -34,8 +34,6 @@ import ch.rgw.tools.Money;
 public class QueryLabelProvider extends LabelProvider implements ITableLabelProvider {
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object,
 	 *      int)
 	 */
@@ -44,8 +42,6 @@ public class QueryLabelProvider extends LabelProvider implements ITableLabelProv
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object,
 	 *      int)
 	 */

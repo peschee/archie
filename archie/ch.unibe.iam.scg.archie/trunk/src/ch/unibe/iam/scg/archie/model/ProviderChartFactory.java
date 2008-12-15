@@ -50,7 +50,7 @@ import ch.unibe.iam.scg.archie.ui.GraphicalMessage;
 public class ProviderChartFactory {
 
 	/**
-	 * Instance of this chart factory. There's always only one thorugh the
+	 * Instance of this chart factory. There's always only one through the
 	 * entire lifecycle of this application.
 	 */
 	private static ProviderChartFactory INSTANCE;
@@ -196,7 +196,6 @@ public class ProviderChartFactory {
 	}
 
 	/**
-	 * 
 	 * @param dataset
 	 * @return
 	 */

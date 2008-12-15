@@ -24,7 +24,7 @@ package ch.unibe.iam.scg.archie.model;
 public class Cohort implements Comparable<Cohort> {
 	
 	/**
-	 * Delimiter used for the title of a cohort
+	 * Delimiter used for the title of a cohort.
 	 */
 	public final static String TITLE_DELIMITER = " - ";
 	
