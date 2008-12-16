@@ -72,14 +72,14 @@ public class UserOverview extends AbstractDataProvider {
 				return Status.CANCEL_STATUS;
 
 			final String valid = (anwender.isValid() == true) ? Messages.USER_OVERVIEW_YES : Messages.USER_OVERVIEW_NO;
-
 			final String group = (anwender.getInfoElement("Groups") != null) ? anwender.getInfoElement("Groups")
 					.toString() : Messages.USER_OVERVIEW_UNDEFINED;
 
 			final Comparable<?>[] row = { anwender.getLabel(), anwender.getGeburtsdatum(), anwender.getGeschlecht(),
 					valid, group };
+			
 			content.add(row);
-
+			
 			monitor.worked(1); // monitoring
 		}
 
