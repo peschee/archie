@@ -201,9 +201,7 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.unibe.iam.scg.archie.model.AbstractDataProvider#getDescription()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String getDescription() {
@@ -213,7 +211,9 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 	}
 
 	/**
-	 * @return whithTime
+	 * Returns the currently set parameter for including time stats.
+	 * 
+	 * @return whithTime True if time statistics are being included, false else.
 	 */
 	@GetProperty(name = "Include Time", index = 1, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Include time statistics for consultations.")
 	public boolean getShowTime() {
@@ -221,7 +221,9 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 	}
 
 	/**
-	 * @param showTime
+	 * Sets the show time property. If set, time statistics will be included in the result.
+	 * 
+	 * @param showTime True if time stats should be included, false else.
 	 */
 	@SetProperty(name = "Include Time")
 	public void setShowTime(final boolean showTime) {
