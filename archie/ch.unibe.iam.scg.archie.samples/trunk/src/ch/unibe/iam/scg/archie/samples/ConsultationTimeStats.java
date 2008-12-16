@@ -35,7 +35,10 @@ import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Consultation statistics, grouped by month. For each month, information about
+ * the total time, costs and profits are given. Averages are computed too.
+ * There's a parameter that can be set which turns the displaying of time
+ * statistics on or off.
  * </p>
  * 
  * $Id$
@@ -80,7 +83,7 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 		query.add("MandantID", "=", Hub.actMandant.getId());
 
 		final List<Konsultation> consults = query.execute();
-		
+
 		// define size and begin task
 		this.size = consults.size();
 		monitor.beginTask("consulttime", this.size);
@@ -90,8 +93,9 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 		for (final Konsultation consult : consults) {
 			try {
 				// check for cancelation
-				if(monitor.isCanceled()) return Status.CANCEL_STATUS;
-				
+				if (monitor.isCanceled())
+					return Status.CANCEL_STATUS;
+
 				final Date consultDate = consultationFormat.parse(consult.getDatum());
 				ArrayList<Konsultation> consultGroup = new ArrayList<Konsultation>();
 
@@ -112,8 +116,9 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 		monitor.subTask("consulttime.computing");
 		for (final Entry<String, ArrayList<Konsultation>> entry : grouped.entrySet()) {
 			// check for cancelation
-			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
-			
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+
 			final Comparable<?>[] row = new Comparable<?>[this.dataSet.getHeadings().size()];
 			int column = 0;
 
@@ -126,8 +131,9 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 
 			for (final Konsultation consultation : entry.getValue()) {
 				// check for cancelation
-				if(monitor.isCanceled()) return Status.CANCEL_STATUS;
-				
+				if (monitor.isCanceled())
+					return Status.CANCEL_STATUS;
+
 				// time statistics for a month
 				consTotal++;
 				if (this.withTime) {
@@ -165,10 +171,10 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 
 			content.add(row);
 		}
-		
+
 		// set heading and content
 		this.dataSet.setContent(content);
-		
+
 		monitor.done();
 		return Status.OK_STATUS;
 	}
@@ -194,7 +200,9 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 		return headings;
 	}
 
-	/** (non-Javadoc)
+	/**
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.unibe.iam.scg.archie.model.AbstractDataProvider#getDescription()
 	 */
 	@Override
