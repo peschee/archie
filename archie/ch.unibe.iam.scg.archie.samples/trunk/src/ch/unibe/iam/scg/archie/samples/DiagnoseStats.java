@@ -35,7 +35,7 @@ import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
- * Provides statistics about diagnoses count and age distribution.
+ * <p>Provides statistics about diagnoses count and age distribution.</p>
  * 
  * $Id$
  * 

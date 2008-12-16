@@ -24,9 +24,9 @@ import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 
 /**
- * Provides a simple System User Overview about all users in the system. Users
+ * <p>Provides a simple System User Overview about all users in the system. Users
  * are listed with their username, birthday, gender and all user groups they are
- * in. Further more, the list shows whether an user account is valid or not.
+ * in. Further more, the list shows whether an user account is valid or not.</p>
  * 
  * $Id$
  * 

@@ -14,11 +14,11 @@ package ch.unibe.iam.scg.archie.samples.model;
 import ch.elexis.data.Person;
 
 /**
- * Wrapper class for persons. This class is needed for a custom label provider.
+ * <p>Wrapper class for persons. This class is needed for a custom label provider.
  * Objects in the dataset need to implement the <code>Comparable</code>
  * interface. As the original <code>Person</code> class in Elexis does not
  * implement this interface, we had to write a quick wrapper in order to be able
- * to use persons in the dataset's content.
+ * to use persons in the dataset's content.</p>	
  * 
  * $Id$
  * 

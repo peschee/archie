@@ -35,7 +35,11 @@ import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>
+ * Provides statistics about consultations. The resulting dataset contains
+ * information about costs, profits and the total number of consultations for a
+ * given age group.
+ * </p>
  * 
  * $Id$
  * 
@@ -117,8 +121,8 @@ public class ConsultationStats extends AbstractTimeSeries {
 
 			// In which cohort does this patient belong to?
 			int lowerBound = ((age / this.cohortSize) * this.cohortSize); // gets
-																			// rounded
-																			// down
+			// rounded
+			// down
 			int upperBound = lowerBound + (this.cohortSize);
 
 			// Initialize empty cohort content, which we will fill with
@@ -138,7 +142,7 @@ public class ConsultationStats extends AbstractTimeSeries {
 			// Cohort is not in cohort list yet, add it.
 			if (!cohorts.containsKey(cohort)) {
 				// Cast int to double.
-				cohortContentCosts.add(((Integer) consultation.getKosten()).doubleValue()); 
+				cohortContentCosts.add(((Integer) consultation.getKosten()).doubleValue());
 				cohortContentProfits.add(consultation.getGewinn());
 				cohorts.put(cohort, cohort);
 			}
