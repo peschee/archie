@@ -30,7 +30,9 @@ import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 import ch.unibe.iam.scg.archie.utils.StringHelper;
 
 /**
- * <p>Action to export result data to a CSV file.</p>
+ * <p>
+ * Action to export result data to a CSV file.
+ * </p>
  * 
  * $Id$
  * 
@@ -82,11 +84,12 @@ public class ExportAction extends Action {
 		final FileDialog chooser = new FileDialog(this.view.getSite().getShell(), SWT.SAVE);
 
 		// set default extension for the exported file
-		chooser.setFilterExtensions(new String[] { "*." + ExportAction.DEFAULT_EXTENSION });
+		chooser.setFilterExtensions(new String[] { "*." + ExportAction.DEFAULT_EXTENSION, "*.*" });
+		chooser.setFilterNames(new String[] { "CSV Files", "All Files" });
 
 		// get a default name based on the current date
 		final String name = this.getNameSuggestion().toLowerCase();
-		chooser.setFileName(name);
+		chooser.setFileName(name + "." + ExportAction.DEFAULT_EXTENSION);
 
 		final String fileName = chooser.open();
 		if (fileName != null) {
