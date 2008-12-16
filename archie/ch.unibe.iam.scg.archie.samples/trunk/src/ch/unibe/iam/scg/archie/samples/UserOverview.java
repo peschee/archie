@@ -24,7 +24,9 @@ import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 
 /**
- * <p>Simple System User Overview.</p>
+ * Provides a simple System User Overview about all users in the system. Users
+ * are listed with their username, birthday, gender and all user groups they are
+ * in. Further more, the list shows whether an user account is valid or not.
  * 
  * $Id$
  * 
@@ -74,13 +76,13 @@ public class UserOverview extends AbstractDataProvider {
 			final String group = (anwender.getInfoElement("Groups") != null) ? anwender.getInfoElement("Groups")
 					.toString() : Messages.USER_OVERVIEW_UNDEFINED;
 
-			final Comparable<?>[] row = { anwender.getLabel(), anwender.getGeburtsdatum(), anwender.getGeschlecht(), valid,
-					group };
+			final Comparable<?>[] row = { anwender.getLabel(), anwender.getGeburtsdatum(), anwender.getGeschlecht(),
+					valid, group };
 			content.add(row);
 
 			monitor.worked(1); // monitoring
 		}
-		
+
 		// set content
 		this.dataSet.setContent(content);
 

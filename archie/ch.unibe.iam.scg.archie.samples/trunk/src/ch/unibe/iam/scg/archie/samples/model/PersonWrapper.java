@@ -20,7 +20,7 @@ import ch.elexis.data.Person;
  * implement this interface, we had to write a quick wrapper in order to be able
  * to use persons in the dataset's content.
  * 
- * $$Id$$
+ * $Id$
  * 
  * @author Peter Siska
  * @author Dennis Schenk
