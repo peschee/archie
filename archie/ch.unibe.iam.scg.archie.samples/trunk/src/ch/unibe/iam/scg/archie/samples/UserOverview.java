@@ -76,10 +76,10 @@ public class UserOverview extends AbstractDataProvider {
 		final List<Konsultation> consults = consultQuery.execute();
 
 		// start the task
-		this.size = users.size() + consults.size();
-		monitor.beginTask("Calculating statistics", this.size); // monitoring
+		monitor.beginTask(Messages.CALCULATING, users.size() + consults.size());
 
 		// sum up user entries
+		monitor.subTask("Counting user entries");
 		for (final Konsultation consult : consultQuery.execute()) {
 			String author = consult.getAuthor();
 			if (!author.equals("")) {
@@ -95,6 +95,7 @@ public class UserOverview extends AbstractDataProvider {
 		}
 
 		// iterate over users and create dataset
+		monitor.subTask("Computing results");
 		for (final Anwender anwender : users) {
 			// check for cancelation
 			if (monitor.isCanceled())

@@ -31,6 +31,7 @@ import ch.rgw.tools.Money;
 import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
+import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
@@ -85,11 +86,10 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 		final List<Konsultation> consults = query.execute();
 
 		// define size and begin task
-		this.size = consults.size();
-		monitor.beginTask("consulttime", this.size);
+		monitor.beginTask(Messages.CALCULATING, consults.size());
 
 		// do the light stuff...
-		monitor.subTask("consulttime.grouping");
+		monitor.subTask("Grouping Consultations");
 		for (final Konsultation consult : consults) {
 			try {
 				// check for cancelation
@@ -113,7 +113,7 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 		}
 
 		// do the super heavy stuff ^^
-		monitor.subTask("consulttime.computing");
+		monitor.subTask("Computing Results");
 		for (final Entry<String, ArrayList<Konsultation>> entry : grouped.entrySet()) {
 			// check for cancelation
 			if (monitor.isCanceled())
@@ -221,9 +221,11 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 	}
 
 	/**
-	 * Sets the show time property. If set, time statistics will be included in the result.
+	 * Sets the show time property. If set, time statistics will be included in
+	 * the result.
 	 * 
-	 * @param showTime True if time stats should be included, false else.
+	 * @param showTime
+	 *            True if time stats should be included, false else.
 	 */
 	@SetProperty(name = "Include Time")
 	public void setShowTime(final boolean showTime) {

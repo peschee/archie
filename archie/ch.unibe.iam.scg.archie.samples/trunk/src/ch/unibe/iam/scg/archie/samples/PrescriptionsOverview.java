@@ -88,8 +88,8 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 		List<Prescription> prescriptions = query.execute();
 
 		// set job size and begin task
-		this.size = prescriptions.size() * 2; // Double size because we have two loops.
-		monitor.beginTask(Messages.DB_QUERYING, this.size); // monitor
+		int size = prescriptions.size() * 2; // Double size because we have two loops.
+		monitor.beginTask(Messages.CALCULATING, size); // monitor
 
 		TreeMap<String, List<Prescription>> prescriptionCount = new TreeMap<String, List<Prescription>>();
 
