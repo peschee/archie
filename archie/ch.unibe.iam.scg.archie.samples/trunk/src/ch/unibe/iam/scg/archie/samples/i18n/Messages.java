@@ -27,7 +27,7 @@ public final class Messages extends NLS {
 	private static final String BUNDLE_NAME = "ch.unibe.iam.scg.archie.samples.i18n.messages"; //$NON-NLS-1$
 
 	// General
-	public static String DB_QUERYING;
+	public static String CALCULATING;
 	
 	// User Overview
 	public static String USER_OVERVIEW_TITLE;

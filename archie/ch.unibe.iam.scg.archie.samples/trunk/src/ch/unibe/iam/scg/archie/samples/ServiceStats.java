@@ -80,8 +80,7 @@ public class ServiceStats extends AbstractTimeSeries {
 		// Get all Consultation which happened in the specified date range.
 		final List<Konsultation> consultations = query.execute();
 
-		this.size = consultations.size();
-		monitor.beginTask(Messages.DB_QUERYING, this.size); // monitoring
+		monitor.beginTask(Messages.CALCULATING, consultations.size()); // monitoring
 
 		final HashMap<IVerrechenbar, ServiceCounter> services = new HashMap<IVerrechenbar, ServiceCounter>();
 

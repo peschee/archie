@@ -76,8 +76,7 @@ public class DiagnoseStats extends AbstractTimeSeries {
 
 		final List<Konsultation> consults = query.execute();
 
-		this.size = consults.size();
-		monitor.beginTask(Messages.DB_QUERYING, this.size);
+		monitor.beginTask(Messages.CALCULATING, consults.size());
 		
 		final TreeMap<String, List<Patient>> diagnoseMap = new TreeMap<String, List<Patient>>();
 		

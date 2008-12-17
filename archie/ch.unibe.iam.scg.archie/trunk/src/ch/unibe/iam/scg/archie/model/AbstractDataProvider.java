@@ -58,11 +58,6 @@ public abstract class AbstractDataProvider extends Job {
 	 */
 	protected DataSet dataSet;
 
-	/**
-	 * Size of the job, this has to be set in the subclasses accordingly
-	 */
-	protected int size = 0;
-
 	private ILabelProvider labelProvider;
 	private IStructuredContentProvider contentProvider;
 

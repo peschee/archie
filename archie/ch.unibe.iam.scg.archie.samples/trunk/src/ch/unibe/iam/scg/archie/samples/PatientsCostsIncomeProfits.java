@@ -107,8 +107,8 @@ public class PatientsCostsIncomeProfits extends AbstractTimeSeries {
 		// Get all Consultation which happened in the specified date range.
 		final List<Konsultation> consultations = query.execute();
 
-		this.size = consultations.size();
-		monitor.beginTask(Messages.DB_QUERYING, this.size); // monitoring
+		// start the task
+		monitor.beginTask(Messages.CALCULATING, consultations.size());
 
 		// Patients TreeMap will hold patients names and their costs, income,
 		// profits

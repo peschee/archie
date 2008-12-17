@@ -93,8 +93,7 @@ public class ConsultationStats extends AbstractTimeSeries {
 		// Get all Consultation which happened in the specified date range.
 		final List<Konsultation> consultations = query.execute();
 
-		this.size = consultations.size();
-		monitor.beginTask(Messages.DB_QUERYING, this.size); // monitoring
+		monitor.beginTask(Messages.CALCULATING, consultations.size()); // monitoring
 
 		// Create a list of cohorts which we will be using as main data holder.
 		// Key is cohort name, entry is cohort itself
@@ -133,8 +132,8 @@ public class ConsultationStats extends AbstractTimeSeries {
 			// Prepare Cohort.
 			Cohort cohort = new Cohort(lowerBound, upperBound, cohortContent);
 
-			ArrayList<Double> cohortContentCosts = new ArrayList<Double>(this.size);
-			ArrayList<Double> cohortContentProfits = new ArrayList<Double>(this.size);
+			ArrayList<Double> cohortContentCosts = new ArrayList<Double>(consultations.size());
+			ArrayList<Double> cohortContentProfits = new ArrayList<Double>(consultations.size());
 
 			cohortContent[0] = cohortContentCosts;
 			cohortContent[1] = cohortContentProfits;
