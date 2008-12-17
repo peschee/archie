@@ -41,12 +41,6 @@ import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 public class UserOverview extends AbstractDataProvider {
 
 	/**
-	 * Map that associates user names with the number of their consutation
-	 * entries.
-	 */
-	private HashMap<String, Integer> userEntryMap;
-
-	/**
 	 * Constructs User Overview
 	 */
 	public UserOverview() {
