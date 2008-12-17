@@ -12,6 +12,7 @@
 package ch.unibe.iam.scg.archie.samples;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -19,14 +20,17 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
 import ch.elexis.data.Anwender;
+import ch.elexis.data.Konsultation;
 import ch.elexis.data.Query;
 import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 
 /**
- * <p>Provides a simple System User Overview about all users in the system. Users
+ * <p>
+ * Provides a simple System User Overview about all users in the system. Users
  * are listed with their username, birthday, gender and all user groups they are
- * in. Further more, the list shows whether an user account is valid or not.</p>
+ * in. Further more, the list shows whether an user account is valid or not.
+ * </p>
  * 
  * $Id$
  * 
@@ -35,6 +39,12 @@ import ch.unibe.iam.scg.archie.samples.i18n.Messages;
  * @version $Rev$
  */
 public class UserOverview extends AbstractDataProvider {
+
+	/**
+	 * Map that associates user names with the number of their consutation
+	 * entries.
+	 */
+	private HashMap<String, Integer> userEntryMap;
 
 	/**
 	 * Constructs User Overview
@@ -48,6 +58,7 @@ public class UserOverview extends AbstractDataProvider {
 		final ArrayList<String> headings = new ArrayList<String>(5);
 
 		headings.add(Messages.USER_OVERVIEW_USER);
+		headings.add(Messages.USER_OVERVIEW_ENTRIES);
 		headings.add(Messages.USER_OVERVIEW_BIRTHDAY);
 		headings.add(Messages.USER_OVERVIEW_GENDER);
 		headings.add(Messages.USER_OVERVIEW_VALID);
@@ -58,15 +69,39 @@ public class UserOverview extends AbstractDataProvider {
 
 	@Override
 	protected IStatus createContent(IProgressMonitor monitor) {
+		// initialize maps and lists
 		final List<Comparable<?>[]> content = new ArrayList<Comparable<?>[]>(5);
+		final HashMap<String, Integer> userEntryMap = new HashMap<String, Integer>();
 
-		final Query<Anwender> query = new Query<Anwender>(Anwender.class);
-		final List<Anwender> anwenderList = query.execute();
+		// create queries
+		final Query<Anwender> userQuery = new Query<Anwender>(Anwender.class);
+		final Query<Konsultation> consultQuery = new Query<Konsultation>(Konsultation.class);
 
-		this.size = anwenderList.size();
-		monitor.beginTask("querying database", this.size); // monitoring
+		// execute queries
+		final List<Anwender> users = userQuery.execute();
+		final List<Konsultation> consults = consultQuery.execute();
 
-		for (final Anwender anwender : anwenderList) {
+		// start the task
+		this.size = users.size() + consults.size();
+		monitor.beginTask("Calculating statistics", this.size); // monitoring
+
+		// sum up user entries
+		for (final Konsultation consult : consultQuery.execute()) {
+			String author = consult.getAuthor();
+			if (!author.equals("")) {
+				int count = 1;
+				if (userEntryMap.containsKey(author)) {
+					count = userEntryMap.get(author);
+					count++;
+				}
+				userEntryMap.put(author, count);
+				
+				monitor.worked(1); // monitoring
+			}
+		}
+
+		// iterate over users and create dataset
+		for (final Anwender anwender : users) {
 			// check for cancelation
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
@@ -75,11 +110,14 @@ public class UserOverview extends AbstractDataProvider {
 			final String group = (anwender.getInfoElement("Groups") != null) ? anwender.getInfoElement("Groups")
 					.toString() : Messages.USER_OVERVIEW_UNDEFINED;
 
-			final Comparable<?>[] row = { anwender.getLabel(), anwender.getGeburtsdatum(), anwender.getGeschlecht(),
+			final String username = anwender.getLabel(true);
+			final Integer entryCount = userEntryMap.containsKey(username) ? userEntryMap.get(username) : new Integer(0);
+
+			final Comparable<?>[] row = { username, entryCount, anwender.getGeburtsdatum(), anwender.getGeschlecht(),
 					valid, group };
-			
+
 			content.add(row);
-			
+
 			monitor.worked(1); // monitoring
 		}
 
