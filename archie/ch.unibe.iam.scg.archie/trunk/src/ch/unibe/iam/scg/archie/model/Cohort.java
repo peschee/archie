@@ -32,12 +32,18 @@ public class Cohort implements Comparable<Cohort> {
 
 	private int lowerBound;
 	private int upperBound;
+
 	private Object value;
 
 	/**
+	 * Public constructor.
+	 * 
 	 * @param lowerBound
+	 *            Lower bound of a cohort.
 	 * @param upperBound
+	 *            Upper bound of a cohort.
 	 * @param value
+	 *            Value of the age group (cohort).
 	 */
 	public Cohort(final int lowerBound, final int upperBound, final Object value) {
 		// Checking Preconditions:
@@ -50,15 +56,18 @@ public class Cohort implements Comparable<Cohort> {
 	}
 
 	/**
-	 * @return Cohort size. The size is always 1 larger than the real
-	 *         difference, since a cohort includes both the lower and upper
-	 *         Bound.
+	 * Returns the cohort size. The size is always 1 larger than the real
+	 * difference, since a cohort includes both the lower and upper Bound.
+	 * 
+	 * @return Returns the cohort size.
 	 */
 	public int getCohortSize() {
 		return Math.abs(this.upperBound - this.lowerBound) + 1;
 	}
 
 	/**
+	 * Sets a cohort's lower bound.
+	 * 
 	 * @param lowerBound
 	 *            the lowerBound to set
 	 */
@@ -67,44 +76,58 @@ public class Cohort implements Comparable<Cohort> {
 	}
 
 	/**
-	 * @return the lowerBound
+	 * Returns a cohort's lower bound.
+	 * 
+	 * @return The lower bound of a cohort.
 	 */
 	public int getLowerBound() {
-		return lowerBound;
+		return this.lowerBound;
 	}
 
 	/**
+	 * Sets a cohort's upper bound.
+	 * 
 	 * @param upperBound
-	 *            the upperBound to set
+	 *            Upperbound value.
 	 */
 	public void setUpperBound(int upperBound) {
 		this.upperBound = upperBound;
 	}
 
 	/**
-	 * @return the upperBound
+	 * Returns a cohort's upper bound.
+	 * 
+	 * @return A cohort's upper bound.
 	 */
 	public int getUpperBound() {
-		return upperBound;
+		return this.upperBound;
 	}
 
 	/**
+	 * Sets a cohort's value.
+	 * 
 	 * @param value
-	 *            the value to set
+	 *            The cohort's value.
 	 */
 	public void setValue(Object value) {
 		this.value = value;
 	}
 
 	/**
-	 * @return the value
+	 * Returns a cohort's value.
+	 * 
+	 * @return Returns a cohort's value.
 	 */
 	public Object getValue() {
-		return value;
+		return this.value;
 	}
 
 	/**
-	 * @return title of this cohort (made up of lower- and upper bound.
+	 * To string representation of a cohort. The lower and upper bound are
+	 * connected by the <code>TITLE_DELIMITER</code> of the <code>Cohort</code>
+	 * class.
+	 * 
+	 * @return Title of this cohort (made up of lower- and upper bound).
 	 */
 	@Override
 	public String toString() {
@@ -140,9 +163,12 @@ public class Cohort implements Comparable<Cohort> {
 	}
 
 	/**
+	 * Checks if another cohort is equal to this one.
+	 * 
 	 * @param object
-	 * @return true if this cohort is equal to another cohort (same lower- and
-	 *         upperBound)
+	 *            An object.
+	 * @return True if this given object is a cohort and is equal (same lower-
+	 *         and upperBound), false else.
 	 */
 	@Override
 	public boolean equals(Object object) {
@@ -156,6 +182,9 @@ public class Cohort implements Comparable<Cohort> {
 	}
 
 	/**
+	 * Returns the hash code for this cohort. The hash code is composed out of
+	 * the name of a cohort.
+	 * 
 	 * @return HashCode of the name of this Cohort.
 	 */
 	@Override
