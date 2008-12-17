@@ -33,6 +33,7 @@ public final class Messages extends NLS {
 	public static String USER_OVERVIEW_TITLE;
 	public static String USER_OVERVIEW_DESCRIPTION;
 	public static String USER_OVERVIEW_USER;
+	public static String USER_OVERVIEW_ENTRIES;
 	public static String USER_OVERVIEW_BIRTHDAY;
 	public static String USER_OVERVIEW_GENDER;
 	public static String USER_OVERVIEW_VALID;
