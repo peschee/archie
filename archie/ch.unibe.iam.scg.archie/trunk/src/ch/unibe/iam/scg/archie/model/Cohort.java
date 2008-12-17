@@ -12,8 +12,10 @@
 package ch.unibe.iam.scg.archie.model;
 
 /**
- * <p>A Cohort represents a certain age-group (e.g. all patients with ages from 10 to 20).
- * lowerBound must always be smaller than upperBound</p>
+ * <p>
+ * A Cohort represents a certain age-group (e.g. all patients with ages from 10
+ * to 20). lowerBound must always be smaller than upperBound
+ * </p>
  * 
  * $Id$
  * 
@@ -22,17 +24,16 @@ package ch.unibe.iam.scg.archie.model;
  * @version $Rev$
  */
 public class Cohort implements Comparable<Cohort> {
-	
+
 	/**
 	 * Delimiter used for the title of a cohort.
 	 */
 	public final static String TITLE_DELIMITER = " - ";
-	
+
 	private int lowerBound;
 	private int upperBound;
 	private Object value;
-	
-	
+
 	/**
 	 * @param lowerBound
 	 * @param upperBound
@@ -47,17 +48,19 @@ public class Cohort implements Comparable<Cohort> {
 		this.setUpperBound(upperBound);
 		this.setValue(value);
 	}
-		
+
 	/**
-	 * @return Cohort size. The size is always 1 larger than the real difference, 
-	 * since a cohort includes both the lower and upper Bound.
+	 * @return Cohort size. The size is always 1 larger than the real
+	 *         difference, since a cohort includes both the lower and upper
+	 *         Bound.
 	 */
 	public int getCohortSize() {
 		return Math.abs(this.upperBound - this.lowerBound) + 1;
 	}
 
 	/**
-	 * @param lowerBound the lowerBound to set
+	 * @param lowerBound
+	 *            the lowerBound to set
 	 */
 	public void setLowerBound(int lowerBound) {
 		this.lowerBound = lowerBound;
@@ -71,7 +74,8 @@ public class Cohort implements Comparable<Cohort> {
 	}
 
 	/**
-	 * @param upperBound the upperBound to set
+	 * @param upperBound
+	 *            the upperBound to set
 	 */
 	public void setUpperBound(int upperBound) {
 		this.upperBound = upperBound;
@@ -85,7 +89,8 @@ public class Cohort implements Comparable<Cohort> {
 	}
 
 	/**
-	 * @param value the value to set
+	 * @param value
+	 *            the value to set
 	 */
 	public void setValue(Object value) {
 		this.value = value;
@@ -97,7 +102,7 @@ public class Cohort implements Comparable<Cohort> {
 	public Object getValue() {
 		return value;
 	}
-	
+
 	/**
 	 * @return title of this cohort (made up of lower- and upper bound.
 	 */
@@ -110,48 +115,46 @@ public class Cohort implements Comparable<Cohort> {
 	}
 
 	/**
-	 * A Cohort is smaller than another if its lower bound is smaller. 
-	 * If the lower bound of two cohorts is equal, the cohort with the 
-	 * smaller cohort size is smaller.
+	 * A Cohort is smaller than another if its lower bound is smaller. If the
+	 * lower bound of two cohorts is equal, the cohort with the smaller cohort
+	 * size is smaller.
 	 * 
-	 * @param otherCohort 
+	 * @param otherCohort
 	 * @return -1 if this cohort is smaller, 0 if equal, 1 is larger
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(Cohort otherCohort) {
-		 if (this.lowerBound == otherCohort.getLowerBound()) {
-			 if(this.getCohortSize() < otherCohort.getCohortSize()) {
-				 return -1;
-			 }
-			 else if (this.getCohortSize() > otherCohort.getCohortSize()) {
-				 return 1;
-			 }
-			 return 0;
-		 }
-		 else if (this.lowerBound < otherCohort.getLowerBound()) {
-			 return -1;
-		 }
-		 else if (this.lowerBound > otherCohort.getLowerBound()) {
-			 return 1;
-		 }
-		 return 0;
+		if (this.lowerBound == otherCohort.getLowerBound()) {
+			if (this.getCohortSize() < otherCohort.getCohortSize()) {
+				return -1;
+			} else if (this.getCohortSize() > otherCohort.getCohortSize()) {
+				return 1;
+			}
+			return 0;
+		} else if (this.lowerBound < otherCohort.getLowerBound()) {
+			return -1;
+		} else if (this.lowerBound > otherCohort.getLowerBound()) {
+			return 1;
+		}
+		return 0;
 	}
-	
+
 	/**
 	 * @param object
-	 * @return true if this cohort is equal to another cohort (same lower- and upperBound)
+	 * @return true if this cohort is equal to another cohort (same lower- and
+	 *         upperBound)
 	 */
 	@Override
 	public boolean equals(Object object) {
-		 if (object instanceof Cohort) {
+		if (object instanceof Cohort) {
 			Cohort otherCohort = ((Cohort) object);
-			 if (this.lowerBound == otherCohort.getLowerBound() && this.upperBound == otherCohort.getUpperBound()) {
-				 return true;
-			 }
-		 }
+			if (this.lowerBound == otherCohort.getLowerBound() && this.upperBound == otherCohort.getUpperBound()) {
+				return true;
+			}
+		}
 		return false;
 	}
-	
+
 	/**
 	 * @return HashCode of the name of this Cohort.
 	 */
@@ -159,5 +162,5 @@ public class Cohort implements Comparable<Cohort> {
 	public int hashCode() {
 		return this.toString().hashCode();
 	}
-	
+
 }

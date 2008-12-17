@@ -29,7 +29,9 @@ import ch.unibe.iam.scg.archie.ui.FieldTypes;
 import ch.unibe.iam.scg.archie.ui.fields.DateTextFieldComposite;
 
 /**
- * <p>Can be used by any statistic that needs a time span defined.</p>
+ * <p>
+ * Can be used by any statistic that needs a time span defined.
+ * </p>
  * 
  * $Id$
  * 
@@ -93,12 +95,19 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 		return this.endDate;
 	}
 
-	/* ------------------------meta accessor methods--------------------------- */
+	// /////////////////////////////////////////////////////////////////////////////
+	// ANNOTATION METHODS
+	// /////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * @return the start date of this query. Inclusive. 
+	 * Returns the start date property of this data provider, formatted
+	 * according to the valid date format in <code>DateTextFieldComposite</code>
+	 * class.
+	 * 
+	 * @return The start date of this query.
 	 */
-	@GetProperty(name = "Start Date", index = -2, fieldType = FieldTypes.TEXT_DATE, validationRegex = "\\d{2}\\.\\d{2}\\.\\d{4}", validationMessage = "Datumsformat bla...")
+	@GetProperty(name = "Start Date", index = -2, fieldType = FieldTypes.TEXT_DATE, validationRegex = "\\d{2}\\.\\d{2}\\.\\d{4}", validationMessage = "The date needs to have the following format: "
+			+ DateTextFieldComposite.VALID_DATE_FORMAT)
 	public String metaGetStartDate() {
 		SimpleDateFormat format = new SimpleDateFormat(DateTextFieldComposite.VALID_DATE_FORMAT);
 		return format.format(this.getStartDate().getTime());
@@ -106,11 +115,13 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 
 	/**
 	 * Set the start date of this query. Inclusive the given date. Consult the
-	 * DateTextFieldComposite class for valid date format.
+	 * <code>DateTextFieldComposite</code> class for valid date format.
 	 * 
-	 * @param startDate 
+	 * @param startDate
+	 *            Start date as string in a valid date format.
 	 * @throws SetDataException
-	 * @see DateTextFieldComposite
+	 *             Exception thrown when the date could not be set.
+	 * @see DateTextFieldComposite#VALID_DATE_FORMAT
 	 */
 	@SetProperty(name = "Start Date", index = -2)
 	public void metaSetStartDate(String startDate) throws SetDataException {
@@ -124,15 +135,18 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 			cal.get(Calendar.MONTH);
 			cal.get(Calendar.YEAR);
 		} catch (ParseException e) { // converting failure
-			throw new SetDataException(NLS.bind(Messages.ERROR_SET_START_DATE, DateTextFieldComposite.VALID_DATE_FORMAT));
+			throw new SetDataException(NLS
+					.bind(Messages.ERROR_SET_START_DATE, DateTextFieldComposite.VALID_DATE_FORMAT));
 		} catch (IllegalArgumentException e) { // illegal date
 			throw new SetDataException(Messages.ERROR_START_DATE_VALID);
 		}
 		this.setStartDate(cal);
 	}
 
-	/** 
-	 * @return the end date of this query. Inclusive.
+	/**
+	 * Returns the end date for this data provider.
+	 * 
+	 * @return The end date of this data provider.
 	 */
 	@GetProperty(name = "End Date", fieldType = FieldTypes.TEXT_DATE, validationRegex = "\\d{2}\\.\\d{2}\\.\\d{4}", validationMessage = "Datumsformat blubb...")
 	public String metaGetEndDate() {
@@ -142,11 +156,13 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 
 	/**
 	 * Set the end date of this query. Inclusive the given date. Consult the
-	 * DateTextFieldComposite class for valid date format.
-	 *
-	 * @param endDate 
-	 * @see DateTextFieldComposite
+	 * <code>DateTextFieldComposite</code> class for valid date format.
+	 * 
+	 * @param endDate
+	 *            End date as string in a valid date format.
 	 * @throws SetDataException
+	 *             Start date as string in a valid date format.
+	 * @see DateTextFieldComposite#VALID_DATE_FORMAT
 	 */
 	@SetProperty(name = "End Date")
 	public void metaSetEndDate(final String endDate) throws SetDataException {
