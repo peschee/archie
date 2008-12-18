@@ -37,15 +37,19 @@ public class QueryContentProvider implements IStructuredContentProvider {
 	private final DataSet dataSet;
 
 	/**
+	 * The dataset to attach to this content provider.
+	 * 
 	 * @param dataSet
+	 *            A dataset object.
 	 */
 	public QueryContentProvider(final DataSet dataSet) {
 		this.dataSet = dataSet;
 	}
 
 	/**
-	 * Returns the elements of the given input element, which should be a
-	 * <code>DataSet</code> as an array.
+	 * Returns the elements of the stored <code>DataSet</code> instance as an
+	 * array. The parameter <code>inputElement</code> passed to this function is
+	 * being ignored.
 	 * 
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
 	 */
@@ -54,17 +58,21 @@ public class QueryContentProvider implements IStructuredContentProvider {
 	}
 
 	/**
+	 * Does nothing.
+	 * 
 	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
 	public void dispose() {
-
+		// does nothing.
 	}
 
 	/**
+	 * Does nothing.
+	 * 
 	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
 	 *      java.lang.Object, java.lang.Object)
 	 */
 	public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {
-
+		// does nothing
 	}
 }
