@@ -18,12 +18,13 @@ package ch.unibe.iam.scg.archie.model;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-
 /**
- * <p>A standard content provider for the queries if no special data should be
+ * <p>
+ * A standard content provider for the queries if no special data should be
  * represented. Each row will be handled as data object in this content
  * provider. E.g. If you want to have the patient as the model represented, you
- * need another content provider.</p>
+ * need another content provider.
+ * </p>
  * 
  * $Id$
  * 
@@ -43,6 +44,9 @@ public class QueryContentProvider implements IStructuredContentProvider {
 	}
 
 	/**
+	 * Returns the elements of the given input element, which should be a
+	 * <code>DataSet</code> as an array.
+	 * 
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
 	 */
 	public Object[] getElements(final Object inputElement) {
@@ -53,13 +57,14 @@ public class QueryContentProvider implements IStructuredContentProvider {
 	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
 	public void dispose() {
-		
+
 	}
 
 	/**
-	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
+	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
+	 *      java.lang.Object, java.lang.Object)
 	 */
 	public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {
-		
+
 	}
 }
