@@ -21,9 +21,11 @@ import org.eclipse.swt.graphics.Image;
 import ch.rgw.tools.Money;
 
 /**
- * <p>Standard label provider for the queries. If no special labels or model is
+ * <p>
+ * Standard label provider for the queries. If no special labels or model is
  * required, this label provider will do nicely. It provides just the labels
- * given at the specific row/columns.</p>
+ * given at the specific row/columns.
+ * </p>
  * 
  * $Id$
  * 
@@ -34,16 +36,23 @@ import ch.rgw.tools.Money;
 public class QueryLabelProvider extends LabelProvider implements ITableLabelProvider {
 
 	/**
-	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object,
-	 *      int)
+	 * Does nothing, returns null.
+	 * 
+	 * @return Returns null.
 	 */
 	public Image getColumnImage(final Object element, final int columnIndex) {
 		return null;
 	}
 
 	/**
-	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object,
-	 *      int)
+	 * Returns the textual representation of each row at a given column index.
+	 * This method merely calls the <code>toString()</code> method on those
+	 * objects. No special labels are being returned, except for
+	 * <code>Money</code> classes where we use the currency based on the locale
+	 * (<code>Locale.getDefault()</code>) as a prefix.
+	 * 
+	 * @return Returns the <code>toString()</code> representation of the object
+	 *         in the given row at the given column index.
 	 */
 	public String getColumnText(final Object element, final int columnIndex) {
 		Comparable<?>[] row = (Comparable[]) element;
