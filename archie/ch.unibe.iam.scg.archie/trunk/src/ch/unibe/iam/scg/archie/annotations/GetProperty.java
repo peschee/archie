@@ -23,9 +23,11 @@ import java.lang.annotation.Target;
 import ch.unibe.iam.scg.archie.ui.FieldTypes;
 
 /**
- * <p>Marks a method as getter. Used by the view to determine which elements can be
+ * <p>
+ * Marks a method as getter. Used by the view to determine which elements can be
  * changed by the user. This is a model driven design. The value of this
- * annotation is used to describe the field in the view.</p>
+ * annotation is used to describe the field in the view.
+ * </p>
  * 
  * $Id$
  * 
@@ -38,24 +40,25 @@ import ch.unibe.iam.scg.archie.ui.FieldTypes;
 public @interface GetProperty {
 
 	/**
-	 * Field name. There has to be a setter method annotated with a
-	 * SetProperty method with the same value to have any effect on the query.
+	 * Field name. There has to be a setter method annotated with a SetProperty
+	 * method with the same value to have any effect on the data provider.
 	 * 
 	 * @return String name
 	 */
 	public String name();
 
 	/**
-	 * A brief description about the getter method.
+	 * A brief description about the getter method. This is used for tooltips in
+	 * the UI.
 	 * 
-	 * @return String description
+	 * @return String A description.
 	 */
 	public String description() default "";
 
-	/** 
-	 * Field index. Defines the order in which the fields are displayed. 
+	/**
+	 * Field index. Defines the order in which the fields are displayed.
 	 * 
-	 * @return Integer ordering
+	 * @return Integer Order in which the fields are displayed.
 	 */
 	public int index() default -1;
 
