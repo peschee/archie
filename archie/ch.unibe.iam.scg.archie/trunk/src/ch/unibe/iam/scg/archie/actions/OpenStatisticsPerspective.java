@@ -27,7 +27,12 @@ import ch.unibe.iam.scg.archie.ui.perspectives.StatisticsPerspective;
 import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 
 /**
- * <p>This action opens the statistic view.</p>
+ * <p>
+ * This action opens the statistic view. NOTE: This class is not used anymore as
+ * our plugin contributes to the <code>Sidebar</code> extension point defined by
+ * Elexis, which automatically makes an <em>Open Arcie</em> button &mdash; thus
+ * deprecated.
+ * </p>
  * 
  * @see IWorkbenchWindowActionDelegate
  * @see StatisticsView $Id: OpenStatisticsPerspective.java 492 2008-11-18
@@ -37,6 +42,7 @@ import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
  * @author Dennis Schenk
  * @version $Rev$
  */
+@Deprecated
 public class OpenStatisticsPerspective implements IWorkbenchWindowActionDelegate {
 
 	private IWorkbenchWindow window;
