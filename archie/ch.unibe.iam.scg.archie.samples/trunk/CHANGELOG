@@ -22,3 +22,6 @@ ARCHIE SAMPLES - CHANGELOG
 - Fixed counting services in service statistics.
 
 - Added entries / per user in UserOverview statistics.
+
+- The private "size" variable from an AbstractDatProvider was removed
+  in the model in 0.8.1. Adapted all statistics accordingly.

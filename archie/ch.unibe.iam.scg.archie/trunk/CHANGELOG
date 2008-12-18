@@ -27,3 +27,7 @@ CHANGELOG
 
 - Added copy selected items command. Items from the main view's 
   table can now be copied into the clipboard.
+  
+- Removed the private "size" variable from an AbstractDatProvider.
+  Only used while running the job and thus does not need to be an object variable.
+  Pay attention to this when implementing your data providers.
