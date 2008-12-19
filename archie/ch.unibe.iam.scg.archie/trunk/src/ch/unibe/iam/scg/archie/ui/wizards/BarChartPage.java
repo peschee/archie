@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.Listener;
 
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.controller.ChartModelManager;
+import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.ChartModel;
 import ch.unibe.iam.scg.archie.model.DataSet;
 import ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite;
@@ -41,7 +42,7 @@ import ch.unibe.iam.scg.archie.utils.SWTUtils;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * TODO: DOCUMENT ME! + i18n
  * </p>
  * 
  * $Id$
@@ -56,16 +57,6 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 	 * Name of this page.
 	 */
 	protected static final String PAGE_NAME = "BarChartPage";
-
-	/**
-	 * Title of this page. This is being set when creating this page.
-	 */
-	private static final String PAGE_TITLE = "Choose Bar Chart Parameters";
-
-	/**
-	 * Description of this page. This is being set when creating this page.
-	 */
-	private static final String PAGE_DESCRIPTION = "BarChartPage Description";
 
 	/**
 	 * Constant for bar chart type in the combo box.
@@ -95,9 +86,9 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 	 * Constructs BarChartPage
 	 */
 	public BarChartPage() {
-		super(BarChartPage.PAGE_NAME, BarChartPage.PAGE_TITLE, ArchieActivator
+		super(BarChartPage.PAGE_NAME, Messages.CHART_WIZARD_BAR_CHART_PAGE_TITLE, ArchieActivator
 				.getImageDescriptor("icons/chart_bar_big.png"));
-		super.setDescription(BarChartPage.PAGE_DESCRIPTION);
+		super.setDescription(Messages.CHART_WIZARD_BAR_CHART_PAGE_DESCRIPTION);
 
 		this.columnButtons = new HashMap<Button, Integer>();
 	}
@@ -107,8 +98,6 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 	// ////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.
 	 *      Event)
 	 */
@@ -131,8 +120,6 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 
 	// TODO: i18n
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override

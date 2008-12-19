@@ -14,6 +14,8 @@ package ch.unibe.iam.scg.archie.i18n;
 
 import org.eclipse.osgi.util.NLS;
 
+import ch.unibe.iam.scg.archie.ui.wizards.ChartWizardMainPage;
+
 /**
  * <p>Message class: used for i18n.</p>
  * 
@@ -52,6 +54,12 @@ public final class Messages extends NLS {
 	// Chart wizard action
 	public static String CHART_WIZARD_TITLE;
 	public static String CHART_WIZARD_DESCRIPTION;
+	
+	// Chart Wizard 
+	public static String CHART_WIZARD_PAGE_TITLE;
+	public static String CHART_WIZARD_PAGE_DESCRIPTION;	
+	public static String CHART_WIZARD_BAR_CHART_PAGE_TITLE;
+	public static String CHART_WIZARD_BAR_CHART_PAGE_DESCRIPTION;
 
 	// User messages
 	public static String WORKING;
