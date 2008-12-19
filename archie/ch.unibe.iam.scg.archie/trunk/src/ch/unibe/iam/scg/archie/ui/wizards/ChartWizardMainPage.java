@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
 import ch.unibe.iam.scg.archie.ArchieActivator;
+import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.ChartModel;
 import ch.unibe.iam.scg.archie.model.DataSet;
 import ch.unibe.iam.scg.archie.utils.DatasetHelper;
@@ -48,16 +49,6 @@ public class ChartWizardMainPage extends AbstractChartPage implements Listener {
 	protected static final String PAGE_NAME = "ChartWizardMainPage";
 
 	/**
-	 * Title of this page. This is being set when creating this page.
-	 */
-	private static final String PAGE_TITLE = "Chart Wizard";
-
-	/**
-	 * Description of this page. This is being set when creating this page.
-	 */
-	private static final String PAGE_DESCRIPTION = "Some description here.";
-
-	/**
 	 * Buttons for chart type selection.
 	 */
 	private ToolItem pieItem;
@@ -67,8 +58,8 @@ public class ChartWizardMainPage extends AbstractChartPage implements Listener {
 	 * Public constructor.
 	 */
 	protected ChartWizardMainPage() {
-		super(ChartWizardMainPage.PAGE_NAME, ChartWizardMainPage.PAGE_TITLE, null);
-		this.setDescription(ChartWizardMainPage.PAGE_DESCRIPTION);
+		super(ChartWizardMainPage.PAGE_NAME, Messages.CHART_WIZARD_PAGE_TITLE, null);
+		this.setDescription(Messages.CHART_WIZARD_PAGE_DESCRIPTION);
 	}
 
 	/**

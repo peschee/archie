@@ -54,12 +54,12 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 	/**
 	 * Title of this page. This is being set when creating this page.
 	 */
-	private static final String PAGE_TITLE = "Choose Pie Chart Parameters";
+	private static final String PAGE_TITLE = "Choose Rows";
 
 	/**
 	 * Description of this page. This is being set when creating this page.
 	 */
-	private static final String PAGE_DESCRIPTION = "ChartWizardMainPage Description";
+	private static final String PAGE_DESCRIPTION = "Please specify which rows you would like to include in your chart.";
 
 	/**
 	 * Constructs ChartWizardMainPage
