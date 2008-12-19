@@ -64,6 +64,7 @@ public final class Messages extends NLS {
 	public static String STATISTICS_LIST_TITLE;
 	public static String EMPTY_PROVIDER_DESCRIPTION;
 	public static String BUTTON_DATE_SELECT;
+	public static String STATISTIC_PARAMETERS_TITLE;
 
 	// Error messages
 	public static String ERROR;

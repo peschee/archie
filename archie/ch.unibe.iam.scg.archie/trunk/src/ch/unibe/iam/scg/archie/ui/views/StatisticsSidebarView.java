@@ -111,7 +111,7 @@ public class StatisticsSidebarView extends ViewPart implements IPropertyChangeLi
 		Group statisticParameters = new Group(container, SWT.NONE);
 		statisticParameters.setLayoutData(new GridData(GridData.FILL_BOTH));
 		statisticParameters.setLayout(layout);
-		statisticParameters.setText("Statistic Parameters");
+		statisticParameters.setText(Messages.STATISTIC_PARAMETERS_TITLE);
 
 		// Add details panel containing details and parameters.
 		this.details = new DetailsPanel(statisticParameters, SWT.NONE);
