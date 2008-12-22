@@ -60,7 +60,7 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 	 * Constructs <code>ConsultationTimeStats</code>.
 	 */
 	public ConsultationTimeStats() {
-		super("Consultation Time");
+		super(Messages.CONSULTATION_TIME_STATS_TITLE);
 		this.withTime = true;
 	}
 
@@ -187,15 +187,15 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 
 		// time statistics
 		if (this.withTime) {
-			headings.add("Time Total");
-			headings.add("Time Max");
-			headings.add("Time Average");
+			headings.add(Messages.CONSULTATION_TIME_STATS_HEADING_TIME_TOTAL);
+			headings.add(Messages.CONSULTATION_TIME_STATS_HEADING_TIME_MAX);
+			headings.add(Messages.CONSULTATION_TIME_STATS_HEADING_TIME_AVERAGE);
 		}
 
 		// money statistics
-		headings.add("Income");
-		headings.add("Spending");
-		headings.add("Profit");
+		headings.add(Messages.CONSULTATION_TIME_STATS_HEADING_INCOME);
+		headings.add(Messages.CONSULTATION_TIME_STATS_HEADING_SPENDING);
+		headings.add(Messages.CONSULTATION_TIME_STATS_HEADING_PROFIT);
 
 		return headings;
 	}
@@ -205,9 +205,7 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 	 */
 	@Override
 	public String getDescription() {
-		return "Creates statistics about consultation times."
-				+ "This includes the total number of consultation minutes"
-				+ "as well as the minimum, maximum and average grouped by month.";
+		return Messages.CONSULTATION_TIME_STATS_DESCRIPTION;
 	}
 
 	/**
