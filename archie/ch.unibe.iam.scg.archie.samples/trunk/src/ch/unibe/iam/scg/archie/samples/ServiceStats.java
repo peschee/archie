@@ -280,6 +280,9 @@ public class ServiceStats extends AbstractTimeSeries {
 		 * Compares one service counter with an other. First the service group
 		 * name is compared, if that's equal, the service code is compared, if
 		 * that's equal, the total income in this service counter is compared.
+		 * 
+		 * @param other ServiceCounter
+		 * @return int
 		 */
 		public int compareTo(ServiceCounter other) {
 			// compare service group
