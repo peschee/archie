@@ -55,7 +55,17 @@ public final class Messages extends NLS {
 	public static String CONSULTATION_STATS_REGEX_MESSAGE = "";
 	public static String CONSULTATION_STATS_COHORT_SIZE_EXCEPTION;
 	
-	// Consultations Statistics
+	// Consultations Time Statistics 
+	public static String CONSULTATION_TIME_STATS_TITLE;
+	public static String CONSULTATION_TIME_STATS_DESCRIPTION;
+	public static String CONSULTATION_TIME_STATS_HEADING_TIME_TOTAL;
+	public static String CONSULTATION_TIME_STATS_HEADING_TIME_MAX;
+	public static String CONSULTATION_TIME_STATS_HEADING_TIME_AVERAGE;
+	public static String CONSULTATION_TIME_STATS_HEADING_INCOME;
+	public static String CONSULTATION_TIME_STATS_HEADING_SPENDING;
+	public static String CONSULTATION_TIME_STATS_HEADING_PROFIT;
+	
+	// Patient Profits Statistics
 	public static String PATIENTS_PROFITS_TITLE;
 	public static String PATIENTS_PROFITS_DESCRIPTION;
 	public static String PATIENTS_PROFITS_HEADING_PATIENT;
