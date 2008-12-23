@@ -28,13 +28,13 @@ import org.eclipse.swt.widgets.Label;
 import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
+import ch.unibe.iam.scg.archie.model.RegexValidation;
 import ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite;
 import ch.unibe.iam.scg.archie.ui.fields.CheckboxFieldComposite;
 import ch.unibe.iam.scg.archie.ui.fields.DateTextFieldComposite;
 import ch.unibe.iam.scg.archie.ui.fields.NumericTextFieldComposite;
 import ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite;
 import ch.unibe.iam.scg.archie.utils.ProviderHelper;
-import ch.unibe.iam.scg.archie.utils.RegexValidation;
 
 /**
  * <p>A composite panel which contains all the parameter fields for a data

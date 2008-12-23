@@ -28,9 +28,13 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 /**
- * <p>Creates a <code>TableViewer</code> from data provided by an 
- * implementation of <code>AbstractDataProvider</code>.<br/>
- * Uses singleton pattern.</p>
+ * <p>
+ * Creates a <code>TableViewer</code> from data provided by an implementation of
+ * <code>AbstractDataProvider</code>.
+ * </p>
+ * <p>
+ * Uses singleton pattern.
+ * </p>
  * 
  * $Id$
  * 
@@ -66,9 +70,9 @@ public class TableFactory {
 	 * 
 	 * @param parent
 	 *            Composite that holds the table.
-	 * @param dataset 
-	 * @param labelProvider 
-	 * @param contentProvider 
+	 * @param dataset
+	 * @param labelProvider
+	 * @param contentProvider
 	 * @return Table
 	 */
 	public TableViewer createTableFromData(final Composite parent, final DataSet dataset,

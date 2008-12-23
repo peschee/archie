@@ -17,7 +17,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.unibe.iam.scg.archie.utils.RegexValidation;
+import ch.unibe.iam.scg.archie.model.RegexValidation;
 
 /**
  * Tests RegexValidation class.

@@ -9,11 +9,11 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.utils;
+package ch.unibe.iam.scg.archie.model;
 
 /**
  * <p>
- * Simple utility class that provides getters and setters for a Regular
+ * Simple wrapper class that provides getters and setters for a Regular
  * Expression (regex) pattern <code>String</code> and associated error message
  * <code>String</code> (if a regex match should fail).
  * </p>
