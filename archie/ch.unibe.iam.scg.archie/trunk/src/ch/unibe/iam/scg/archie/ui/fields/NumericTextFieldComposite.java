@@ -20,11 +20,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
+import ch.elexis.util.Log;
+import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.i18n.Messages;
-import ch.unibe.iam.scg.archie.utils.RegexValidation;
+import ch.unibe.iam.scg.archie.model.RegexValidation;
 
 /**
- * <p>Implements <code>FieldComposite</code> with a <code>SmartNumericField</code>.</p>
+ * <p>
+ * Implements <code>FieldComposite</code> with a <code>SmartNumericField</code>.
+ * </p>
  * 
  * $Id$
  * 
@@ -35,10 +39,14 @@ import ch.unibe.iam.scg.archie.utils.RegexValidation;
 public class NumericTextFieldComposite extends TextFieldComposite {
 
 	/**
-	 * @param parent Composite
-	 * @param style Integer
-	 * @param labelText String
-	 * @param regex String
+	 * @param parent
+	 *            Composite
+	 * @param style
+	 *            Integer
+	 * @param labelText
+	 *            String
+	 * @param regex
+	 *            String
 	 */
 	public NumericTextFieldComposite(Composite parent, int style, final String labelText, RegexValidation regex) {
 		super(parent, style, labelText, regex);
@@ -82,6 +90,26 @@ public class NumericTextFieldComposite extends TextFieldComposite {
 			}
 		});
 		return newMenu;
+	}
+
+	/**
+	 * Returns the value of the numeric field as an <code>int</code>. The String
+	 * content ist parsed using the <code>Integer.parseInt()</code> method, if
+	 * an exception is thrown, it's logged as an error to the Elexis log.
+	 * 
+	 * @return Contents of the inner <code>SmartNumericField</code> as an
+	 *         <code>int</code>. This way, implementing providers can use an
+	 *         <code>int</code> as parameters for their setter methods.
+	 */
+	@Override
+	public Object getValue() {
+		int value = 0;
+		try {
+			value = Integer.parseInt(this.smartField.getContents());
+		} catch (Exception e) {
+			ArchieActivator.LOG.log(e.getLocalizedMessage(), Log.ERRORS);
+		}
+		return value;
 	}
 
 	/**

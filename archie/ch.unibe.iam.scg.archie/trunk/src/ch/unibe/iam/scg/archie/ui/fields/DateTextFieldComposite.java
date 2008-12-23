@@ -40,7 +40,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.i18n.Messages;
-import ch.unibe.iam.scg.archie.utils.RegexValidation;
+import ch.unibe.iam.scg.archie.model.RegexValidation;
 
 /**
  * Implements <code>AbstractFieldComposite</code> with a SmartDateField.

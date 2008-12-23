@@ -114,7 +114,7 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 				return;
 			} catch (Exception e) {
 				// TODO: Internalization
-				ArchieActivator.LOG.log("Could not update parameters for the given provider." + "\n"
+				ArchieActivator.LOG.log("Could not update parameters for provider " + provider.getName() + ".\n"
 						+ e.getLocalizedMessage(), Log.WARNINGS);
 				e.printStackTrace();
 			}

@@ -26,8 +26,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Text;
 
 import ch.unibe.iam.scg.archie.i18n.Messages;
+import ch.unibe.iam.scg.archie.model.RegexValidation;
 import ch.unibe.iam.scg.archie.ui.Decorators;
-import ch.unibe.iam.scg.archie.utils.RegexValidation;
 
 /**
  * <p>
