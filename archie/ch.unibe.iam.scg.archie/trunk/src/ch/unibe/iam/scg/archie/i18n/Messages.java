@@ -14,8 +14,6 @@ package ch.unibe.iam.scg.archie.i18n;
 
 import org.eclipse.osgi.util.NLS;
 
-import ch.unibe.iam.scg.archie.ui.wizards.ChartWizardMainPage;
-
 /**
  * <p>Message class: used for i18n.</p>
  * 
