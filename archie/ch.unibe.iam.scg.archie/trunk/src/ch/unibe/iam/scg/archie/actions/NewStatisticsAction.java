@@ -184,18 +184,18 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 				} else {
 					// create result table
 					TableFactory tableFactory = TableFactory.getInstance();
-					TableViewer viewer = tableFactory.createTableFromData(results, provider.getDataSet(), provider
-							.getLabelProvider(), provider.getContentProvider());
+					TableViewer viewer = tableFactory.createTableFromData(results, dataset,
+							provider.getLabelProvider(), provider.getContentProvider());
 
 					// add column dataset sorter and add table to the manager
 					new DatasetTableColumnSorter(viewer.getTable(), dataset);
 					TableManager.getInstance().setTable(viewer.getTable());
-					
+
 					// add selection menu
 					MenuManager menuManager = new MenuManager();
 					Menu menu = menuManager.createContextMenu(viewer.getTable());
 					viewer.getTable().setMenu(menu);
-					
+
 					NewStatisticsAction.this.view.getSite().registerContextMenu(menuManager, viewer);
 					NewStatisticsAction.this.view.getSite().setSelectionProvider(viewer);
 				}
