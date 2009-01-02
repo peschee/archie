@@ -94,6 +94,7 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 		TreeMap<String, List<Prescription>> prescriptionCount = new TreeMap<String, List<Prescription>>();
 
 		// group prescriptions by count
+		monitor.subTask("Grouping Prescriptions");
 		for (Prescription prescription : prescriptions) {
 			// check for cancelation
 			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
@@ -111,6 +112,7 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 		}
 
 		// compute prescription stats in grouped list
+		monitor.subTask("Computing Results");
 		for (final Entry<String, List<Prescription>> entry : prescriptionCount.entrySet()) {
 			// check for cancellation
 			if(monitor.isCanceled()) return Status.CANCEL_STATUS;

@@ -99,6 +99,7 @@ public class ConsultationStats extends AbstractTimeSeries {
 		// Key is cohort name, entry is cohort itself
 		TreeMap<Cohort, Cohort> cohorts = new TreeMap<Cohort, Cohort>();
 
+		monitor.subTask("Grouping Consultations");
 		for (Konsultation consultation : consultations) {
 			// Check for cancellation
 			if (monitor.isCanceled()) {
@@ -160,6 +161,7 @@ public class ConsultationStats extends AbstractTimeSeries {
 		ArrayList<Comparable<?>[]> result = new ArrayList<Comparable<?>[]>();
 
 		// Go over all cohorts we stored and create actual dataset.
+		monitor.subTask("Computing Results");
 		for (final Entry<Cohort, Cohort> entry : cohorts.entrySet()) {
 			// Check for cancellation
 			if (monitor.isCanceled()) {

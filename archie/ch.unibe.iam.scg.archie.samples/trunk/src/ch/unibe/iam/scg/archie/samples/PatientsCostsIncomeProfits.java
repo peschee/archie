@@ -114,6 +114,7 @@ public class PatientsCostsIncomeProfits extends AbstractTimeSeries {
 		// profits
 		TreeMap<PersonWrapper, ArrayList<Money>> patients = new TreeMap<PersonWrapper, ArrayList<Money>>();
 
+		monitor.subTask("Grouping Consultations");
 		for (Konsultation consultation : consultations) {
 			// Check for user cancellation
 			if (monitor.isCanceled()) {
@@ -150,6 +151,7 @@ public class PatientsCostsIncomeProfits extends AbstractTimeSeries {
 
 		List<Comparable<?>[]> datasetContent = new ArrayList<Comparable<?>[]>();
 
+		monitor.subTask("Computing Results");
 		for (final Entry<PersonWrapper, ArrayList<Money>> entry : patients.entrySet()) {
 			Comparable<?>[] row = { entry.getKey(), entry.getValue().get(0), entry.getValue().get(1),
 					entry.getValue().get(2) };
