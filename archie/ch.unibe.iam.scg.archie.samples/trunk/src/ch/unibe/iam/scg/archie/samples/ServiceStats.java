@@ -85,6 +85,7 @@ public class ServiceStats extends AbstractTimeSeries {
 		final HashMap<IVerrechenbar, ServiceCounter> services = new HashMap<IVerrechenbar, ServiceCounter>();
 
 		// Go through all consultations.
+		monitor.subTask("Grouping Consultations");
 		for (Konsultation consultation : consultations) {
 
 			// Check for cancellation.
@@ -123,6 +124,7 @@ public class ServiceStats extends AbstractTimeSeries {
 		Collections.sort(counters);
 
 		// Go over all services we stored and create actual dataset.
+		monitor.subTask("Computing Results");
 		for (ServiceCounter counter : counters) {
 
 			// Check for cancellation

@@ -82,6 +82,7 @@ public class DiagnoseStats extends AbstractTimeSeries {
 		
 		// Get consultations and their patient and diagnoses stats and put them
 		// all in a map that we can process later.
+		monitor.subTask("Grouping Consultations");
 		for (Konsultation consult : consults) {
 			// Check for Cancellation.
 			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
@@ -106,6 +107,7 @@ public class DiagnoseStats extends AbstractTimeSeries {
 		final ArrayList<Comparable<?>[]> result = new ArrayList<Comparable<?>[]>();
 		
 		// Build up result list from diagnose map.
+		monitor.subTask("Computing Results");
 		for (Entry<String, List<Patient>> entry : diagnoseMap.entrySet()) {
 			// Check for cancellation.
 			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
