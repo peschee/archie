@@ -24,7 +24,7 @@ import ch.unibe.iam.scg.archie.model.Cohort;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Tests the custom cohort object.
  * </p>
  * 
  * $Id$
@@ -106,7 +106,7 @@ public class CohortTest {
 		Assert.assertEquals(cohort.getCohortSize(), 1);
 		Assert.assertEquals(cohortStrange.getCohortSize(), 21);
 	}
-	
+
 	/**
 	 * Static method for JUnit 4 test classes to make them accessible to a
 	 * TestRunner designed to work with earlier versions of JUnit.

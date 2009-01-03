@@ -70,7 +70,7 @@ public class ChartModel {
 
 		this.keysIndex = -1;
 		this.valuesIndex = -1;
-		this.categoryColumnIndex = 0;
+		this.categoryColumnIndex = 0; //defaults to first column
 		this.chartType = -1;
 
 		this.isLineChart = false;
@@ -211,7 +211,7 @@ public class ChartModel {
 	 * 
 	 * @param columnIndex
 	 */
-	public void setRowTitleColumnIndex(int columnIndex) {
+	public void setCategoryColumnIndex(int columnIndex) {
 		this.categoryColumnIndex = columnIndex;
 	}
 
@@ -222,7 +222,7 @@ public class ChartModel {
 	 * @return The index of the column used for grouping columns for each row in
 	 *         a bar chart, or -1 if the index was not set yet.
 	 */
-	public int getRowTitleColumnIndex() {
+	public int getCategoryColumnIndex() {
 		return this.categoryColumnIndex;
 	}
 

@@ -22,15 +22,16 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import ch.unibe.iam.scg.archie.controller.ProviderManager;
+import ch.unibe.iam.scg.archie.controller.TableFactory;
 import ch.unibe.iam.scg.archie.controller.TableManager;
 import ch.unibe.iam.scg.archie.model.ChartModel;
 import ch.unibe.iam.scg.archie.model.DataSet;
 import ch.unibe.iam.scg.archie.model.DatasetTableColumnSorter;
-import ch.unibe.iam.scg.archie.model.TableFactory;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Dataset row selection page. Users needs to select the rows he wants to have
+ * included in the graph on this page.
  * </p>
  * 
  * $Id$

@@ -33,13 +33,13 @@ import ch.elexis.util.SWTHelper;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.controller.ChartModelManager;
 import ch.unibe.iam.scg.archie.controller.ProviderManager;
+import ch.unibe.iam.scg.archie.controller.TableFactory;
 import ch.unibe.iam.scg.archie.controller.TableManager;
 import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.model.DataSet;
 import ch.unibe.iam.scg.archie.model.DatasetTableColumnSorter;
 import ch.unibe.iam.scg.archie.model.SetDataException;
-import ch.unibe.iam.scg.archie.model.TableFactory;
 import ch.unibe.iam.scg.archie.ui.ParametersPanel;
 import ch.unibe.iam.scg.archie.ui.ProviderInformatioPanel;
 import ch.unibe.iam.scg.archie.ui.ResultPanel;
@@ -135,8 +135,8 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 			this.setEnabled(false);
 
 			// add provider information
-			// TODO: Refactor this, currently the provider information is being
-			// handled by this class
+			// NOTE: Currently provider information is being handled here. Room
+			// for improvement...
 			this.providerInformation = new ProviderInformatioPanel(this.view.getParent());
 			this.providerInformation.updateProviderInformation(provider);
 

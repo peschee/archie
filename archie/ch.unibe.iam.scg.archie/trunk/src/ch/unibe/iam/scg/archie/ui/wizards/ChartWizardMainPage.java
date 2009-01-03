@@ -32,7 +32,7 @@ import ch.unibe.iam.scg.archie.utils.DatasetHelper;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Main page in the chart wizard. Contains buttons for selecting the chart type.
  * </p>
  * 
  * $Id$
@@ -112,9 +112,9 @@ public class ChartWizardMainPage extends AbstractChartPage implements Listener {
 		this.applyToStatusLine(this.getErrorStatus());
 	}
 
-	//////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////
 	// INTERFACE FUNCTIONS
-	//////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)

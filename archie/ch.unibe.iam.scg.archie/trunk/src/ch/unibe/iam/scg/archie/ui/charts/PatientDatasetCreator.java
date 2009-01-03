@@ -9,10 +9,6 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
-/**
- * TODO: Add package description.
- */
 package ch.unibe.iam.scg.archie.ui.charts;
 
 import java.util.HashMap;
@@ -30,7 +26,7 @@ import ch.elexis.data.Query;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Dataset creator for the patients dashboard chart.
  * </p>
  * 
  * $Id$
@@ -50,8 +46,9 @@ public class PatientDatasetCreator extends AbstractDatasetCreator {
 		super(jobName);
 	}
 
-
-	/** (non-Javadoc)
+	/**
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.elexis.actions.BackgroundJob#execute(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
@@ -90,7 +87,7 @@ public class PatientDatasetCreator extends AbstractDatasetCreator {
 
 			((DefaultPieDataset) this.dataset).setValue(entry.getKey(), entry.getValue());
 		}
-		
+
 		monitor.done();
 		return Status.OK_STATUS;
 	}

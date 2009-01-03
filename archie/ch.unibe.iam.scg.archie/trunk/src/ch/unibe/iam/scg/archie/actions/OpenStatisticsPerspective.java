@@ -9,10 +9,6 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
-/**
- * TODO: Add package description.
- */
 package ch.unibe.iam.scg.archie.actions;
 
 import org.eclipse.jface.action.IAction;
@@ -27,12 +23,15 @@ import ch.unibe.iam.scg.archie.ui.perspectives.StatisticsPerspective;
 import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 
 /**
+ * 
  * <p>
- * This action opens the statistic view. NOTE: This class is not used anymore as
- * our plugin contributes to the <code>Sidebar</code> extension point defined by
+ * This action opens the statistic view. This class is not used anymore as our
+ * plugin contributes to the <code>Sidebar</code> extension point defined by
  * Elexis, which automatically makes an <em>Open Arcie</em> button &mdash; thus
  * deprecated.
  * </p>
+ * 
+ * NOTE: This class is not used anymore
  * 
  * @see IWorkbenchWindowActionDelegate
  * @see StatisticsView $Id: OpenStatisticsPerspective.java 492 2008-11-18

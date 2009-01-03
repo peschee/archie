@@ -11,13 +11,16 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.tests;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import ch.unibe.iam.scg.archie.model.ChartModel;
+import ch.unibe.iam.scg.archie.model.DataSet;
+
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>Simple chart model tests.</p>
  * 
  * $Id$
  * 
@@ -26,12 +29,15 @@ import org.junit.Test;
  * @version $Rev$
  */
 public class ChartModelTest {
+	
+	private ChartModel model;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		this.model = new ChartModel();
 	}
 
 	/**
@@ -39,7 +45,25 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testChartModel() {
-		fail("Not yet implemented"); // TODO
+		ChartModel model = null;
+		assertNull(model);
+
+		model = new ChartModel();
+		assertNotNull(model);
+		
+		assertNull(model.getDataSet());
+		assertNull(model.getChartName());
+		assertNull(model.getRows());
+		assertNull(model.getColumns());
+		
+		assertSame(-1, model.getKeysIndex());
+		assertSame(-1, model.getValuesIndex());
+		assertSame(-1, model.getChartType());
+		assertSame(0, model.getCategoryColumnIndex());
+		
+		assertFalse(model.isLineChart());
+		assertFalse(model.isThreeDimensional());
+		assertFalse(model.isValid());
 	}
 
 	/**
@@ -47,7 +71,13 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testSetChartType() {
-		fail("Not yet implemented"); // TODO
+		assertSame(-1, this.model.getChartType());
+		this.model.setChartType(ChartModel.CHART_BAR);
+		assertSame(ChartModel.CHART_BAR, this.model.getChartType());
+		this.model.setChartType(ChartModel.CHART_PIE);
+		assertSame(ChartModel.CHART_PIE, this.model.getChartType());
+		this.model.setChartType(ChartModel.CHART_BAR);
+		assertSame(ChartModel.CHART_BAR, this.model.getChartType());
 	}
 
 	/**
@@ -55,7 +85,9 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testGetChartType() {
-		fail("Not yet implemented"); // TODO
+		assertSame(-1, this.model.getChartType());
+		this.model.setChartType(ChartModel.CHART_PIE);
+		assertSame(ChartModel.CHART_PIE, this.model.getChartType());
 	}
 
 	/**
@@ -63,7 +95,10 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testGetChartName() {
-		fail("Not yet implemented"); // TODO
+		assertNull(this.model.getChartName());
+		this.model.setChartName("Star Wars");
+		assertNotNull(this.model.getChartName());
+		assertEquals("Star Wars", this.model.getChartName());
 	}
 
 	/**
@@ -71,7 +106,10 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testSetChartName() {
-		fail("Not yet implemented"); // TODO
+		assertNull(this.model.getChartName());
+		this.model.setChartName("Star Wars");
+		assertNotNull(this.model.getChartName());
+		assertEquals("Star Wars", this.model.getChartName());
 	}
 
 	/**
@@ -79,7 +117,11 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testGetDataSet() {
-		fail("Not yet implemented"); // TODO
+		assertNull(this.model.getDataSet());
+		DataSet dataset = new DataSet();
+		this.model.setDataSet(dataset);
+		assertNotNull(this.model.getDataSet());
+		assertSame(dataset, this.model.getDataSet());
 	}
 
 	/**
@@ -87,7 +129,10 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testHasDataSet() {
-		fail("Not yet implemented"); // TODO
+		assertFalse(this.model.hasDataSet());
+		DataSet dataset = new DataSet();
+		this.model.setDataSet(dataset);
+		assertTrue(this.model.hasDataSet());
 	}
 
 	/**
@@ -95,7 +140,11 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testSetDataSet() {
-		fail("Not yet implemented"); // TODO
+		assertNull(this.model.getDataSet());
+		DataSet dataset = new DataSet();
+		this.model.setDataSet(dataset);
+		assertNotNull(this.model.getDataSet());
+		assertSame(dataset, this.model.getDataSet());
 	}
 
 	/**
@@ -103,7 +152,9 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testGetKeysIndex() {
-		fail("Not yet implemented"); // TODO
+		assertSame(-1, this.model.getKeysIndex());
+		this.model.setKeysIndex(2);
+		assertSame(2, this.model.getKeysIndex());
 	}
 
 	/**
@@ -111,7 +162,9 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testSetKeysIndex() {
-		fail("Not yet implemented"); // TODO
+		assertSame(-1, this.model.getKeysIndex());
+		this.model.setKeysIndex(2);
+		assertSame(2, this.model.getKeysIndex());
 	}
 
 	/**
@@ -119,7 +172,9 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testGetValuesIndex() {
-		fail("Not yet implemented"); // TODO
+		assertSame(-1, this.model.getValuesIndex());
+		this.model.setValuesIndex(5);
+		assertSame(5, this.model.getValuesIndex());
 	}
 
 	/**
@@ -127,7 +182,9 @@ public class ChartModelTest {
 	 */
 	@Test
 	public void testSetValuesIndex() {
-		fail("Not yet implemented"); // TODO
+		assertSame(-1, this.model.getValuesIndex());
+		this.model.setValuesIndex(1);
+		assertSame(1, this.model.getValuesIndex());
 	}
 
 	/**
@@ -179,7 +236,7 @@ public class ChartModelTest {
 	}
 
 	/**
-	 * Test method for {@link ch.unibe.iam.scg.archie.model.ChartModel#setRowTitleColumnIndex(int)}.
+	 * Test method for {@link ch.unibe.iam.scg.archie.model.ChartModel#setCategoryColumnIndex(int)}.
 	 */
 	@Test
 	public void testSetRowTitleColumnIndex() {
@@ -187,7 +244,7 @@ public class ChartModelTest {
 	}
 
 	/**
-	 * Test method for {@link ch.unibe.iam.scg.archie.model.ChartModel#getRowTitleColumnIndex()}.
+	 * Test method for {@link ch.unibe.iam.scg.archie.model.ChartModel#getCategoryColumnIndex()}.
 	 */
 	@Test
 	public void testGetRowTitleColumnIndex() {

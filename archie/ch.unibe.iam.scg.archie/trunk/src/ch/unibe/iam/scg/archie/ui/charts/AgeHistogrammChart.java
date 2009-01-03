@@ -27,7 +27,8 @@ import ch.unibe.iam.scg.archie.preferences.PreferenceConstants;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Specific chart composite containing statistics about age distrubition in the
+ * Elexis system.
  * </p>
  * 
  * $Id$
@@ -66,14 +67,14 @@ public class AgeHistogrammChart extends AbstractChartComposite {
 		// set tooltip renderer
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
 		plot.getRenderer().setBaseToolTipGenerator(new HistogramTooltipGenerator());
-		
+
 		// hide tick labels
 		CategoryAxis axis = (CategoryAxis) plot.getDomainAxis();
 		axis.setTickLabelsVisible(false);
 
 		// Set chart background color to it's parents background
-		chart.setBackgroundPaint(new Color(this.parent.getBackground().getRed(), this.parent.getBackground()
-				.getGreen(), this.parent.getBackground().getBlue()));
+		chart.setBackgroundPaint(new Color(this.parent.getBackground().getRed(),
+				this.parent.getBackground().getGreen(), this.parent.getBackground().getBlue()));
 
 		return chart;
 	}

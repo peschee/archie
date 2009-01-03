@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Label;
 
 /**
  * <p>
- * TODO: DOCUMENT ME! + Needs to get tested (is never used so far)
+ * Combo box field composite. TODO: Test me, use me.
  * </p>
  * 
  * $Id$

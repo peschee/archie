@@ -17,7 +17,10 @@ import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.ui.views.Dashboard;
 
 /**
- * <p>TODO: DOCUMENT ME!</p>
+ * <p>
+ * Action contributed to the dashboard view that triggers the creation of the
+ * dashboard charts.
+ * </p>
  * 
  * $Id$
  * 
@@ -26,21 +29,24 @@ import ch.unibe.iam.scg.archie.ui.views.Dashboard;
  * @version $Rev$
  */
 public class CreateChartsAction extends Action {
-	
+
 	private Dashboard dashboard;
-	
+
 	/**
+	 * Public constructor.
+	 * 
 	 * @param dashboard
+	 *            Dashboard to attach the action to.
 	 */
 	public CreateChartsAction(Dashboard dashboard) {
 		this.dashboard = dashboard;
-		
+
 		this.setToolTipText("Create Charts");
 		this.setImageDescriptor(ArchieActivator.getImageDescriptor("icons/control.png"));
 	}
-	
+
 	/**
-	 * @{inheritDoc}
+	 * @{inheritDoc
 	 */
 	@Override
 	public void run() {

@@ -18,7 +18,8 @@ import ch.unibe.iam.scg.archie.model.ChartModel;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Main entry point for the chart wizard. Contains all the necessary chart
+ * wizard pages for building a chart model.
  * </p>
  * 
  * $Id$

@@ -9,10 +9,6 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
-/**
- * TODO: Document.
- */
 package ch.unibe.iam.scg.archie.preferences;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;

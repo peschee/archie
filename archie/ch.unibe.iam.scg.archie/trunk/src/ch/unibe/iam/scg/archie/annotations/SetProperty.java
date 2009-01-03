@@ -9,10 +9,6 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
-/**
- * TODO: Document.
- */
 package ch.unibe.iam.scg.archie.annotations;
 
 import java.lang.annotation.ElementType;
