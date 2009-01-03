@@ -31,3 +31,8 @@ CHANGELOG
 - Removed the private "size" variable from an AbstractDatProvider.
   Only used while running the job and thus does not need to be an object variable.
   Pay attention to this when implementing your data providers.
+  
+0.9
+---
+
+- Code cleanup, Javadoc enhancements.
