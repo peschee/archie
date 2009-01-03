@@ -1,0 +1,38 @@
+CHANGELOG
+=========
+
+0.7
+---
+
+- Initial implementation
+
+0.8
+---
+
+- Minor code refactorings
+- Refactored dashboard composites and messages
+
+- Fixed date bugs in dashboard charts
+
+- Added on-demand chart creation in dashboard
+- Added actions instead of buttons for dashboard functions
+
+
+0.8.1
+-----
+
+- Fixed bug where the dataset would not be sorted along with
+  the table on the selection page in the chart builder wizard
+- Fixed bug where exported filenames would have no filetype attached.
+
+- Added copy selected items command. Items from the main view's 
+  table can now be copied into the clipboard.
+  
+- Removed the private "size" variable from an AbstractDatProvider.
+  Only used while running the job and thus does not need to be an object variable.
+  Pay attention to this when implementing your data providers.
+  
+0.9
+---
+
+- Code cleanup, Javadoc enhancements.
