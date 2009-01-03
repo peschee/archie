@@ -28,15 +28,15 @@ import org.eclipse.ui.PlatformUI;
 import ch.elexis.util.Log;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.controller.ChartModelManager;
+import ch.unibe.iam.scg.archie.controller.ProviderChartFactory;
 import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.ChartModel;
-import ch.unibe.iam.scg.archie.model.ProviderChartFactory;
 import ch.unibe.iam.scg.archie.ui.views.ChartView;
 import ch.unibe.iam.scg.archie.ui.wizards.ChartWizard;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Action for starting the chart generation wizard.
  * </p>
  * 
  * $Id$
@@ -46,12 +46,12 @@ import ch.unibe.iam.scg.archie.ui.wizards.ChartWizard;
  * @version $Rev$
  */
 public class ChartWizardAction extends Action {
-	
+
 	/**
 	 * Constant for the default wizard page height.
 	 */
 	private static final int WIZARD_PAGE_HEIGHT = 600;
-	
+
 	/**
 	 * Constant for the default wizard page width.
 	 */

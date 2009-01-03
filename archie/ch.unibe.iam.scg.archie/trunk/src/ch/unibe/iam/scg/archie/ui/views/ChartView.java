@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.ViewPart;
 
 import ch.unibe.iam.scg.archie.ArchieActivator;
-import ch.unibe.iam.scg.archie.model.ProviderChartFactory;
+import ch.unibe.iam.scg.archie.controller.ProviderChartFactory;
 
 /**
  * <p>

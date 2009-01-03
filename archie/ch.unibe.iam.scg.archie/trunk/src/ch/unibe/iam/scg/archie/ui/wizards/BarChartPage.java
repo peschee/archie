@@ -41,8 +41,9 @@ import ch.unibe.iam.scg.archie.utils.DatasetHelper;
 import ch.unibe.iam.scg.archie.utils.SWTUtils;
 
 /**
+ * TODO: i18n
  * <p>
- * TODO: DOCUMENT ME! + i18n
+ * Chart wizard page for setting parameters for bar charts.
  * </p>
  * 
  * $Id$
@@ -234,7 +235,7 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 			chartModel.setLineChart(this.chartType.getSelectionIndex() == BarChartPage.TYPE_LINE);
 			chartModel.setColumns(indexes);
 			chartModel.setChartName(this.chartName.getValue().toString());
-			chartModel.setRowTitleColumnIndex(rowTitleIndex > -1 ? rowTitleIndex : 0);
+			chartModel.setCategoryColumnIndex(rowTitleIndex > -1 ? rowTitleIndex : 0);
 			chartModel.setThreeDimensional(this.threeDimensional.getSelection());
 		}
 	}
@@ -251,7 +252,7 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 
 			this.chartName.setValue(model.getChartName());
 			this.chartType.select(model.isLineChart() ? BarChartPage.TYPE_LINE : BarChartPage.TYPE_BAR);
-			this.rowTitle.select(model.getRowTitleColumnIndex());
+			this.rowTitle.select(model.getCategoryColumnIndex());
 			this.threeDimensional.setSelection(model.isThreeDimensional());
 
 			int[] columns = model.getColumns();

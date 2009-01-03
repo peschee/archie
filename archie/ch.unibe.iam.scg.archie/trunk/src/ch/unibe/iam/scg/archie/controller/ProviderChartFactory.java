@@ -9,11 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
-/**
- * TODO: Document.
- */
-package ch.unibe.iam.scg.archie.model;
+package ch.unibe.iam.scg.archie.controller;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -34,11 +30,14 @@ import org.jfree.experimental.chart.swt.ChartComposite;
 import ch.rgw.tools.Money;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.i18n.Messages;
+import ch.unibe.iam.scg.archie.model.ChartModel;
+import ch.unibe.iam.scg.archie.model.DataSet;
 import ch.unibe.iam.scg.archie.ui.GraphicalMessage;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Factory singleton object for creating chart composited based on JFreeChart
+ * charts and our custom chart model.
  * </p>
  * 
  * $Id$
@@ -164,7 +163,7 @@ public class ProviderChartFactory {
 		for (int i = 0; i < rows.length; i++) {
 			double value = 0.0;
 			int rowIndex = rows[i];
-			
+
 			if (values[rowIndex] instanceof Money) {
 				value = ((Money) values[rowIndex]).doubleValue();
 			} else {
@@ -205,13 +204,13 @@ public class ProviderChartFactory {
 		int[] rows = this.model.getRows();
 		int[] columns = this.model.getColumns();
 
-		int rowTitleColumnIndex = this.model.getRowTitleColumnIndex();
+		int rowTitleColumnIndex = this.model.getCategoryColumnIndex();
 
 		for (int i = 0; i < rows.length; i++) {
 			int rowIndex = rows[i];
-			
+
 			Comparable<?>[] row = dataset.getRow(rowIndex);
-			
+
 			String rowTitle = row[rowTitleColumnIndex].toString();
 
 			for (int j = 0; j < columns.length; j++) {
@@ -219,7 +218,7 @@ public class ProviderChartFactory {
 				int columnIndex = columns[j];
 
 				String columnTitle = (String) dataset.getHeadings().get(columnIndex);
-				
+
 				Comparable<?> cell = dataset.getCell(rowIndex, columnIndex);
 
 				if (cell instanceof Money) {
@@ -251,11 +250,11 @@ public class ProviderChartFactory {
 		} else if (this.model.isLineChart()) {
 			JFreeChart chart = ChartFactory.createLineChart(this.model.getChartName(), "Category", "Value", barDataset,
 					PlotOrientation.VERTICAL, true, true, false);
-			
+
 			LineAndShapeRenderer renderer = (LineAndShapeRenderer) ((CategoryPlot) chart.getPlot()).getRenderer();
-			renderer.setShapesVisible(true); 
-			renderer.setShapesFilled(true); 
-		
+			renderer.setShapesVisible(true);
+			renderer.setShapesFilled(true);
+
 			return chart;
 		}
 		return ChartFactory.createBarChart(this.model.getChartName(), "Category", "Value", barDataset,

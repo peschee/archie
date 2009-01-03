@@ -105,7 +105,7 @@ public class ParametersPanel extends Composite {
 		this.layout();
 
 		// adjust label widths
-		// TODO: Probably not so efficient, maybe refactor the abstract
+		// NOTE: Probably not so efficient, maybe refactor the abstract
 		// composites to only hold the text input fields and put all labels and
 		// abstract fields into one layout?
 		this.adjustLabelWidths();

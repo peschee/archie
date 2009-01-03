@@ -18,7 +18,12 @@ import org.jfree.data.general.AbstractDataset;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Abstract dataset creator is resposible for creating a dataset out of the data
+ * from the database. This class is used in <code>AbstractChartComposite</code>
+ * to build the JFreeChart based charts.<br>
+ * <br>
+ * An abstract dataset creator extends the Eclipse API class <code>Job</code>
+ * for proper monitoring capabilities while creating the dataset's content.
  * </p>
  * 
  * $Id$

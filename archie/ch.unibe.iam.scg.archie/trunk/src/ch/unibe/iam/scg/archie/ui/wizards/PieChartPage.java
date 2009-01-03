@@ -36,7 +36,7 @@ import ch.unibe.iam.scg.archie.utils.DatasetHelper;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * Chart wizard page for setting parameters for pie charts.
  * </p>
  * 
  * $Id$

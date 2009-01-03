@@ -9,11 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
-/**
- * TODO: Document.
- */
-package ch.unibe.iam.scg.archie.model;
+package ch.unibe.iam.scg.archie.controller;
 
 import java.util.List;
 
@@ -26,6 +22,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+
+import ch.unibe.iam.scg.archie.model.ColumnSorterAdapter;
+import ch.unibe.iam.scg.archie.model.DataSet;
 
 /**
  * <p>

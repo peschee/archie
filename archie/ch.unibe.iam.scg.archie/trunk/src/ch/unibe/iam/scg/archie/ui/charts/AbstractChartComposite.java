@@ -9,10 +9,6 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
-/**
- * TODO: Add package description.
- */
 package ch.unibe.iam.scg.archie.ui.charts;
 
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
@@ -32,7 +28,12 @@ import ch.unibe.iam.scg.archie.ui.GraphicalMessage;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * An abstract chart composite class. Inheriting from an SWT
+ * <code>Composite</code>, it can be used in UI classes. This class also
+ * implements the <code>IJobChangeListener</code> interface. It contains an
+ * <code>AbstractDatasetCreator</code> which creates the corresponding
+ * JFreeChart based charts, and by using this listener interface reacts to
+ * certain job events propagated by the dataset creator class.
  * </p>
  * 
  * $Id$
@@ -126,19 +127,20 @@ public abstract class AbstractChartComposite extends Composite implements IJobCh
 	}
 
 	/**
-	 * TODO: DOCUMENT ME!
+	 * Requests a cancellation of the dataset creator. It's the creators
+	 * responsibility however to properly react to this request.
 	 */
 	public void cancelCreator() {
 		this.creator.cancel();
 	}
-	
+
 	/**
 	 * Schedules the creator (job) for this composite.
 	 */
 	public void startCreator() {
 		this.creator.schedule();
 	}
-	
+
 	public AbstractDatasetCreator getCreator() {
 		return this.creator;
 	}

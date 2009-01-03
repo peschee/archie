@@ -18,7 +18,8 @@ import org.eclipse.swt.widgets.Composite;
 
 /**
  * <p>
- * TODO: DOCUMENT ME!
+ * An abstract chart page, providing basic methods and error handling functions
+ * for chart wizard pages.
  * </p>
  * 
  * $Id$.

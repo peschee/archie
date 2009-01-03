@@ -9,10 +9,6 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-
-/**
- * TODO: Add package description.
- */
 package ch.unibe.iam.scg.archie.ui.charts;
 
 import java.text.ParseException;
