@@ -25,3 +25,8 @@ ARCHIE SAMPLES - CHANGELOG
 
 - The private "size" variable from an AbstractDatProvider was removed
   in the model in 0.8.1. Adapted all statistics accordingly.
+  
+0.9
+---
+
+- Code cleanup, Javadoc enhancements.
