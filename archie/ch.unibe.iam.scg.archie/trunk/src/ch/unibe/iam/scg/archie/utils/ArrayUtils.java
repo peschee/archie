@@ -11,8 +11,12 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.utils;
 
+import java.lang.reflect.Method;
+
 /**
- * <p>Array utility class providing convenience methods for arrays.</p>
+ * <p>
+ * Array utility class providing convenience methods for arrays.
+ * </p>
  * 
  * $Id$
  * 
@@ -57,7 +61,7 @@ public class ArrayUtils {
 		}
 		return buffer.toString();
 	}
-	
+
 	/**
 	 * 
 	 * @param array
@@ -66,29 +70,49 @@ public class ArrayUtils {
 	 */
 	public static final boolean inArray(int[] array, int needle) {
 		boolean found = false;
-		for(int i = 0; i < array.length; i++) {
-			if(array[i] == needle) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == needle) {
 				found = true;
 				break;
 			}
 		}
 		return found;
 	}
-	
+
 	/**
 	 * @param interfaces
-	 * @param needle 
+	 * @param needle
 	 * @return True if the given class is in the interfaces array.
 	 */
 	public static final boolean hasInterface(Class<?>[] interfaces, Class<?> needle) {
 		boolean found = false;
-		for(int i = 0; i < interfaces.length; i++) {
+		for (int i = 0; i < interfaces.length; i++) {
 			String interfaceName = interfaces[i].getName();
-			if(interfaceName.equals(needle.getName())) {
+			if (interfaceName.equals(needle.getName())) {
 				found = true;
 				break;
 			}
 		}
 		return found;
+	}
+
+	/**
+	 * Checks for a given method name in the array of methods.
+	 * 
+	 * @param methods
+	 *            Array of <code>Method</code> objects.
+	 * @param string
+	 *            Needle, the method name to search for.
+	 * @return True if a method with the given name exists in the array, false
+	 *         else.
+	 */
+	public static boolean hasMethod(Method[] methods, String needle) {
+		for (int i = 0; i < methods.length; i++) {
+			String methodName = methods[i].getName();
+			if (methodName.equals(needle)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
