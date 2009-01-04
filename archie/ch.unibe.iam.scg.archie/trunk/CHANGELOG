@@ -35,4 +35,12 @@ CHANGELOG
 0.9
 ---
 
+- AbstractFieldComposite now return proper values according to their type.
+
 - Code cleanup, Javadoc enhancements.
+ 
+0.9.1
+-----
+
+- Fixed a bug where classes in dataset that do not directly implement 
+  the "Comparable" interface would be compared by their "toString" method.

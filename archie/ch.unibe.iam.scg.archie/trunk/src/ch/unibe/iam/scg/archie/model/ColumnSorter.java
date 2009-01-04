@@ -11,6 +11,8 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.model;
 
+import java.lang.reflect.Method;
+
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
@@ -18,8 +20,10 @@ import org.eclipse.swt.SWT;
 import ch.unibe.iam.scg.archie.utils.ArrayUtils;
 
 /**
- * <p>A ViewerSorter which can sort top down and bottom up depending on the setting
- * of the reverse boolean.</p>
+ * <p>
+ * A ViewerSorter which can sort top down and bottom up depending on the setting
+ * of the reverse boolean.
+ * </p>
  * 
  * $Id$
  * 
@@ -54,11 +58,7 @@ public class ColumnSorter extends ViewerSorter {
 
 		int result;
 
-		Class<?>[] o1interfaces = o1.getClass().getInterfaces();
-		Class<?>[] o2interfaces = o2.getClass().getInterfaces();
-
-		if (ArrayUtils.hasInterface(o1interfaces, Comparable.class)
-				&& ArrayUtils.hasInterface(o2interfaces, Comparable.class)) {
+		if (this.isComparable(o1) && this.isComparable(o2)) {
 			result = ((Comparable) o1).compareTo((Comparable) o2);
 		} else {
 			result = o1.toString().compareTo(o2.toString());
@@ -68,6 +68,8 @@ public class ColumnSorter extends ViewerSorter {
 	}
 
 	/**
+	 * Sets the sort direction.
+	 * 
 	 * @param sortDirection
 	 *            Sort direction to use, should be one of <code>SWT.UP</code> or
 	 *            <code>SWT.DOWN</code>
@@ -77,16 +79,34 @@ public class ColumnSorter extends ViewerSorter {
 	}
 
 	/**
-	 * @return index
+	 * Returns the current column index.
+	 * 
+	 * @return index Column index.
 	 */
 	public int getIndex() {
 		return this.index;
 	}
 
 	/**
+	 * Sets the current column index.
+	 * 
 	 * @param index
+	 *            Column index.
 	 */
 	public void setIndex(final int index) {
 		this.index = index;
+	}
+
+	/**
+	 * Checks whether a given object can be compared. This method checks whether
+	 * an object implements the <code>Comparable</code> interface directly or
+	 * whether it has the <em>compareTo</em> method in it's object methods
+	 * array.
+	 * 
+	 * @return True if the object has a compareTo method, false else.
+	 */
+	private boolean isComparable(Object object) {
+		return ArrayUtils.hasInterface(object.getClass().getInterfaces(), Comparable.class)
+				|| ArrayUtils.hasMethod(object.getClass().getMethods(), "compareTo");
 	}
 }
