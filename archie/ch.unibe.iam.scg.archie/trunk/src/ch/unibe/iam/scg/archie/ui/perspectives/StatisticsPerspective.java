@@ -23,7 +23,7 @@ import ch.elexis.views.Starter;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.ui.views.ChartView;
 import ch.unibe.iam.scg.archie.ui.views.Dashboard;
-import ch.unibe.iam.scg.archie.ui.views.StatisticsSidebarView;
+import ch.unibe.iam.scg.archie.ui.views.SidebarView;
 import ch.unibe.iam.scg.archie.ui.views.StatisticsView;
 
 /**
@@ -68,9 +68,9 @@ public class StatisticsPerspective implements IPerspectiveFactory {
 		main.addPlaceholder(IProgressConstants.PROGRESS_VIEW_ID);
 
 		// Sidebar
-		sidebar.addView(StatisticsSidebarView.ID);
+		sidebar.addView(SidebarView.ID);
 		
 		layout.getViewLayout(StatisticsView.ID).setCloseable(false);
-		layout.getViewLayout(StatisticsSidebarView.ID).setCloseable(false);
+		layout.getViewLayout(SidebarView.ID).setCloseable(false);
 	}
 }
