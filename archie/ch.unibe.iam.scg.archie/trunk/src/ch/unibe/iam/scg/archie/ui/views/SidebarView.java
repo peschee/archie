@@ -12,6 +12,7 @@
 package ch.unibe.iam.scg.archie.ui.views;
 
 import java.util.Hashtable;
+import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import org.eclipse.core.runtime.CoreException;
@@ -64,7 +65,7 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 	/**
 	 * List of all available providers.
 	 */
-	protected Hashtable<String, AbstractDataProvider> providers;
+	protected TreeMap<String, AbstractDataProvider> providers;
 
 	/**
 	 * Map of available provider categories. Category IDs are being mapped to
@@ -163,7 +164,7 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 	 * statistics plugin title to its datasource instance.
 	 */
 	private void initializeAvailableStatistics() {
-		this.providers = new Hashtable<String, AbstractDataProvider>();
+		this.providers = new TreeMap<String, AbstractDataProvider>();
 
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = reg.getConfigurationElementsFor("ch.unibe.iam.scg.archie.dataprovider");
