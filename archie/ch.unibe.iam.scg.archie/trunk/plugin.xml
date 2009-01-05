@@ -19,7 +19,7 @@
       </view>
       <view
             category="ch.unibe.iam.scg.archie.views.Archie"
-            class="ch.unibe.iam.scg.archie.ui.views.StatisticsSidebarView"
+            class="ch.unibe.iam.scg.archie.ui.views.SidebarView"
             icon="icons/wand_pencil.png"
             id="ch.unibe.iam.scg.archie.ui.views.StatisticsSidebarView"
             name="%VIEW_SIDEBAR"

@@ -12,6 +12,7 @@
 package ch.unibe.iam.scg.archie.ui.views;
 
 import java.util.Hashtable;
+import java.util.Map.Entry;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -43,7 +44,9 @@ import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.ui.DetailsPanel;
 
 /**
- * <p>In this View a user can chose a statistic, set options for it and run it.</p>
+ * <p>
+ * In this View a user can chose a statistic, set options for it and run it.
+ * </p>
  * 
  * $Id$
  * 
@@ -51,13 +54,23 @@ import ch.unibe.iam.scg.archie.ui.DetailsPanel;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class StatisticsSidebarView extends ViewPart implements IPropertyChangeListener, UserListener {
+public class SidebarView extends ViewPart implements IPropertyChangeListener, UserListener {
 
-	/** ID of this view. */
+	/**
+	 * ID of this view.
+	 */
 	public static final String ID = ArchieActivator.PLUGIN_ID + ".ui.views.StatisticsSidebarView";
 
-	/** List of all available providers. */
+	/**
+	 * List of all available providers.
+	 */
 	protected Hashtable<String, AbstractDataProvider> providers;
+
+	/**
+	 * Map of available provider categories. Category IDs are being mapped to
+	 * their names.
+	 */
+	protected Hashtable<String, String> categories;
 
 	protected Combo list;
 
@@ -70,7 +83,8 @@ public class StatisticsSidebarView extends ViewPart implements IPropertyChangeLi
 	 */
 	@Override
 	public void createPartControl(final Composite parent) {
-		// fill statistics table
+		// fill maps
+		this.initializeAvailableCategories();
 		this.initializeAvailableStatistics();
 
 		// create a new container for sidebar controls
@@ -96,13 +110,13 @@ public class StatisticsSidebarView extends ViewPart implements IPropertyChangeLi
 		// add listeners
 		this.list.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				String title = StatisticsSidebarView.this.list.getText();
+				String title = SidebarView.this.list.getText();
 
-				if (StatisticsSidebarView.this.isValidProviderTitle(title)) {
-					AbstractDataProvider provider = StatisticsSidebarView.this.providers.get(title);
+				if (SidebarView.this.isValidProviderTitle(title)) {
+					AbstractDataProvider provider = SidebarView.this.providers.get(title);
 					ProviderManager.getInstance().setProvider(provider);
 				} else {
-					StatisticsSidebarView.this.details.reset();
+					SidebarView.this.details.reset();
 				}
 			}
 		});
@@ -125,6 +139,26 @@ public class StatisticsSidebarView extends ViewPart implements IPropertyChangeLi
 	}
 
 	/**
+	 * Fills the categories hash map with available categories and their IDs.
+	 * This method needs to be executed before the initialization of the data
+	 * provider table in order for the providers to check for their category.
+	 */
+	private void initializeAvailableCategories() {
+		this.categories = new Hashtable<String, String>();
+
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		IConfigurationElement[] elements = reg.getConfigurationElementsFor("ch.unibe.iam.scg.archie.dataprovider");
+		for (int i = 0; i < elements.length; i++) {
+			IConfigurationElement element = elements[i];
+
+			// only category elements
+			if ("category".equals(element.getName())) {
+				this.categories.put(element.getAttribute("id"), element.getAttribute("name"));
+			}
+		}
+	}
+
+	/**
 	 * Fills the statistics hashtable with all available plugins mapping a
 	 * statistics plugin title to its datasource instance.
 	 */
@@ -135,17 +169,47 @@ public class StatisticsSidebarView extends ViewPart implements IPropertyChangeLi
 		IConfigurationElement[] extensions = reg.getConfigurationElementsFor("ch.unibe.iam.scg.archie.dataprovider");
 		for (int i = 0; i < extensions.length; i++) {
 			IConfigurationElement element = extensions[i];
-			try {
-				AbstractDataProvider source = (AbstractDataProvider) element.createExecutableExtension("class");
+			// only DataProvider elements, as only they have the class attribute
+			if ("DataProvider".equals(element.getName())) {
+				try {
+					Object executable = element.createExecutableExtension("class");
 
-				// add to list of available statistics
-				this.providers.put(source.getName(), source);
-			} catch (CoreException e) {
-				ArchieActivator.LOG.log("Error while trying to load a data provider." + "\n" + element.getName() + "\n"
-						+ e.getLocalizedMessage(), Log.WARNINGS);
-				e.printStackTrace();
+					// check if we have the right class
+					if (executable instanceof AbstractDataProvider) {
+
+						// compose category prefix
+						String category = element.getAttribute("category") == null ? "" : this
+								.getCategoryNameFromId(element.getAttribute("category"))
+								+ ": ";
+
+						// add to list of available statistics
+						AbstractDataProvider provider = (AbstractDataProvider) executable;
+						this.providers.put(category + provider.getName(), provider);
+					}
+				} catch (CoreException e) {
+					String errorMessage = "Error while trying to load the data provider: " + element.getName() + "\n"
+							+ e.getLocalizedMessage();
+					ArchieActivator.LOG.log(errorMessage, Log.WARNINGS);
+					e.printStackTrace();
+				}
 			}
 		}
+	}
+
+	/**
+	 * Retrieves the category name from the categories table based on the given
+	 * ID.
+	 * 
+	 * @return The corresponding category name or an empty string if no category
+	 *         with the given ID is in the table.
+	 */
+	private String getCategoryNameFromId(String categoryId) {
+		for (Entry<String, String> category : this.categories.entrySet()) {
+			if (category.getKey().equals(categoryId)) {
+				return category.getValue();
+			}
+		}
+		return "";
 	}
 
 	/**
