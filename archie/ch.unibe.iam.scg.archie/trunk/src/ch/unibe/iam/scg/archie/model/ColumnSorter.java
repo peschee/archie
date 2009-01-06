@@ -11,8 +11,6 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.model;
 
-import java.lang.reflect.Method;
-
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;

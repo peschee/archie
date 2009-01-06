@@ -102,7 +102,7 @@ public class AgeHistogrammChart extends AbstractChartComposite {
 	 */
 	private int getCohortSize() {
 
-		IPreferenceStore preferences = ArchieActivator.getDefault().getPreferenceStore();
+		IPreferenceStore preferences = ArchieActivator.getInstance().getPreferenceStore();
 
 		if (preferences.getInt(PreferenceConstants.P_COHORT_SIZE) > 0) {
 			return preferences.getInt(PreferenceConstants.P_COHORT_SIZE);

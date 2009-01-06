@@ -68,7 +68,7 @@ public class ResultPanel extends Composite {
 
 		// add the intial message to the container
 		new GraphicalMessage(this.messageContainer,
-				ArchieActivator.getDefault().getImageRegistry().get(ArchieActivator.IMG_COFFEE), Messages.WORKING);
+				ArchieActivator.getInstance().getImageRegistry().get(ArchieActivator.IMG_COFFEE), Messages.WORKING);
 	}
 
 	/**
@@ -93,6 +93,6 @@ public class ResultPanel extends Composite {
 	 */
 	public void showEmptyMessage() {
 		this.createMessageContainer();
-		new GraphicalMessage(this.messageContainer, ArchieActivator.getDefault().getImageRegistry().get(ArchieActivator.IMG_INFO), Messages.RESULT_EMPTY);
+		new GraphicalMessage(this.messageContainer, ArchieActivator.getInstance().getImageRegistry().get(ArchieActivator.IMG_INFO), Messages.RESULT_EMPTY);
 	}
 }

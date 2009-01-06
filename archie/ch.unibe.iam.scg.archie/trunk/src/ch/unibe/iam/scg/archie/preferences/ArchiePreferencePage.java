@@ -40,7 +40,7 @@ public class ArchiePreferencePage extends FieldEditorPreferencePage implements I
 	public ArchiePreferencePage() {
 		super(FieldEditorPreferencePage.GRID);
 		
-		this.setPreferenceStore(ArchieActivator.getDefault().getPreferenceStore());
+		this.setPreferenceStore(ArchieActivator.getInstance().getPreferenceStore());
 		this.setDefaults();
 		
 		this.setDescription("Archie settings page. Use the following input fields to manipulate Archie's default behaviour and adjust to fit your preferences.");

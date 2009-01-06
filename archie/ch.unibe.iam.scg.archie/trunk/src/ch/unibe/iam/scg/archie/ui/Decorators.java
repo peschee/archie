@@ -44,7 +44,7 @@ public final class Decorators {
 	static {
 		// Get Image from our own ImageRegistry
 		registry.registerFieldDecoration(DEC_VALID, null, DEC_IMG_ID, ArchieActivator
-				.getDefault().getImageRegistry());
+				.getInstance().getImageRegistry());
 	}
 	
 	/**

@@ -97,7 +97,7 @@ public class PatientsConsHistChart extends AbstractChartComposite {
 	/** Set cohort size according to preferences, if set, else return default value. */
 	private int getCohortSize() {
 
-		IPreferenceStore preferences = ArchieActivator.getDefault().getPreferenceStore();
+		IPreferenceStore preferences = ArchieActivator.getInstance().getPreferenceStore();
 		
 		if(preferences.getInt(PreferenceConstants.P_COHORT_SIZE) > 0) {
 			return preferences.getInt(PreferenceConstants.P_COHORT_SIZE);
