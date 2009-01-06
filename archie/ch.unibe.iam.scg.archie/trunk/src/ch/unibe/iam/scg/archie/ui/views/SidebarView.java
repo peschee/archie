@@ -87,6 +87,10 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 		this.autoComplete = new AutoCompleteField(this.list, new ComboContentAdapter(), availableTitles);
 		this.list.setItems(availableTitles);
 
+		// NOTE: Currently does not work on GTK, any maybe not even on OS X
+		// TODO: Add value in Archie preference pane.
+		this.list.setVisibleItemCount(5);
+
 		// add listeners
 		this.list.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
