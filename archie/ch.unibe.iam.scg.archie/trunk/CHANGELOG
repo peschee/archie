@@ -53,3 +53,5 @@ CHANGELOG
   implementing plugins can define categories to group providers in the 
   provider list in the UI. The category is used as a prefix for the providers
   in that list.
+
+- Fixed a bug where DB queries in the dashboard returned false total values.

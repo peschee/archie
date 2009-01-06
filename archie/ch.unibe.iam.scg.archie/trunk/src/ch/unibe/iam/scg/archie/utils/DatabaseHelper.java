@@ -14,13 +14,12 @@ package ch.unibe.iam.scg.archie.utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ch.elexis.data.Konsultation;
 import ch.elexis.data.Patient;
 import ch.elexis.data.PersistentObject;
-import ch.elexis.data.Query;
-import ch.elexis.data.Rechnung;
+import ch.elexis.util.Log;
 import ch.rgw.tools.JdbcLink;
 import ch.rgw.tools.JdbcLink.Stm;
+import ch.unibe.iam.scg.archie.ArchieActivator;
 
 /**
  * <p>
@@ -42,8 +41,8 @@ public class DatabaseHelper {
 	 * @return int number of patients in the system.
 	 */
 	public static int getNumberOfPatients() {
-		Query<Patient> query = new Query<Patient>(Patient.class);
-		return query.size();
+		return DatabaseHelper.getTotalFromQuery(
+				"SELECT COUNT(ID) AS total FROM KONTAKT WHERE istPatient = '1' AND deleted = '0'", "total");
 	}
 
 	/**
@@ -52,8 +51,32 @@ public class DatabaseHelper {
 	 * @return int number of consultations in the system.
 	 */
 	public static int getNumberOfConsultations() {
-		Query<Konsultation> query = new Query<Konsultation>(Konsultation.class);
-		return query.size();
+		return DatabaseHelper.getTotalFromQuery("SELECT COUNT(ID) AS total FROM BEHANDLUNGEN WHERE deleted = '0'",
+				"total");
+	}
+
+	/**
+	 * Returns the total number of invoices in the system.
+	 * 
+	 * @return Total number of invoices in the system
+	 */
+	public static int getTotalNumberOfInvoices() {
+		return DatabaseHelper.getTotalFromQuery("SELECT COUNT(ID) AS total FROM RECHNUNGEN where deleted = '0'",
+				"total");
+	}
+
+	/**
+	 * Returns the number of invoices in the system with the given status.
+	 * 
+	 * @param status
+	 *            Invoice status.
+	 * @return Total number of invoices with the given status.
+	 * @see ch.elexis.data.Rechnung
+	 */
+	public static int getNumberOfInvoices(int status) {
+		return DatabaseHelper.getTotalFromQuery(
+				"SELECT COUNT(id) AS total FROM RECHNUNGEN WHERE deleted = '0' AND RnStatus = '" + status + "'",
+				"total");
 	}
 
 	/**
@@ -78,6 +101,8 @@ public class DatabaseHelper {
 				}
 			}
 		} catch (SQLException e) {
+			ArchieActivator.LOG.log("Error while trying to data from database.\n" + e.getLocalizedMessage(),
+					Log.WARNINGS);
 			e.printStackTrace();
 		} finally {
 			link.releaseStatement(statement);
@@ -86,38 +111,32 @@ public class DatabaseHelper {
 	}
 
 	/**
-	 * Returns the total number of invoices in the system.
+	 * Returns the int result from the given total column based on the given
+	 * query.
 	 * 
-	 * @return Total number of invoices in the system
+	 * @param query
+	 *            An SQL query.
+	 * @param totalColumn
+	 *            The column name to retrieve the value from.
+	 * @return The value of the total column or 0 if something went wrong.
+	 * @since 0.9.2
 	 */
-	public static int getTotalNumberOfInvoices() {
-		Query<Rechnung> query = new Query<Rechnung>(Rechnung.class);
-		return query.size();
-	}
-
-	/**
-	 * Returns the number of invoices in the system with the given status.
-	 * 
-	 * @param status
-	 *            Invoice status.
-	 * @return Total number of invoices with the given status.
-	 * @see ch.elexis.data.Rechnung
-	 */
-	public static int getNumberOfInvoices(int status) {
+	private static int getTotalFromQuery(String query, String totalColumn) {
 		JdbcLink link = PersistentObject.getConnection();
 		Stm statement = link.getStatement();
-		ResultSet result = statement
-				.query("SELECT COUNT(id) AS total FROM RECHNUNGEN WHERE deleted = '0' AND RnStatus = '" + status + "'");
+		ResultSet result = statement.query(query);
+
 		try {
 			if (result != null && result.next()) {
-				return result.getInt("total");
+				return result.getInt(totalColumn);
 			}
 		} catch (SQLException e) {
+			ArchieActivator.LOG.log("Error while trying to data from database.\n" + e.getLocalizedMessage(),
+					Log.WARNINGS);
 			e.printStackTrace();
 		} finally {
 			link.releaseStatement(statement);
 		}
-
 		return 0;
 	}
 }
