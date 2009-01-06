@@ -11,14 +11,8 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.ui.views;
 
-import java.util.Hashtable;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.fieldassist.AutoCompleteField;
 import org.eclipse.jface.fieldassist.ComboContentAdapter;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -35,7 +29,6 @@ import org.eclipse.ui.part.ViewPart;
 
 import ch.elexis.actions.GlobalEvents;
 import ch.elexis.actions.GlobalEvents.UserListener;
-import ch.elexis.util.Log;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.acl.ArchieACL;
 import ch.unibe.iam.scg.archie.actions.NewStatisticsAction;
@@ -62,17 +55,6 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 	 */
 	public static final String ID = ArchieActivator.PLUGIN_ID + ".ui.views.StatisticsSidebarView";
 
-	/**
-	 * List of all available providers.
-	 */
-	protected TreeMap<String, AbstractDataProvider> providers;
-
-	/**
-	 * Map of available provider categories. Category IDs are being mapped to
-	 * their names.
-	 */
-	protected Hashtable<String, String> categories;
-
 	protected Combo list;
 
 	protected DetailsPanel details;
@@ -84,10 +66,6 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 	 */
 	@Override
 	public void createPartControl(final Composite parent) {
-		// fill maps
-		this.initializeAvailableCategories();
-		this.initializeAvailableStatistics();
-
 		// create a new container for sidebar controls
 		Composite container = new Composite(parent, SWT.NONE);
 
@@ -101,7 +79,8 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 		availableStatistics.setText(Messages.STATISTICS_LIST_TITLE);
 
 		// Create an auto-complete field
-		String[] availableTitles = this.providers.keySet().toArray(new String[this.providers.size()]);
+		TreeMap<String, AbstractDataProvider> providers = ArchieActivator.getInstance().getProviderTable();
+		String[] availableTitles = providers.keySet().toArray(new String[providers.size()]);
 
 		this.list = new Combo(availableStatistics, SWT.BORDER | SWT.DROP_DOWN);
 		this.list.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -114,7 +93,7 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 				String title = SidebarView.this.list.getText();
 
 				if (SidebarView.this.isValidProviderTitle(title)) {
-					AbstractDataProvider provider = SidebarView.this.providers.get(title);
+					AbstractDataProvider provider = ArchieActivator.getInstance().getProviderTable().get(title);
 					ProviderManager.getInstance().setProvider(provider);
 				} else {
 					SidebarView.this.details.reset();
@@ -140,80 +119,6 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 	}
 
 	/**
-	 * Fills the categories hash map with available categories and their IDs.
-	 * This method needs to be executed before the initialization of the data
-	 * provider table in order for the providers to check for their category.
-	 */
-	private void initializeAvailableCategories() {
-		this.categories = new Hashtable<String, String>();
-
-		IExtensionRegistry reg = Platform.getExtensionRegistry();
-		IConfigurationElement[] elements = reg.getConfigurationElementsFor("ch.unibe.iam.scg.archie.dataprovider");
-		for (int i = 0; i < elements.length; i++) {
-			IConfigurationElement element = elements[i];
-
-			// only category elements
-			if ("category".equals(element.getName())) {
-				this.categories.put(element.getAttribute("id"), element.getAttribute("name"));
-			}
-		}
-	}
-
-	/**
-	 * Fills the statistics hashtable with all available plugins mapping a
-	 * statistics plugin title to its datasource instance.
-	 */
-	private void initializeAvailableStatistics() {
-		this.providers = new TreeMap<String, AbstractDataProvider>();
-
-		IExtensionRegistry reg = Platform.getExtensionRegistry();
-		IConfigurationElement[] extensions = reg.getConfigurationElementsFor("ch.unibe.iam.scg.archie.dataprovider");
-		for (int i = 0; i < extensions.length; i++) {
-			IConfigurationElement element = extensions[i];
-			// only DataProvider elements, as only they have the class attribute
-			if ("DataProvider".equals(element.getName())) {
-				try {
-					Object executable = element.createExecutableExtension("class");
-
-					// check if we have the right class
-					if (executable instanceof AbstractDataProvider) {
-
-						// compose category prefix
-						String category = element.getAttribute("category") == null ? "" : this
-								.getCategoryNameFromId(element.getAttribute("category"))
-								+ ": ";
-
-						// add to list of available statistics
-						AbstractDataProvider provider = (AbstractDataProvider) executable;
-						this.providers.put(category + provider.getName(), provider);
-					}
-				} catch (CoreException e) {
-					String errorMessage = "Error while trying to load the data provider: " + element.getName() + "\n"
-							+ e.getLocalizedMessage();
-					ArchieActivator.LOG.log(errorMessage, Log.WARNINGS);
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	/**
-	 * Retrieves the category name from the categories table based on the given
-	 * ID.
-	 * 
-	 * @return The corresponding category name or an empty string if no category
-	 *         with the given ID is in the table.
-	 */
-	private String getCategoryNameFromId(String categoryId) {
-		for (Entry<String, String> category : this.categories.entrySet()) {
-			if (category.getKey().equals(categoryId)) {
-				return category.getValue();
-			}
-		}
-		return "";
-	}
-
-	/**
 	 * Checks whether the title passed to this function is a valid data provider
 	 * we have in the statistics table.
 	 * 
@@ -222,7 +127,7 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 	 * @return True if the there is a provider with the given title, false else.
 	 */
 	protected boolean isValidProviderTitle(String title) {
-		return this.providers.get(title) != null;
+		return ArchieActivator.getInstance().getProviderTable().get(title) != null;
 	}
 
 	/**

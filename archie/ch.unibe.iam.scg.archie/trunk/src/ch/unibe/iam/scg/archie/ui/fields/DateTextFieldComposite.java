@@ -78,7 +78,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 
 		// Add datePicker Popup Button (as Label)
 		Label datePickerPopupButton = new Label(this, SWT.FLAT);
-		Image image = ArchieActivator.getDefault().getImageRegistry().get(ArchieActivator.IMG_BUTTON_CALENDAR);
+		Image image = ArchieActivator.getInstance().getImageRegistry().get(ArchieActivator.IMG_BUTTON_CALENDAR);
 		datePickerPopupButton.setImage(image);
 		datePickerPopupButton.addMouseListener(new MouseListener() {
 			public void mouseDown(MouseEvent event) {

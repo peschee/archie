@@ -11,6 +11,14 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie;
 
+import java.util.Hashtable;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -22,10 +30,13 @@ import ch.elexis.Hub;
 import ch.elexis.preferences.SettingsPreferenceStore;
 import ch.elexis.util.Log;
 import ch.unibe.iam.scg.archie.i18n.Messages;
+import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 
 /**
- * <p>The activator class controls the plug-in life cycle and holds an image
- * registry for images used throughout the PLUGIN.</p>
+ * <p>
+ * The activator class controls the plug-in life cycle and holds an image
+ * registry for images used throughout the PLUGIN.
+ * </p>
  * 
  * $Id$
  * 
@@ -34,13 +45,13 @@ import ch.unibe.iam.scg.archie.i18n.Messages;
  * @version $Rev$
  */
 public class ArchieActivator extends AbstractUIPlugin {
-	
+
 	/** The shared instance */
 	private static ArchieActivator PLUGIN;
 
 	/** The plug-in ID */
 	public static final String PLUGIN_ID = "ch.unibe.iam.scg.archie"; //$NON-NLS-1$
-	
+
 	/** Human readable PLUGIN name. */
 	public static final String PLUGIN_NAME = "Archie"; //$NON-NLS-1$
 
@@ -60,36 +71,50 @@ public class ArchieActivator extends AbstractUIPlugin {
 	public static final String IMG_PATIENT_FEMALE = "user_female"; //$NON-NLS-1$
 	public static final String IMG_GO = "go"; //$NON-NLS-1$
 	public static final String IMG_REFRESH = "refresh"; //$NON-NLS-1$
-	
+
 	/** Preference store for this PLUGIN. */
 	private static IPreferenceStore PREFERENCE_STORE = null;
-	
+
 	/** Log for this plugin. */
 	public static final Log LOG = Log.get(ArchieActivator.PLUGIN_NAME);
+
+	/**
+	 * List of all available providers. <b>This variable is built-up upon the
+	 * first request in the corresponding getter method to save resources, not
+	 * upon activation of the plugin.</b>
+	 */
+	private TreeMap<String, AbstractDataProvider> providers;
+
+	/**
+	 * Map of available provider categories. Category IDs are being mapped to
+	 * their names. <b>This variable is built-up upon plugin activation to
+	 * ensure that the categories are available later when building the list of
+	 * available providers.</b>
+	 */
+	private Hashtable<String, String> categories;
+
+	// /////////////////////////////////////////////////////////////////////////////
+	// CONSTRUCTOR
+	// /////////////////////////////////////////////////////////////////////////////
 
 	/** The constructor */
 	public ArchieActivator() {
 		ArchieActivator.PLUGIN = this;
 		ArchieActivator.LOG.log(Messages.ARCHIE_STARTED, Log.SYNCMARK);
+
+		this.initializeAvailableCategories();
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		ArchieActivator.PLUGIN = null;
-		super.stop(context);
-	}
+	// /////////////////////////////////////////////////////////////////////////////
+	// STATIC METHODS
+	// /////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * @return the shared instance
+	 * Returns an instance of this activator object.
+	 * 
+	 * @return The shared instance
 	 */
-	public static ArchieActivator getDefault() {
+	public static ArchieActivator getInstance() {
 		return ArchieActivator.PLUGIN;
 	}
 
@@ -104,25 +129,45 @@ public class ArchieActivator extends AbstractUIPlugin {
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return AbstractUIPlugin.imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
-	
+
 	/**
-	 * Returns an image from this PLUGIN's image registry based on the given descriptor string.
-	 * @param descriptor Image descriptor string.
+	 * Returns an image from this PLUGIN's image registry based on the given
+	 * descriptor string.
+	 * 
+	 * @param descriptor
+	 *            Image descriptor string.
 	 * @return Image under that given descriptor from the registry.
 	 */
 	public static Image getImage(String descriptor) {
-		return ArchieActivator.getDefault().getImageRegistry().get(descriptor);
+		return ArchieActivator.getInstance().getImageRegistry().get(descriptor);
 	}
-	
+
+	// ////////////////////////////////////////////////////////////////////////////
+	// OVERRIDE METHODS
+	// ////////////////////////////////////////////////////////////////////////////
+
+	/** {@inheritDoc} */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		ArchieActivator.PLUGIN = null;
+		super.stop(context);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public IPreferenceStore getPreferenceStore() {
-		if(ArchieActivator.PREFERENCE_STORE == null) {
+		if (ArchieActivator.PREFERENCE_STORE == null) {
 			ArchieActivator.PREFERENCE_STORE = new SettingsPreferenceStore(Hub.globalCfg);
 		}
 		return ArchieActivator.PREFERENCE_STORE;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	protected void initializeImageRegistry(ImageRegistry registry) {
@@ -144,5 +189,103 @@ public class ArchieActivator extends AbstractUIPlugin {
 		registry.put(IMG_PATIENT_FEMALE, ArchieActivator.getImageDescriptor("icons/user_female.png"));
 		registry.put(IMG_GO, ArchieActivator.getImageDescriptor("icons/control.png"));
 		registry.put(IMG_REFRESH, ArchieActivator.getImageDescriptor("icons/arrow_circle_double.png"));
+	}
+
+	// ///////////////////////////////////////////////////////////////////////////
+	// PUBLIC OBJECT METHODS
+	// ///////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Returns the table of available data providers. This method builds up the
+	 * table of providers upon first request.
+	 * 
+	 * @return Table containing all available data providers.
+	 */
+	public TreeMap<String, AbstractDataProvider> getProviderTable() {
+		if (this.providers == null) {
+			this.providers = new TreeMap<String, AbstractDataProvider>();
+
+			IExtensionRegistry reg = Platform.getExtensionRegistry();
+			IConfigurationElement[] extensions = reg
+					.getConfigurationElementsFor("ch.unibe.iam.scg.archie.dataprovider");
+			for (int i = 0; i < extensions.length; i++) {
+				IConfigurationElement element = extensions[i];
+				// only DataProvider elements, as only they have the class
+				// attribute
+				if ("DataProvider".equals(element.getName())) {
+					try {
+						Object executable = element.createExecutableExtension("class");
+
+						// check if we have the right class
+						if (executable instanceof AbstractDataProvider) {
+
+							// compose category prefix
+							String category = element.getAttribute("category") == null ? "" : this
+									.getCategoryNameFromId(element.getAttribute("category"))
+									+ ": ";
+
+							// add to list of available statistics
+							AbstractDataProvider provider = (AbstractDataProvider) executable;
+							this.providers.put(category + provider.getName(), provider);
+						}
+					} catch (CoreException e) {
+						String errorMessage = "Error while trying to load the data provider: " + element.getName()
+								+ "\n" + e.getLocalizedMessage();
+						ArchieActivator.LOG.log(errorMessage, Log.WARNINGS);
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		// return providers
+		return ArchieActivator.getInstance().providers;
+	}
+
+	// ///////////////////////////////////////////////////////////////////////////
+	// PRIVATE OBJECT METHODS
+	// ///////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Fills the categories hash map with available categories and their IDs.
+	 * This method needs to be executed before the initialization of the data
+	 * provider table in order for the providers to check for their category.
+	 */
+	private void initializeAvailableCategories() {
+		if (this.categories == null) {
+			this.categories = new Hashtable<String, String>();
+
+			IExtensionRegistry reg = Platform.getExtensionRegistry();
+			IConfigurationElement[] elements = reg.getConfigurationElementsFor("ch.unibe.iam.scg.archie.dataprovider");
+			for (int i = 0; i < elements.length; i++) {
+				IConfigurationElement element = elements[i];
+
+				// only category elements
+				if ("category".equals(element.getName())) {
+					this.categories.put(element.getAttribute("id"), element.getAttribute("name"));
+				}
+			}
+		}
+	}
+
+	/**
+	 * Retrieves the category name from the categories table based on the given
+	 * ID.
+	 * 
+	 * @return The corresponding category name or an empty string if no category
+	 *         with the given ID is in the table.
+	 */
+	private String getCategoryNameFromId(String categoryId) {
+		if (this.categories == null) {
+			String error = "Provider categories have to be initialized first.";
+			ArchieActivator.LOG.log(error, Log.ERRORS);
+			throw new IllegalStateException("Provider categories have to be initialized first.");
+		}
+		for (Entry<String, String> category : this.categories.entrySet()) {
+			if (category.getKey().equals(categoryId)) {
+				return category.getValue();
+			}
+		}
+		return "";
 	}
 }

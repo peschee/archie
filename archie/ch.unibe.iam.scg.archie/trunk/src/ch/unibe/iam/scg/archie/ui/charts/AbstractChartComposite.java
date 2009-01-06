@@ -100,7 +100,7 @@ public abstract class AbstractChartComposite extends Composite implements IJobCh
 	 * Display loading screen
 	 */
 	public void setLoadingMessage() {
-		new GraphicalMessage(this, ArchieActivator.getDefault().getImageRegistry().get(ArchieActivator.IMG_COFFEE),
+		new GraphicalMessage(this, ArchieActivator.getInstance().getImageRegistry().get(ArchieActivator.IMG_COFFEE),
 				Messages.WORKING);
 		this.layout();
 	}
