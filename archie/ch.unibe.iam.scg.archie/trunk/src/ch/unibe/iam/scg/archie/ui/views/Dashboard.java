@@ -43,8 +43,9 @@ import ch.unibe.iam.scg.archie.ui.charts.PatientsConsHistChart;
 
 /**
  * <p>
- * The Dashboard View gives a general Overview of the Elexis System. E.g. How many patients and 
- * consultations are in the system, what is the age distribution of patients etc.
+ * The Dashboard View gives a general Overview of the Elexis System. E.g. How
+ * many patients and consultations are in the system, what is the age
+ * distribution of patients etc.
  * </p>
  * 
  * $Id$
@@ -212,7 +213,7 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 		assert (this.bottomPart != null);
 
 		this.chartsNotCreatedMessage = new GraphicalMessage(this.bottomPart, ArchieActivator
-				.getImage(ArchieActivator.IMG_INFO),Messages.DASHBOARD_CHARTS_NOT_CREATED);
+				.getImage(ArchieActivator.IMG_INFO), Messages.DASHBOARD_CHARTS_NOT_CREATED);
 	}
 
 	/**
@@ -290,6 +291,10 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 		}
 
 		this.initialize(); // re-initialize
+
+		// reset action states
+		this.refreshChartsAction.setEnabled(false);
+		this.createChartsAction.setEnabled(true);
 	}
 
 	/**
