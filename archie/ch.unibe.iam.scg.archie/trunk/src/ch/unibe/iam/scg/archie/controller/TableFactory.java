@@ -31,9 +31,7 @@ import ch.unibe.iam.scg.archie.model.DataSet;
  * Creates a <code>TableViewer</code> from data provided by an implementation of
  * <code>AbstractDataProvider</code>.
  * </p>
- * <p>
- * Uses singleton pattern.
- * </p>
+ * <p>Uses singleton pattern.</p>
  * 
  * $Id$
  * 

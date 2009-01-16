@@ -88,17 +88,19 @@ public class DatabaseHelper {
 	 * @return Number of patients with that gender, 0 if nothing found.
 	 */
 	public static int getNumberGenderPatients(String gender) {
+		// Checking Preconditions.
+		if(!(gender.equals(Patient.MALE) || gender.equals(Patient.FEMALE)) ) {
+			throw new IllegalArgumentException("Gender has to be either " + Patient.MALE + " or " + Patient.FEMALE + ".");
+		}
 		JdbcLink link = PersistentObject.getConnection();
 		Stm statement = link.getStatement();
 		ResultSet result = statement
 				.query("SELECT Geschlecht, COUNT(ID) AS total FROM KONTAKT WHERE istPatient = '1' AND geschlecht = '"
-						+ Patient.MALE + "' OR Geschlecht = '" + Patient.FEMALE
+						+ gender 
 						+ "' AND deleted = '0' GROUP BY Geschlecht");
 		try {
 			while (result != null && result.next()) {
-				if (result.getString("Geschlecht").equals(gender)) {
-					return result.getInt("total");
-				}
+				return result.getInt("total");
 			}
 		} catch (SQLException e) {
 			ArchieActivator.LOG.log("Error while trying to data from database.\n" + e.getLocalizedMessage(),
