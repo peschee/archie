@@ -11,6 +11,8 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.ui;
 
+import java.math.BigDecimal;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -153,7 +155,7 @@ public class DashboardOverview extends Composite {
 	 * @return float How much percent is givenAmount of totalAmount
 	 */
 	private float calculatePercent(final float givenAmount, final float totalAmount) {
-		return Math.round((givenAmount / totalAmount) * 100);
+		return (givenAmount / totalAmount) * 100;
 	}
 
 	/**
@@ -167,6 +169,8 @@ public class DashboardOverview extends Composite {
 	 *         string containing the % sign.
 	 */
 	private String writePercent(final float givenAmount, final float totalAmount) {
-		return calculatePercent(givenAmount, totalAmount) + " %";
+		BigDecimal percent = new BigDecimal(calculatePercent(givenAmount, totalAmount));
+		percent = percent.setScale(1, BigDecimal.ROUND_HALF_UP);
+		return  percent.doubleValue() + " %";
 	}
 }

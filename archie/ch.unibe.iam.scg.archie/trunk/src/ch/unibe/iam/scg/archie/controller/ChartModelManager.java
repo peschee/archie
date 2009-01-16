@@ -14,9 +14,7 @@ package ch.unibe.iam.scg.archie.controller;
 import ch.unibe.iam.scg.archie.model.ChartModel;
 
 /**
- * <p>
- * Manages Chart Models.
- * </p>
+ * <p>Manages Chart Models.</p>
  * 
  * $Id$
  * 
