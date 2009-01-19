@@ -40,6 +40,7 @@ public class ArchieACL implements IACLContributor {
 	 * @return String[]
 	 */
 	public ACE[] getACL() {
+		// TODO: localization?
 		return new ACE[] { ArchieACL.USE_ARCHIE };
 	}
 
