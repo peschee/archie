@@ -19,7 +19,8 @@ import ch.unibe.iam.scg.archie.i18n.Messages;
 
 /**
  * <p>Handles the access to Archie based on access control lists defined in Elexis
- * properties.</p>
+ * properties.<br/>
+ * TODO: revert ACE changes, they are only implemented in elexis 2.0. Also implement right localization</p>
  * 
  * $Id$
  * 
