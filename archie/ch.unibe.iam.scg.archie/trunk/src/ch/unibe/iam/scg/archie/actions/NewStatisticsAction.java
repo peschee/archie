@@ -113,8 +113,7 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 				SWTHelper.showError(Messages.ERROR, e.getMessage());
 				return;
 			} catch (Exception e) {
-				// TODO: Internalization
-				ArchieActivator.LOG.log("Could not update parameters for provider " + provider.getName() + ".\n"
+				ArchieActivator.LOG.log(Messages.ACTION_NEWSTAT_ERROR_COULDNT_UPDATE_PROVIDER + " " + provider.getName() + ".\n"
 						+ e.getLocalizedMessage(), Log.WARNINGS);
 				e.printStackTrace();
 			}
@@ -124,7 +123,7 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 				this.view = (StatisticsView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 						.showView(StatisticsView.ID);
 			} catch (PartInitException e) {
-				ArchieActivator.LOG.log("Could not initialize main view." + "\n" + e.getLocalizedMessage(),
+				ArchieActivator.LOG.log(Messages.ACTION_NEWSTAT_ERROR_COULDNT_INIT_VIEW + "\n" + e.getLocalizedMessage(),
 						Log.WARNINGS);
 				e.printStackTrace();
 			}
@@ -161,7 +160,7 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	// //////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * This metohod is being called as soon as the job this action observes,
+	 * This method is being called as soon as the job this action observes,
 	 * finishes. The action is enabled as soon as the last job finishes. This
 	 * method also creates and sets the result table in the result view as well
 	 * as information about the parameters of the active provider in the header
@@ -171,7 +170,7 @@ public class NewStatisticsAction extends Action implements IJobChangeListener, O
 	 */
 	public void done(final IJobChangeEvent event) {
 		// allow other threads to update this UI thread
-		// http://www.eclipse.org/swt/faq.php#uithread
+		// @see http://www.eclipse.org/swt/faq.php#uithread
 		Desk.getDisplay().syncExec(new Runnable() {
 			public void run() {
 				final ResultPanel results = NewStatisticsAction.this.view.getResultPanel();
