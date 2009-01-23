@@ -55,10 +55,37 @@ public final class Messages extends NLS {
 	
 	// Chart Wizard 
 	public static String CHART_WIZARD_PAGE_TITLE;
-	public static String CHART_WIZARD_PAGE_DESCRIPTION;	
+	public static String CHART_WIZARD_PAGE_DESCRIPTION;
+	public static String CHART_WIZARD_PAGE_ERROR_DATASET;
+	public static String CHART_WIZARD_PAGE_TEXT_PIE_CHART;
+	public static String CHART_WIZARD_PAGE_TEXT_BAR_CHART;
+	
 	public static String CHART_WIZARD_BAR_CHART_PAGE_TITLE;
 	public static String CHART_WIZARD_BAR_CHART_PAGE_DESCRIPTION;
-
+	public static String CHART_WIZARD_BAR_CHART_TEXT_CHART_TYPE;
+	public static String CHART_WIZARD_BAR_CHART_BAR_CHART;
+	public static String CHART_WIZARD_BAR_CHART_LINE_CHART;
+	public static String CHART_WIZARD_BAR_CHART_TEXT_EXPLANATON;
+	public static String CHART_WIZARD_BAR_CHART_TEXT_NAME_CHART;
+	public static String CHART_WIZARD_BAR_CHART_TEXT_COLUMN_ROW_LABEL;
+	public static String CHART_WIZARD_BAR_CHART_ERROR_ONE_COLUMN;
+	public static String CHART_WIZARD_BAR_CHART_TEXT_COLUMNS_CATEGORIES;
+	public static String CHART_WIZARD_BAR_CHART_TEXT_3D_EXPLANATION;
+	public static String CHART_WIZARD_BAR_CHART_TEXT_3D;
+	public static String CHART_WIZARD_BAR_CHART_TEXT_3D_TOOLTIP;
+	
+	public static String CHART_WIZARD_PIE_CHART_PAGE_TITLE;
+	public static String CHART_WIZARD_PIE_CHART_PAGE_DESCRIPTION;
+	public static String CHART_WIZARD_PIE_CHART_PAGE_ERROR_NUMERIC;
+	public static String CHART_WIZARD_PIE_CHART_PAGE_TEXT_NAME;
+	public static String CHART_WIZARD_PIE_CHART_PAGE_TEXT_KEYS;
+	public static String CHART_WIZARD_PIE_CHART_PAGE_TEXT_VALUES;
+	public static String CHART_WIZARD_PIE_CHART_TEXT_3D;
+	public static String CHART_WIZARD_PIE_CHART_TEXT_3D_TOOLTIP;
+	
+	public static String CHART_WIZARD_CONTENT_SELECTION_PAGE_TITLE;
+	public static String CHART_WIZARD_CONTENT_SELECTION_PAGE_DESCRIPTION;
+	
 	// User messages
 	public static String WORKING;
 	public static String NO_PLUGIN_SELECTED;
