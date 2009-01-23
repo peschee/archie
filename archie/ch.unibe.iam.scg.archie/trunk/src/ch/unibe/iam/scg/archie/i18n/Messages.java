@@ -48,6 +48,8 @@ public final class Messages extends NLS {
 	// New statistic action
 	public static String ACTION_NEWSTAT_TITLE;
 	public static String ACTION_NEWSTAT_DESCRIPTION;
+	public static String ACTION_NEWSTAT_ERROR_COULDNT_UPDATE_PROVIDER;
+	public static String ACTION_NEWSTAT_ERROR_COULDNT_INIT_VIEW;
 	
 	// Chart wizard action
 	public static String CHART_WIZARD_TITLE;
