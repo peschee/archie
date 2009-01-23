@@ -57,8 +57,6 @@ public class ChartWizard extends Wizard {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
 	@Override
@@ -67,8 +65,6 @@ public class ChartWizard extends Wizard {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#canFinish()
 	 */
 	@Override
@@ -77,8 +73,6 @@ public class ChartWizard extends Wizard {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#addPages()
 	 */
 	@Override

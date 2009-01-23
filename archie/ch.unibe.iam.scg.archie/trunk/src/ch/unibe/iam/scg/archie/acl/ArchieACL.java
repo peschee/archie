@@ -20,7 +20,6 @@ import ch.unibe.iam.scg.archie.i18n.Messages;
 /**
  * <p>Handles the access to Archie based on access control lists defined in Elexis
  * properties.<br/>
- * TODO: revert ACE changes, they are only implemented in elexis 2.0. Also implement right localization</p>
  * 
  * $Id$
  * 
@@ -33,7 +32,7 @@ public class ArchieACL implements IACLContributor {
 	/**
 	 * Access control string that will be displayed in the ACL.
 	 */
-	public static final ACE USE_ARCHIE = new ACE(ACE.ACE_ROOT, ArchieActivator.PLUGIN_NAME + " " + Messages.ACL_ACCESS);
+	public static final ACE USE_ARCHIE = new ACE(ACE.ACE_ROOT, "archie", ArchieActivator.PLUGIN_NAME + " " + Messages.ACL_ACCESS);
 
 	/**
 	 * Returns the ACL for this plugin.
@@ -41,7 +40,6 @@ public class ArchieACL implements IACLContributor {
 	 * @return String[]
 	 */
 	public ACE[] getACL() {
-		// TODO: localization?
 		return new ACE[] { ArchieACL.USE_ARCHIE };
 	}
 
