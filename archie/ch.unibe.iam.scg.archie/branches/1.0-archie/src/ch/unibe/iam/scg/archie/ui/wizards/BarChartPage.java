@@ -41,10 +41,7 @@ import ch.unibe.iam.scg.archie.utils.DatasetHelper;
 import ch.unibe.iam.scg.archie.utils.SWTUtils;
 
 /**
- * TODO: i18n
- * <p>
- * Chart wizard page for setting parameters for bar charts.
- * </p>
+ * <p>Chart wizard page for setting parameters for bar charts.</p>
  * 
  * $Id$
  * 
@@ -110,7 +107,7 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 		int[] selected = this.getSelectedIndexes();
 		if (selected.length <= 0) {
 			status = new Status(IStatus.ERROR, ArchieActivator.PLUGIN_NAME, 0,
-					"At least one valid column needs to be selected.", null);
+				Messages.CHART_WIZARD_BAR_CHART_ERROR_ONE_COLUMN, null);
 		}
 
 		// apply status
@@ -119,7 +116,6 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 		this.getWizard().getContainer().updateButtons();
 	}
 
-	// TODO: i18n
 	/**
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -131,22 +127,18 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 		composite.setLayout(new GridLayout());
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		SWTUtils.createLabel(composite).setText(
-				"Refine the type of your chart. Line combine values, bar charts separate them by category.");
+		SWTUtils.createLabel(composite).setText(Messages.CHART_WIZARD_BAR_CHART_TEXT_CHART_TYPE);
 
 		// initialize chart type combo
 		this.chartType = new Combo(composite, SWT.READ_ONLY);
-		this.chartType.add("Bar Chart", BarChartPage.TYPE_BAR);
-		this.chartType.add("Line Chart", BarChartPage.TYPE_LINE);
+		this.chartType.add(Messages.CHART_WIZARD_BAR_CHART_BAR_CHART, BarChartPage.TYPE_BAR);
+		this.chartType.add(Messages.CHART_WIZARD_BAR_CHART_LINE_CHART, BarChartPage.TYPE_LINE);
 		this.chartType.select(BarChartPage.TYPE_BAR);
 		this.chartType.addListener(SWT.Selection, this);
 
-		SWTUtils
-				.createLabel(composite)
-				.setText(
-						"Please choose which columns you want to include in the bar chart. Each column depits a category, the rows will be drawn per category. You will be able to choose the rows in the next steps.");
+		SWTUtils.createLabel(composite).setText(Messages.CHART_WIZARD_BAR_CHART_TEXT_EXPLANATON);
 
-		this.chartName = new TextFieldComposite(composite, SWT.NONE, "Name of the Chart", null);
+		this.chartName = new TextFieldComposite(composite, SWT.NONE, Messages.CHART_WIZARD_BAR_CHART_TEXT_NAME_CHART, null);
 		this.chartName.addListener(SWT.KeyUp, this);
 
 		// add separator
@@ -155,15 +147,12 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 		DataSet dataset = ((ChartWizard) this.getWizard()).getModel().getDataSet();
 		List<String> columns = dataset.getHeadings();
 
-		SWTUtils.createLabel(composite).setText("Select a column that will be used for the row labels.");
+		SWTUtils.createLabel(composite).setText(Messages.CHART_WIZARD_BAR_CHART_TEXT_COLUMN_ROW_LABEL);
 
 		this.rowTitle = new Combo(composite, SWT.READ_ONLY);
 		this.rowTitle.setItems(columns.toArray(new String[0]));
 
-		SWTUtils
-				.createLabel(composite)
-				.setText(
-						"Chose which columns should be used for categories in this bar chart. Row values will be grouped per category.");
+		SWTUtils.createLabel(composite).setText(Messages.CHART_WIZARD_BAR_CHART_TEXT_COLUMNS_CATEGORIES);
 
 		// add buttons
 		this.addButtons(composite, dataset);
@@ -171,14 +160,11 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 		// add separator
 		SWTUtils.createSpacedSeparator(composite, SWT.HORIZONTAL);
 
-		SWTUtils
-				.createLabel(composite)
-				.setText(
-						"You can create a 3d chart by selecting this button below. Note that the chart is not rendered by a 3d engine which can lead to distortions depending on the size of the container.");
+		SWTUtils.createLabel(composite).setText(Messages.CHART_WIZARD_BAR_CHART_TEXT_3D_EXPLANATION);
 
 		this.threeDimensional = new Button(composite, SWT.CHECK);
-		this.threeDimensional.setText("3D Graph");
-		this.threeDimensional.setToolTipText("Check if you want the graph to be three dimensional.");
+		this.threeDimensional.setText(Messages.CHART_WIZARD_BAR_CHART_TEXT_3D);
+		this.threeDimensional.setToolTipText(Messages.CHART_WIZARD_BAR_CHART_TEXT_3D_TOOLTIP);
 		this.threeDimensional.addListener(SWT.Selection, this);
 
 		// compute composite widht and height

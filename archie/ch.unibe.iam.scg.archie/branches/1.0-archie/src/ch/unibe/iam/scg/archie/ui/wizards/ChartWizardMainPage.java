@@ -98,13 +98,13 @@ public class ChartWizardMainPage extends AbstractChartPage implements Listener {
 		// Create toolbar items
 		this.pieItem = new ToolItem(pieToolbar, SWT.RADIO | SWT.CENTER);
 		this.pieItem.setImage(ArchieActivator.getImage(ArchieActivator.IMG_CHART_PIE_BIG));
-		this.pieItem.setText("Pie Chart");
+		this.pieItem.setText(Messages.CHART_WIZARD_PAGE_TEXT_PIE_CHART);
 		this.pieItem.setEnabled(this.hasValidDataset());
 		this.pieItem.addListener(SWT.Selection, this);
 
 		this.barItem = new ToolItem(barToolbar, SWT.RADIO | SWT.CENTER);
 		this.barItem.setImage(ArchieActivator.getImage(ArchieActivator.IMG_CHART_BAR_BIG));
-		this.barItem.setText("Bar Chart");
+		this.barItem.setText(Messages.CHART_WIZARD_PAGE_TEXT_BAR_CHART);
 		this.barItem.setEnabled(this.hasValidDataset());
 		this.barItem.addListener(SWT.Selection, this);
 
@@ -160,7 +160,7 @@ public class ChartWizardMainPage extends AbstractChartPage implements Listener {
 
 		if (!this.hasValidDataset()) {
 			status = new Status(IStatus.ERROR, ArchieActivator.PLUGIN_NAME, 0,
-					"You cannot create graphs for this dataset. The dataset does not have any numeric values.", null);
+					Messages.CHART_WIZARD_PAGE_ERROR_DATASET, null);
 		}
 
 		return status;

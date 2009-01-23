@@ -24,15 +24,14 @@ import org.eclipse.swt.widgets.TableColumn;
 import ch.unibe.iam.scg.archie.controller.ProviderManager;
 import ch.unibe.iam.scg.archie.controller.TableFactory;
 import ch.unibe.iam.scg.archie.controller.TableManager;
+import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.ChartModel;
 import ch.unibe.iam.scg.archie.model.DataSet;
 import ch.unibe.iam.scg.archie.model.DatasetTableColumnSorter;
 
 /**
- * <p>
- * Dataset row selection page. Users needs to select the rows he wants to have
- * included in the graph on this page.
- * </p>
+ * <p>Dataset row selection page. Users needs to select the rows he wants to have
+ * included in the graph on this page.</p>
  * 
  * $Id$
  * 
@@ -53,21 +52,11 @@ public class ContentSelectionPage extends WizardPage implements SelectionListene
 	protected static final String PAGE_NAME = "ContentSelectionPage";
 
 	/**
-	 * Title of this page. This is being set when creating this page.
-	 */
-	private static final String PAGE_TITLE = "Choose Rows";
-
-	/**
-	 * Description of this page. This is being set when creating this page.
-	 */
-	private static final String PAGE_DESCRIPTION = "Please specify which rows you would like to include in your chart.";
-
-	/**
 	 * Constructs ChartWizardMainPage
 	 */
 	public ContentSelectionPage() {
-		super(ContentSelectionPage.PAGE_NAME, ContentSelectionPage.PAGE_TITLE, null);
-		super.setDescription(ContentSelectionPage.PAGE_DESCRIPTION);
+		super(ContentSelectionPage.PAGE_NAME, Messages.CHART_WIZARD_CONTENT_SELECTION_PAGE_TITLE, null);
+		super.setDescription(Messages.CHART_WIZARD_CONTENT_SELECTION_PAGE_DESCRIPTION);
 	}
 
 	/**
