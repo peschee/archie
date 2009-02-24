@@ -11,15 +11,11 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.ui.perspectives;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.progress.IProgressConstants;
 
-import ch.elexis.Hub;
-import ch.elexis.preferences.PreferenceConstants;
-import ch.elexis.views.Starter;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.ui.views.ChartView;
 import ch.unibe.iam.scg.archie.ui.views.Dashboard;
@@ -52,11 +48,6 @@ public class StatisticsPerspective implements IPerspectiveFactory {
 
 		layout.setEditorAreaVisible(false);
 		layout.setFixed(false);
-
-		// Add elexis sidebar
-		if (Hub.localCfg.get(PreferenceConstants.SHOWSIDEBAR, "true").equals("true")) { //$NON-NLS-1$
-			layout.addStandaloneView(Starter.ID, false, SWT.LEFT, 0.1f, editorArea);
-		}
 
 		IFolderLayout main = layout.createFolder("main", IPageLayout.LEFT, 1.0f, editorArea);
 		IFolderLayout sidebar = layout.createFolder("right", IPageLayout.RIGHT, 0.6f, "main");
