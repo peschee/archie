@@ -12,7 +12,8 @@
 package ch.unibe.iam.scg.archie.ui;
 
 /**
- * Enum that stores available implementations of <code>AbstractFieldComposite</code>.
+ * Enum that stores available implementations of
+ * <code>AbstractFieldComposite</code> objects.
  * 
  * $Id$
  * 
@@ -21,18 +22,22 @@ package ch.unibe.iam.scg.archie.ui;
  * @version $Rev$
  */
 public enum FieldTypes {
+
 	/**
 	 * Vanilla Text Field
 	 */
-	TEXT, 
+	TEXT,
+
 	/**
 	 * Numeric Text Field
 	 */
-	TEXT_NUMERIC, 
+	TEXT_NUMERIC,
+
 	/**
 	 * Date Text Field
 	 */
-	TEXT_DATE, 
+	TEXT_DATE,
+
 	/**
 	 * Checkbox Button
 	 */

@@ -54,4 +54,6 @@ CHANGELOG
   provider list in the UI. The category is used as a prefix for the providers
   in that list.
 
-- Fixed a bug where DB queries in the dashboard returned false total values.
+- Fixed bug where DB queries in the dashboard returned false total values.
+- Fixed bug where changing mandate / user would leave the chart creation button
+  in dashboard inactive.

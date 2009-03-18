@@ -55,7 +55,7 @@ public class ChartModel {
 	private int categoryColumnIndex; // used in bar & line charts
 	private int chartType;
 
-	private boolean threeDimensional;
+	private boolean isThreeDimensional;
 
 	/**
 	 * 
@@ -74,7 +74,7 @@ public class ChartModel {
 		this.chartType = -1;
 
 		this.isLineChart = false;
-		this.threeDimensional = false;
+		this.isThreeDimensional = false;
 	}
 
 	// ///////////////////////////////////////////////////////////////////////////
@@ -193,10 +193,10 @@ public class ChartModel {
 
 	/**
 	 * 
-	 * @return threeDimensional
+	 * @return isThreeDimensional
 	 */
 	public boolean isThreeDimensional() {
-		return this.threeDimensional;
+		return this.isThreeDimensional;
 	}
 
 	/**
@@ -204,7 +204,7 @@ public class ChartModel {
 	 * @param isThreeDimensional
 	 */
 	public void setThreeDimensional(boolean isThreeDimensional) {
-		this.threeDimensional = isThreeDimensional;
+		this.isThreeDimensional = isThreeDimensional;
 	}
 
 	/**
@@ -268,7 +268,7 @@ public class ChartModel {
 		output.append("Columns: " + ArrayUtils.toString(this.columns) + "\n");
 		output.append("Category Column Index: " + this.categoryColumnIndex + "\n");
 		output.append("Line Chart: " + this.isLineChart + "\n");
-		output.append("3D: " + this.threeDimensional + "\n");
+		output.append("3D: " + this.isThreeDimensional + "\n");
 		output.append("Dataset:\n\n" + this.dataSet.toString());
 		output.append("********************************************************************************\n");
 		return output.toString();

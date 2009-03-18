@@ -35,7 +35,7 @@ public class StringHelper {
 		String safe = name.trim();
 
 		// remove illegal characters
-		safe = safe.replaceAll("[\\/|\\\\|\\*|\\:|\\||\"|\'|\\<|\\>|\\{|\\}|\\?|\\%]", "");
+		safe = safe.replaceAll("[\\/|\\\\|\\*|\\:|\\||\"|\'|\\<|\\>|\\{|\\}|\\?|\\%|,]", "");
 
 		// replace . dots with _ and remove the _ if at the end
 		safe = safe.replaceAll("\\.", "_");
