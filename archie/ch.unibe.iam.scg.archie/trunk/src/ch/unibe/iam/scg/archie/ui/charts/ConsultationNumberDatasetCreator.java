@@ -125,10 +125,8 @@ public class ConsultationNumberDatasetCreator extends AbstractDatasetCreator {
 			
 			int count = 0;
 			
-			for(@SuppressWarnings("unused") final Konsultation consult : entry.getValue()) {
-				count++;
-				monitor.worked(1);
-			}
+			count = count + entry.getValue().size();
+			monitor.worked(entry.getValue().size());
 			
 			countSeries.add(month, count);
 		}
