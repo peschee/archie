@@ -120,10 +120,9 @@ public class ConsultationStats extends AbstractTimeSeries {
 			}
 
 			// In which cohort does this patient belong to?
-			int lowerBound = ((age / this.cohortSize) * this.cohortSize); // gets
-			// rounded
-			// down
-			int upperBound = lowerBound + (this.cohortSize);
+			// gets rounded down
+			int lowerBound = ((age / this.cohortSize) * this.cohortSize);
+			int upperBound = lowerBound + this.cohortSize;
 
 			// Initialize empty cohort content, which we will fill with
 			// consultation costs and profits.
@@ -211,33 +210,40 @@ public class ConsultationStats extends AbstractTimeSeries {
 	}
 
 	/**
+	 * Returns the cohort size.
+	 * 
 	 * @return cohortSize
 	 */
 	@GetProperty(name = "Cohort Size", index = 2, fieldType = FieldTypes.TEXT_NUMERIC, validationRegex = "^([1-9]){1}\\d{0,2}", validationMessage = "This field has to consist of at least one, at most three numbers.")
-	public String getCohortSize() {
-		return "" + this.cohortSize;
+	public int getCohortSize() {
+		return this.cohortSize;
 	}
 
 	/**
+	 * Sets the cohort size.
+	 * 
 	 * @param cohortSize
+	 *            Size of the cohort.
 	 * @throws SetDataException
+	 *             Thrown when a cohort size is smaller than 1.
 	 */
 	@SetProperty(name = "Cohort Size")
-	public void setCohortSize(final String cohortSize) throws SetDataException {
-		Integer size = new Integer(1);
+	public void setCohortSize(final int cohortSize) throws SetDataException {
 		try {
-			size = new Integer(cohortSize);
-			if (size < 1) {
+			if (cohortSize < 1) {
 				throw new Exception("Cohort size must be at least 1!");
 			}
-			this.cohortSize = size;
+			this.cohortSize = cohortSize;
 		} catch (final Exception e) {
 			throw new SetDataException(Messages.CONSULTATION_STATS_COHORT_SIZE_EXCEPTION);
 		}
 	}
 
 	/**
-	 * @return currentMandatorOnly
+	 * Returns true if the statistic is run for the current mandator only.
+	 * 
+	 * @return currentMandatorOnly True if the statistic is run for the current
+	 *         mandator only, false else.
 	 */
 	@GetProperty(name = "Active Mandator Only", index = 3, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Compute statistics only for the current mandator. If unchecked, the statistics will be computed for all mandator.")
 	public boolean getCurrentMandatorOnly() {
@@ -245,7 +251,11 @@ public class ConsultationStats extends AbstractTimeSeries {
 	}
 
 	/**
+	 * Sets whether the statistics should be run for the current mandator only.
+	 * 
 	 * @param currentMandatorOnly
+	 *            True if the statistic needs to be run for the current mandator
+	 *            only, false else.
 	 */
 	@SetProperty(name = "Active Mandator Only")
 	public void setCurrentMandatorOnly(final boolean currentMandatorOnly) {
