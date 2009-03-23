@@ -31,8 +31,8 @@ import ch.unibe.iam.scg.archie.controller.ChartModelManager;
 import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.ChartModel;
 import ch.unibe.iam.scg.archie.model.DataSet;
-import ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite;
-import ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite;
+import ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.TextWidget;
 import ch.unibe.iam.scg.archie.utils.DatasetHelper;
 
 /**
@@ -51,7 +51,7 @@ public class PieChartPage extends AbstractChartPage implements Listener {
 	 */
 	protected static final String PAGE_NAME = "PieChartPage";
 
-	private TextFieldComposite chartName;
+	private TextWidget chartName;
 
 	private Combo keysColumn;
 	private Combo valuesColumn;
@@ -112,7 +112,7 @@ public class PieChartPage extends AbstractChartPage implements Listener {
 		container.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		container.setLayout(layout);
 
-		this.chartName = new TextFieldComposite(container, SWT.NONE, Messages.CHART_WIZARD_PIE_CHART_PAGE_TEXT_NAME, null);
+		this.chartName = new TextWidget(container, SWT.NONE, Messages.CHART_WIZARD_PIE_CHART_PAGE_TEXT_NAME, null);
 		GridData nameLayoutData = new GridData(SWT.FILL, SWT.FILL, true, false);
 		nameLayoutData.horizontalSpan = 2;
 		this.chartName.setLayoutData(nameLayoutData);
@@ -147,7 +147,7 @@ public class PieChartPage extends AbstractChartPage implements Listener {
 		this.chartName.pack();
 		int width = this.chartName.getLabel().getBounds().width;
 		GridData widthData = new GridData();
-		widthData.widthHint = width + AbstractFieldComposite.STD_COLUMN_HORIZONTAL_SPACING;
+		widthData.widthHint = width + AbstractWidget.STD_COLUMN_HORIZONTAL_SPACING;
 		keysLabel.setLayoutData(widthData);
 		valuesLabel.setLayoutData(widthData);
 		threeDimensionalLabel.setLayoutData(widthData);

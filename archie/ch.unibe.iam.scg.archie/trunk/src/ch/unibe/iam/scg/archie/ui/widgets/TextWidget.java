@@ -9,7 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.ui.fields;
+package ch.unibe.iam.scg.archie.ui.widgets;
 
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
@@ -43,7 +43,7 @@ import ch.unibe.iam.scg.archie.ui.Decorators;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class TextFieldComposite extends AbstractFieldComposite {
+public class TextWidget extends AbstractWidget {
 
 	// Margin between field and decoration image in pixels.
 	protected final static int DECORATION_HORIZONTAL_MARGIN = 3;
@@ -61,7 +61,7 @@ public class TextFieldComposite extends AbstractFieldComposite {
 	 * @param regex String Optional <code>RegexValidation</code>,
 	 * can be <code>null</code> if not desired.
 	 */
-	public TextFieldComposite(Composite parent, int style, final String labelText, RegexValidation regex) {
+	public TextWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
 		super(parent, style, labelText);
 
 		// Create label
@@ -70,7 +70,7 @@ public class TextFieldComposite extends AbstractFieldComposite {
 
 		this.regexValidation = regex; // Can be null.
 
-		this.layout.horizontalSpacing = AbstractFieldComposite.STD_COLUMN_HORIZONTAL_SPACING;
+		this.layout.horizontalSpacing = AbstractWidget.STD_COLUMN_HORIZONTAL_SPACING;
 
 		// Create actual text field.
 		this.control = new Text(this, SWT.BORDER);
@@ -86,14 +86,14 @@ public class TextFieldComposite extends AbstractFieldComposite {
 		// Add ModifyListener to text field.
 		((Text) this.control).addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent event) {
-				TextFieldComposite.this.handleModify(TextFieldComposite.this.smartField);
+				TextWidget.this.handleModify(TextWidget.this.smartField);
 			}
 		});
 
 		// Create control decoration.
 		this.controlDecoration = new ControlDecoration(this.control, SWT.RIGHT | SWT.CENTER);
 		this.controlDecoration.setShowOnlyOnFocus(false);
-		this.controlDecoration.setMarginWidth(TextFieldComposite.DECORATION_HORIZONTAL_MARGIN);
+		this.controlDecoration.setMarginWidth(TextWidget.DECORATION_HORIZONTAL_MARGIN);
 	}
 
 	/**
@@ -173,8 +173,8 @@ public class TextFieldComposite extends AbstractFieldComposite {
 
 			// check whether we have a regex validation and if it matches the
 			// fields content.
-			if (TextFieldComposite.this.hasRegexValidation()
-					&& this.getContents().matches(TextFieldComposite.this.regexValidation.getPattern())) {
+			if (TextWidget.this.hasRegexValidation()
+					&& this.getContents().matches(TextWidget.this.regexValidation.getPattern())) {
 				return false;
 			}
 			return true;
@@ -202,7 +202,7 @@ public class TextFieldComposite extends AbstractFieldComposite {
 		 * @return String Retrieves content of field.
 		 */
 		public String getContents() {
-			return this.contentAdapter.getControlContents(TextFieldComposite.this.control);
+			return this.contentAdapter.getControlContents(TextWidget.this.control);
 		}
 
 		/**
@@ -210,7 +210,7 @@ public class TextFieldComposite extends AbstractFieldComposite {
 		 *            String Content to add to field.
 		 */
 		public void setContents(final String contents) {
-			this.contentAdapter.setControlContents(TextFieldComposite.this.control, contents, contents.length());
+			this.contentAdapter.setControlContents(TextWidget.this.control, contents, contents.length());
 		}
 
 		public FieldDecoration getFieldDecoration() {
@@ -244,8 +244,8 @@ public class TextFieldComposite extends AbstractFieldComposite {
 		 */
 		protected String getErrorMessage() {
 			String error = Messages.FIELD_GENERAL_ERROR;
-			if (TextFieldComposite.this.hasRegexValidation()) {
-				error += " " + TextFieldComposite.this.regexValidation.getMessage();
+			if (TextWidget.this.hasRegexValidation()) {
+				error += " " + TextWidget.this.regexValidation.getMessage();
 			}
 			return error;
 		}
@@ -379,7 +379,7 @@ public class TextFieldComposite extends AbstractFieldComposite {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#setDescription(java.lang.String)
+	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setDescription(java.lang.String)
 	 */
 	@Override
 	public void setDescription(final String description) {

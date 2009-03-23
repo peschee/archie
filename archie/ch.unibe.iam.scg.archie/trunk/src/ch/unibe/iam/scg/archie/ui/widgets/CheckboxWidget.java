@@ -9,7 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.ui.fields;
+package ch.unibe.iam.scg.archie.ui.widgets;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -26,14 +26,14 @@ import org.eclipse.swt.widgets.Label;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class CheckboxFieldComposite extends AbstractFieldComposite {
+public class CheckboxWidget extends AbstractWidget {
 	
 	/**
 	 * @param parent Composite
 	 * @param style Integer
 	 * @param labelText String
 	 */
-	public CheckboxFieldComposite(Composite parent, int style, final String labelText) {
+	public CheckboxWidget(Composite parent, int style, final String labelText) {
 		super(parent, style, labelText);
 
 		// Create Label
@@ -45,7 +45,7 @@ public class CheckboxFieldComposite extends AbstractFieldComposite {
 		
 		// Layout Data
 		GridData layoutData = new GridData(GridData.GRAB_HORIZONTAL);
-		this.layout.horizontalSpacing = AbstractFieldComposite.STD_COLUMN_HORIZONTAL_SPACING;
+		this.layout.horizontalSpacing = AbstractWidget.STD_COLUMN_HORIZONTAL_SPACING;
 		this.control.setLayoutData(layoutData);
 	}
 	
@@ -57,7 +57,7 @@ public class CheckboxFieldComposite extends AbstractFieldComposite {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#getValue()
+	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#getValue()
 	 */
 	@Override
 	public Object getValue() {
@@ -74,7 +74,7 @@ public class CheckboxFieldComposite extends AbstractFieldComposite {
 
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#setValue(java.lang.Object)
+	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setValue(java.lang.Object)
 	 */
 	@Override
 	public void setValue(final Object value) {
@@ -86,7 +86,7 @@ public class CheckboxFieldComposite extends AbstractFieldComposite {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#setDescription(java.lang.String)
+	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setDescription(java.lang.String)
 	 */
 	@Override
 	public void setDescription(String description) {

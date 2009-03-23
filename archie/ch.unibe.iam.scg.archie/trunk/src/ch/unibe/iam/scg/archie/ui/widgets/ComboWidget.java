@@ -9,7 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.ui.fields;
+package ch.unibe.iam.scg.archie.ui.widgets;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -28,14 +28,14 @@ import org.eclipse.swt.widgets.Label;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class ComboFieldComposite extends AbstractFieldComposite {
+public class ComboWidget extends AbstractWidget {
 
 	/**
 	 * @param parent
 	 * @param style
 	 * @param labelText
 	 */
-	public ComboFieldComposite(Composite parent, int style, final String labelText) {
+	public ComboWidget(Composite parent, int style, final String labelText) {
 		super(parent, style, labelText);
 
 		// Create Label
@@ -47,7 +47,7 @@ public class ComboFieldComposite extends AbstractFieldComposite {
 
 		// Layout Data
 		GridData layoutData = new GridData(SWT.FILL, SWT.FILL, true, false);
-		this.layout.horizontalSpacing = AbstractFieldComposite.STD_COLUMN_HORIZONTAL_SPACING;
+		this.layout.horizontalSpacing = AbstractWidget.STD_COLUMN_HORIZONTAL_SPACING;
 		this.control.setLayoutData(layoutData);
 	}
 
@@ -62,7 +62,7 @@ public class ComboFieldComposite extends AbstractFieldComposite {
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#getValue()
+	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#getValue()
 	 */
 	@Override
 	public Object getValue() {
@@ -72,7 +72,7 @@ public class ComboFieldComposite extends AbstractFieldComposite {
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#isValid()
+	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#isValid()
 	 */
 	@Override
 	public boolean isValid() {
@@ -82,7 +82,7 @@ public class ComboFieldComposite extends AbstractFieldComposite {
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#setValue(java.lang.Object)
+	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setValue(java.lang.Object)
 	 */
 	@Override
 	public void setValue(final Object value) {
@@ -92,7 +92,7 @@ public class ComboFieldComposite extends AbstractFieldComposite {
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite#setDescription(java.lang.String)
+	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setDescription(java.lang.String)
 	 */
 	@Override
 	public void setDescription(final String description) {

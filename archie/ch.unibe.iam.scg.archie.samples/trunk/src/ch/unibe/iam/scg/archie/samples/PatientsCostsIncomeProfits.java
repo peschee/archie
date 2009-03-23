@@ -37,7 +37,7 @@ import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
 import ch.unibe.iam.scg.archie.model.QueryContentProvider;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 import ch.unibe.iam.scg.archie.samples.model.PersonWrapper;
-import ch.unibe.iam.scg.archie.ui.FieldTypes;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
  * <p>
@@ -179,7 +179,7 @@ public class PatientsCostsIncomeProfits extends AbstractTimeSeries {
 	 * @return true if only patients for active mendator should be shown, false
 	 *         if all patients should be shown.
 	 */
-	@GetProperty(name = "Active Mandator Only", index = 3, description = "Show only patients which belong to active mandator", fieldType = FieldTypes.BUTTON_CHECKBOX)
+	@GetProperty(name = "Active Mandator Only", index = 3, description = "Show only patients which belong to active mandator", widgetType = WidgetTypes.BUTTON_CHECKBOX)
 	public boolean getShowForMandate() {
 		return this.currentMandatorOnly;
 	}

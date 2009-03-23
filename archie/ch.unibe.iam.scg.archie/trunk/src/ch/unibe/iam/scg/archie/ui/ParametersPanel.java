@@ -29,11 +29,12 @@ import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.model.RegexValidation;
-import ch.unibe.iam.scg.archie.ui.fields.AbstractFieldComposite;
-import ch.unibe.iam.scg.archie.ui.fields.CheckboxFieldComposite;
-import ch.unibe.iam.scg.archie.ui.fields.DateTextFieldComposite;
-import ch.unibe.iam.scg.archie.ui.fields.NumericTextFieldComposite;
-import ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite;
+import ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.CheckboxWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.DateWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.NumericWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.TextWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 import ch.unibe.iam.scg.archie.utils.ProviderHelper;
 
 /**
@@ -53,7 +54,7 @@ public class ParametersPanel extends Composite {
 	 * Map containing all text fields an their name. Used to feed the query with
 	 * the user input.
 	 */
-	private Map<String, AbstractFieldComposite> fieldMap;
+	private Map<String, AbstractWidget> fieldMap;
 
 	/**
 	 * Map containing the getter method names and their default values. We need
@@ -95,7 +96,7 @@ public class ParametersPanel extends Composite {
 		}
 
 		// initialize an empty field map
-		this.fieldMap = new TreeMap<String, AbstractFieldComposite>();
+		this.fieldMap = new TreeMap<String, AbstractWidget>();
 		this.defaultValuesMap = new HashMap<String, Object>();
 
 		// populate again
@@ -120,14 +121,14 @@ public class ParametersPanel extends Composite {
 	private void adjustLabelWidths() {
 		// calculate max label width
 		int maxWidth = 0;
-		for (AbstractFieldComposite field : this.fieldMap.values()) {
+		for (AbstractWidget field : this.fieldMap.values()) {
 			Label label = field.getLabel();
 			int width = label.getBounds().width;
 			maxWidth = (width > maxWidth) ? width : maxWidth;
 		}
 
 		// set all labels to that max width
-		for (AbstractFieldComposite field : this.fieldMap.values()) {
+		for (AbstractWidget field : this.fieldMap.values()) {
 			Label label = field.getLabel();
 			GridData data = new GridData();
 			data.widthHint = maxWidth;
@@ -159,8 +160,8 @@ public class ParametersPanel extends Composite {
 			}
 
 			// create the appropriate text field
-			AbstractFieldComposite fieldComposite = this.createTextField(this, ProviderHelper.getValue(method, this.provider),
-					getter.name(), getter.fieldType(), regex );
+			AbstractWidget fieldComposite = this.createTextField(this, ProviderHelper.getValue(method, this.provider),
+					getter.name(), getter.widgetType(), regex );
 			
 			if(!getter.description().equals("")) {
 				fieldComposite.setDescription(getter.description());
@@ -188,7 +189,7 @@ public class ParametersPanel extends Composite {
 	 * @return true if all fields are valid, false else.
 	 */
 	public boolean allFieldsValid() {
-		for (Map.Entry<String, AbstractFieldComposite> entry : this.fieldMap.entrySet()) {
+		for (Map.Entry<String, AbstractWidget> entry : this.fieldMap.entrySet()) {
 			if (!entry.getValue().isValid()) {
 				return false;
 			}
@@ -207,24 +208,24 @@ public class ParametersPanel extends Composite {
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		if (this.fieldMap != null) {
-			for (Map.Entry<String, AbstractFieldComposite> entry : this.fieldMap.entrySet()) {
+			for (Map.Entry<String, AbstractWidget> entry : this.fieldMap.entrySet()) {
 				entry.getValue().setEnabled(enabled);
 			}
 		}
 	}
 
-	private AbstractFieldComposite createTextField(final Composite parent, Object value, final String label, 
-			FieldTypes fieldType, final RegexValidation regex) {
+	private AbstractWidget createTextField(final Composite parent, Object value, final String label, 
+			WidgetTypes fieldType, final RegexValidation regex) {
 		switch (fieldType) {
 		case TEXT_DATE:
-			return new DateTextFieldComposite(parent, SWT.NONE, label, regex);
+			return new DateWidget(parent, SWT.NONE, label, regex);
 		case TEXT_NUMERIC:
-			return new NumericTextFieldComposite(parent, SWT.NONE, label, regex);
+			return new NumericWidget(parent, SWT.NONE, label, regex);
 		case BUTTON_CHECKBOX:
-			return new CheckboxFieldComposite(parent, SWT.NONE, label);
+			return new CheckboxWidget(parent, SWT.NONE, label);
 		case TEXT:
 		default: // Standard text field
-			return new TextFieldComposite(parent, SWT.NONE, label, regex);
+			return new TextWidget(parent, SWT.NONE, label, regex);
 		}
 	}
 
@@ -241,7 +242,7 @@ public class ParametersPanel extends Composite {
 	private void setData(ArrayList<Method> setterList) throws Exception {
 		for (Method method : setterList) {
 			SetProperty setter = method.getAnnotation(SetProperty.class);
-			AbstractFieldComposite field = this.fieldMap.get(setter.name());
+			AbstractWidget field = this.fieldMap.get(setter.name());
 			Object value = field.getValue();
 			ProviderHelper.setValue(this.provider, method, value);
 		}

@@ -9,7 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.ui.fields;
+package ch.unibe.iam.scg.archie.ui.widgets;
 
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 /**
- * <p>An AbstractFieldComposite has a label, a layout and any kind of control.</p>
+ * <p>An AbstractWidget has a label, a layout and any kind of control.</p>
  * 
  * $Id$
  * 
@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.Label;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public abstract class AbstractFieldComposite extends Composite {
+public abstract class AbstractWidget extends Composite {
 	
 	/** Horizontal space between components in this composite. */
 	public final static int STD_COLUMN_HORIZONTAL_SPACING = 20;
@@ -41,7 +41,7 @@ public abstract class AbstractFieldComposite extends Composite {
 	 * @param style Integer
 	 * @param labelText String
 	 */
-	public AbstractFieldComposite(Composite parent, int style, final String labelText) {
+	public AbstractWidget(Composite parent, int style, final String labelText) {
 		super(parent, style);
 
 		// Check Arguments

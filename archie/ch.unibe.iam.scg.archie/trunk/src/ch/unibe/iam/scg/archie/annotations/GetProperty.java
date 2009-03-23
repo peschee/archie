@@ -16,7 +16,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import ch.unibe.iam.scg.archie.ui.FieldTypes;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
  * <p>
@@ -36,8 +36,10 @@ import ch.unibe.iam.scg.archie.ui.FieldTypes;
 public @interface GetProperty {
 
 	/**
-	 * Field name. There has to be a setter method annotated with a SetProperty
-	 * method with the same value to have any effect on the data provider.
+	 * Property name. There has to be a setter method annotated with a
+	 * SetProperty method with the same value to have any effect on the data
+	 * provider. This name will also be the title of the corresponding widget
+	 * shown in the UI.
 	 * 
 	 * @return String name
 	 */
@@ -52,14 +54,15 @@ public @interface GetProperty {
 	public String description() default "";
 
 	/**
-	 * Field index. Defines the order in which the fields are displayed.
+	 * Property index. Defines the order in which this property is displayed and
+	 * processed.
 	 * 
-	 * @return Integer Order in which the fields are displayed.
+	 * @return Integer Order in which the fields are displayed and processed.
 	 */
 	public int index() default -1;
 
-	/** Field type. What kind of field? */
-	public FieldTypes fieldType() default FieldTypes.TEXT;
+	/** Widget type. What kind of widget? */
+	public WidgetTypes widgetType() default WidgetTypes.TEXT;
 
 	/**
 	 * A regular expression pattern string to be performed as validations on the
