@@ -9,11 +9,11 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.ui;
+package ch.unibe.iam.scg.archie.ui.widgets;
 
 /**
  * Enum that stores available implementations of
- * <code>AbstractFieldComposite</code> objects.
+ * <code>AbstractWidget</code> objects.
  * 
  * $Id$
  * 
@@ -21,7 +21,7 @@ package ch.unibe.iam.scg.archie.ui;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public enum FieldTypes {
+public enum WidgetTypes {
 
 	/**
 	 * Vanilla Text Field

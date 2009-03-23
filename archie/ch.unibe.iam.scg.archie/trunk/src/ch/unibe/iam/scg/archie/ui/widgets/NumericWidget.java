@@ -9,7 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.ui.fields;
+package ch.unibe.iam.scg.archie.ui.widgets;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MenuDetectEvent;
@@ -36,7 +36,7 @@ import ch.unibe.iam.scg.archie.model.RegexValidation;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class NumericTextFieldComposite extends TextFieldComposite {
+public class NumericWidget extends TextWidget {
 
 	/**
 	 * @param parent
@@ -48,22 +48,22 @@ public class NumericTextFieldComposite extends TextFieldComposite {
 	 * @param regex
 	 *            String
 	 */
-	public NumericTextFieldComposite(Composite parent, int style, final String labelText, RegexValidation regex) {
+	public NumericWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
 		super(parent, style, labelText, regex);
 
 		// Create quickFix menu listener
 		this.controlDecoration.addMenuDetectListener(new MenuDetectListener() {
 			public void menuDetected(MenuDetectEvent event) {
 				// no quick fix if we aren't in error state.
-				if (NumericTextFieldComposite.this.smartField.isValid()) {
+				if (NumericWidget.this.smartField.isValid()) {
 					return;
 				}
-				if (NumericTextFieldComposite.this.smartField.quickFixMenu == null) {
-					NumericTextFieldComposite.this.smartField.quickFixMenu = NumericTextFieldComposite.this
-							.createQuickFixMenu((SmartNumericField) NumericTextFieldComposite.this.smartField);
+				if (NumericWidget.this.smartField.quickFixMenu == null) {
+					NumericWidget.this.smartField.quickFixMenu = NumericWidget.this
+							.createQuickFixMenu((SmartNumericField) NumericWidget.this.smartField);
 				}
-				NumericTextFieldComposite.this.smartField.quickFixMenu.setLocation(event.x, event.y);
-				NumericTextFieldComposite.this.smartField.quickFixMenu.setVisible(true);
+				NumericWidget.this.smartField.quickFixMenu.setLocation(event.x, event.y);
+				NumericWidget.this.smartField.quickFixMenu.setVisible(true);
 			}
 		});
 	}
@@ -133,8 +133,8 @@ public class NumericTextFieldComposite extends TextFieldComposite {
 			}
 
 			// perform regex validation if available
-			if (NumericTextFieldComposite.this.hasRegexValidation()
-					&& !this.getContents().matches(NumericTextFieldComposite.this.regexValidation.getPattern())) {
+			if (NumericWidget.this.hasRegexValidation()
+					&& !this.getContents().matches(NumericWidget.this.regexValidation.getPattern())) {
 				return false;
 			}
 			return true;
@@ -154,8 +154,8 @@ public class NumericTextFieldComposite extends TextFieldComposite {
 		@Override
 		protected String getErrorMessage() {
 			String error = Messages.FIELD_NUMERIC_ERROR;
-			if (NumericTextFieldComposite.this.hasRegexValidation()) {
-				error += "\n" + NumericTextFieldComposite.this.regexValidation.getMessage();
+			if (NumericWidget.this.hasRegexValidation()) {
+				error += "\n" + NumericWidget.this.regexValidation.getMessage();
 			}
 			return error;
 		}

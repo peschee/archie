@@ -32,7 +32,7 @@ import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
-import ch.unibe.iam.scg.archie.ui.FieldTypes;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
  * <p>Provides statistics about diagnoses count and age distribution.</p>
@@ -175,7 +175,7 @@ public class DiagnoseStats extends AbstractTimeSeries {
 	/**
 	 * @return currentMandatorOnly
 	 */
-	@GetProperty(name = "Active Mandator Only", index = 1, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Compute statistics only for the current mandant. If unchecked, the statistics will be computed for all mandants.")
+	@GetProperty(name = "Active Mandator Only", index = 1, widgetType = WidgetTypes.BUTTON_CHECKBOX, description = "Compute statistics only for the current mandant. If unchecked, the statistics will be computed for all mandants.")
 	public boolean getCurrentMandatorOnly() {
 		return this.currentMandatorOnly;
 	}

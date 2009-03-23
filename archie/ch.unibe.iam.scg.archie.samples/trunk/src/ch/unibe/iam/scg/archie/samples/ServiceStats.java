@@ -34,7 +34,7 @@ import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
-import ch.unibe.iam.scg.archie.ui.FieldTypes;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
  * <p>
@@ -209,7 +209,7 @@ public class ServiceStats extends AbstractTimeSeries {
 	/**
 	 * @return currentMandatorOnly
 	 */
-	@GetProperty(name = "Active Mandator Only", index = 3, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Compute statistics only for the current mandator. If unchecked, the statistics will be computed for all mandators.")
+	@GetProperty(name = "Active Mandator Only", index = 3, widgetType = WidgetTypes.BUTTON_CHECKBOX, description = "Compute statistics only for the current mandator. If unchecked, the statistics will be computed for all mandators.")
 	public boolean getCurrentMandatorOnly() {
 		return this.currentMandatorOnly;
 	}
@@ -225,7 +225,7 @@ public class ServiceStats extends AbstractTimeSeries {
 	/**
 	 * @return groupByCodeSystem
 	 */
-	@GetProperty(name = "Groupy By Codesystem", index = 5, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Groups services by code system.")
+	@GetProperty(name = "Groupy By Codesystem", index = 5, widgetType = WidgetTypes.BUTTON_CHECKBOX, description = "Groups services by code system.")
 	public boolean isGroupByCodeSystem() {
 		return this.groupByCodeSystem;
 	}

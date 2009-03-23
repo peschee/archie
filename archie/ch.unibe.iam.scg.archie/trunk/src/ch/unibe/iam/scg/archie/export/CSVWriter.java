@@ -21,7 +21,7 @@ import java.util.Map;
 
 import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.model.DataSet;
-import ch.unibe.iam.scg.archie.ui.fields.DateTextFieldComposite;
+import ch.unibe.iam.scg.archie.ui.widgets.DateWidget;
 import ch.unibe.iam.scg.archie.utils.ProviderHelper;
 
 /**
@@ -99,7 +99,7 @@ public class CSVWriter {
 	 */
 	private static void writeProviderInformation(FileWriter writer, final AbstractDataProvider provider)
 			throws IOException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(DateTextFieldComposite.VALID_DATE_FORMAT);
+		SimpleDateFormat dateFormat = new SimpleDateFormat(DateWidget.VALID_DATE_FORMAT);
 
 		// provider title
 		writer.write(provider.getName());

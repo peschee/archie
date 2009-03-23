@@ -32,7 +32,7 @@ import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
 import ch.unibe.iam.scg.archie.model.Cohort;
 import ch.unibe.iam.scg.archie.model.SetDataException;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
-import ch.unibe.iam.scg.archie.ui.FieldTypes;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
  * <p>
@@ -214,7 +214,7 @@ public class ConsultationStats extends AbstractTimeSeries {
 	 * 
 	 * @return cohortSize
 	 */
-	@GetProperty(name = "Cohort Size", index = 2, fieldType = FieldTypes.TEXT_NUMERIC, validationRegex = "^([1-9]){1}\\d{0,2}", validationMessage = "This field has to consist of at least one, at most three numbers.")
+	@GetProperty(name = "Cohort Size", index = 2, widgetType = WidgetTypes.TEXT_NUMERIC, validationRegex = "^([1-9]){1}\\d{0,2}", validationMessage = "This field has to consist of at least one, at most three numbers.")
 	public int getCohortSize() {
 		return this.cohortSize;
 	}
@@ -245,7 +245,7 @@ public class ConsultationStats extends AbstractTimeSeries {
 	 * @return currentMandatorOnly True if the statistic is run for the current
 	 *         mandator only, false else.
 	 */
-	@GetProperty(name = "Active Mandator Only", index = 3, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Compute statistics only for the current mandator. If unchecked, the statistics will be computed for all mandator.")
+	@GetProperty(name = "Active Mandator Only", index = 3, widgetType = WidgetTypes.BUTTON_CHECKBOX, description = "Compute statistics only for the current mandator. If unchecked, the statistics will be computed for all mandator.")
 	public boolean getCurrentMandatorOnly() {
 		return this.currentMandatorOnly;
 	}

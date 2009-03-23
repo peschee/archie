@@ -21,8 +21,8 @@ import org.eclipse.osgi.util.NLS;
 import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.i18n.Messages;
-import ch.unibe.iam.scg.archie.ui.FieldTypes;
-import ch.unibe.iam.scg.archie.ui.fields.DateTextFieldComposite;
+import ch.unibe.iam.scg.archie.ui.widgets.DateWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
  * <p>
@@ -97,33 +97,33 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 
 	/**
 	 * Returns the start date property of this data provider, formatted
-	 * according to the valid date format in <code>DateTextFieldComposite</code>
+	 * according to the valid date format in <code>DateWidget</code>
 	 * class.
 	 * 
 	 * @return The start date of this query.
 	 */
-	@GetProperty(name = "Start Date", index = -2, fieldType = FieldTypes.TEXT_DATE, validationRegex = "\\d{2}\\.\\d{2}\\.\\d{4}", validationMessage = "The date needs to have the following format: "
-			+ DateTextFieldComposite.VALID_DATE_FORMAT)
+	@GetProperty(name = "Start Date", index = -2, widgetType = WidgetTypes.TEXT_DATE, validationRegex = "\\d{2}\\.\\d{2}\\.\\d{4}", validationMessage = "The date needs to have the following format: "
+			+ DateWidget.VALID_DATE_FORMAT)
 	public String metaGetStartDate() {
-		SimpleDateFormat format = new SimpleDateFormat(DateTextFieldComposite.VALID_DATE_FORMAT);
+		SimpleDateFormat format = new SimpleDateFormat(DateWidget.VALID_DATE_FORMAT);
 		return format.format(this.getStartDate().getTime());
 	}
 
 	/**
 	 * Set the start date of this query. Inclusive the given date. Consult the
-	 * <code>DateTextFieldComposite</code> class for valid date format.
+	 * <code>DateWidget</code> class for valid date format.
 	 * 
 	 * @param startDate
 	 *            Start date as string in a valid date format.
 	 * @throws SetDataException
 	 *             Exception thrown when the date could not be set.
-	 * @see DateTextFieldComposite#VALID_DATE_FORMAT
+	 * @see DateWidget#VALID_DATE_FORMAT
 	 */
 	@SetProperty(name = "Start Date", index = -2)
 	public void metaSetStartDate(String startDate) throws SetDataException {
 		Calendar cal;
 		try {
-			SimpleDateFormat format = new SimpleDateFormat(DateTextFieldComposite.VALID_DATE_FORMAT);
+			SimpleDateFormat format = new SimpleDateFormat(DateWidget.VALID_DATE_FORMAT);
 			Date date = format.parse(startDate);
 			cal = Calendar.getInstance();
 			cal.setTime(date);
@@ -132,7 +132,7 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 			cal.get(Calendar.YEAR);
 		} catch (ParseException e) { // converting failure
 			throw new SetDataException(NLS
-					.bind(Messages.ERROR_SET_START_DATE, DateTextFieldComposite.VALID_DATE_FORMAT));
+					.bind(Messages.ERROR_SET_START_DATE, DateWidget.VALID_DATE_FORMAT));
 		} catch (IllegalArgumentException e) { // illegal date
 			throw new SetDataException(Messages.ERROR_START_DATE_VALID);
 		}
@@ -144,27 +144,27 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 	 * 
 	 * @return The end date of this data provider.
 	 */
-	@GetProperty(name = "End Date", fieldType = FieldTypes.TEXT_DATE, validationRegex = "\\d{2}\\.\\d{2}\\.\\d{4}", validationMessage = "Datumsformat blubb...")
+	@GetProperty(name = "End Date", widgetType = WidgetTypes.TEXT_DATE, validationRegex = "\\d{2}\\.\\d{2}\\.\\d{4}", validationMessage = "Datumsformat blubb...")
 	public String metaGetEndDate() {
-		SimpleDateFormat format = new SimpleDateFormat(DateTextFieldComposite.VALID_DATE_FORMAT);
+		SimpleDateFormat format = new SimpleDateFormat(DateWidget.VALID_DATE_FORMAT);
 		return format.format(this.getEndDate().getTime());
 	}
 
 	/**
 	 * Set the end date of this query. Inclusive the given date. Consult the
-	 * <code>DateTextFieldComposite</code> class for valid date format.
+	 * <code>DateWidget</code> class for valid date format.
 	 * 
 	 * @param endDate
 	 *            End date as string in a valid date format.
 	 * @throws SetDataException
 	 *             Start date as string in a valid date format.
-	 * @see DateTextFieldComposite#VALID_DATE_FORMAT
+	 * @see DateWidget#VALID_DATE_FORMAT
 	 */
 	@SetProperty(name = "End Date")
 	public void metaSetEndDate(final String endDate) throws SetDataException {
 		Calendar cal;
 		try {
-			SimpleDateFormat format = new SimpleDateFormat(DateTextFieldComposite.VALID_DATE_FORMAT);
+			SimpleDateFormat format = new SimpleDateFormat(DateWidget.VALID_DATE_FORMAT);
 			Date date = format.parse(endDate);
 			cal = Calendar.getInstance();
 			cal.setTime(date);
@@ -172,7 +172,7 @@ public abstract class AbstractTimeSeries extends AbstractDataProvider {
 			cal.get(Calendar.MONTH);
 			cal.get(Calendar.YEAR);
 		} catch (ParseException e) { // converting failure
-			throw new SetDataException(NLS.bind(Messages.ERROR_SET_END_DATE, DateTextFieldComposite.VALID_DATE_FORMAT));
+			throw new SetDataException(NLS.bind(Messages.ERROR_SET_END_DATE, DateWidget.VALID_DATE_FORMAT));
 		} catch (IllegalArgumentException e) { // illegal date
 			throw new SetDataException(Messages.ERROR_END_DATE_VALID);
 		}

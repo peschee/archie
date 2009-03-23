@@ -35,7 +35,7 @@ import ch.unibe.iam.scg.archie.controller.ChartModelManager;
 import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.ChartModel;
 import ch.unibe.iam.scg.archie.model.DataSet;
-import ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite;
+import ch.unibe.iam.scg.archie.ui.widgets.TextWidget;
 import ch.unibe.iam.scg.archie.utils.ArrayUtils;
 import ch.unibe.iam.scg.archie.utils.DatasetHelper;
 import ch.unibe.iam.scg.archie.utils.SWTUtils;
@@ -66,7 +66,7 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 	 */
 	private static final int TYPE_LINE = 1;
 
-	private TextFieldComposite chartName;
+	private TextWidget chartName;
 	private Combo chartType;
 	private Combo rowTitle;
 
@@ -138,7 +138,7 @@ public class BarChartPage extends AbstractChartPage implements Listener {
 
 		SWTUtils.createLabel(composite).setText(Messages.CHART_WIZARD_BAR_CHART_TEXT_EXPLANATON);
 
-		this.chartName = new TextFieldComposite(composite, SWT.NONE, Messages.CHART_WIZARD_BAR_CHART_TEXT_NAME_CHART, null);
+		this.chartName = new TextWidget(composite, SWT.NONE, Messages.CHART_WIZARD_BAR_CHART_TEXT_NAME_CHART, null);
 		this.chartName.addListener(SWT.KeyUp, this);
 
 		// add separator

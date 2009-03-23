@@ -9,7 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.ui.fields;
+package ch.unibe.iam.scg.archie.ui.widgets;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,7 +43,7 @@ import ch.unibe.iam.scg.archie.i18n.Messages;
 import ch.unibe.iam.scg.archie.model.RegexValidation;
 
 /**
- * Implements <code>AbstractFieldComposite</code> with a SmartDateField.
+ * Implements <code>AbstractWidget</code> with a SmartDateField.
  * 
  * $Id$
  * 
@@ -51,7 +51,7 @@ import ch.unibe.iam.scg.archie.model.RegexValidation;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class DateTextFieldComposite extends TextFieldComposite {
+public class DateWidget extends TextWidget {
 
 	/**
 	 * Valid DateFormat pattern for DateTextFieldComposites.
@@ -61,7 +61,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 	/**
 	 * A simple date format used in this class.
 	 */
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(DateTextFieldComposite.VALID_DATE_FORMAT);
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(DateWidget.VALID_DATE_FORMAT);
 
 	private DateTime datePicker;
 
@@ -73,7 +73,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 	 * @param labelText
 	 * @param regex
 	 */
-	public DateTextFieldComposite(Composite parent, int style, final String labelText, RegexValidation regex) {
+	public DateWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
 		super(parent, style, labelText, regex);
 
 		// Add datePicker Popup Button (as Label)
@@ -82,7 +82,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 		datePickerPopupButton.setImage(image);
 		datePickerPopupButton.addMouseListener(new MouseListener() {
 			public void mouseDown(MouseEvent event) {
-				DateTextFieldComposite.this.popUpCalendar();
+				DateWidget.this.popUpCalendar();
 			}
 
 			public void mouseDoubleClick(MouseEvent e) {
@@ -115,11 +115,11 @@ public class DateTextFieldComposite extends TextFieldComposite {
 			}
 			public void mouseDown(MouseEvent e) {
 				Calendar cal = Calendar.getInstance();
-				cal.set(Calendar.YEAR, DateTextFieldComposite.this.datePicker.getYear());
-				cal.set(Calendar.MONTH, DateTextFieldComposite.this.datePicker.getMonth());
-				cal.set(Calendar.DAY_OF_MONTH, DateTextFieldComposite.this.datePicker.getDay());
-				DateTextFieldComposite.this.smartField.setContents(DateTextFieldComposite.DATE_FORMAT.format(cal.getTime()));
-				DateTextFieldComposite.this.popDownCalendar();
+				cal.set(Calendar.YEAR, DateWidget.this.datePicker.getYear());
+				cal.set(Calendar.MONTH, DateWidget.this.datePicker.getMonth());
+				cal.set(Calendar.DAY_OF_MONTH, DateWidget.this.datePicker.getDay());
+				DateWidget.this.smartField.setContents(DateWidget.DATE_FORMAT.format(cal.getTime()));
+				DateWidget.this.popDownCalendar();
 			}
 			public void mouseUp(MouseEvent e) {
 				// Nothing here. Move along...
@@ -135,7 +135,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 				switch (event.detail) {
 				case SWT.TRAVERSE_ESCAPE:
 				case SWT.TRAVERSE_RETURN:
-					DateTextFieldComposite.this.popDownCalendar();
+					DateWidget.this.popDownCalendar();
 					event.detail = SWT.TRAVERSE_NONE;
 					event.doit = false;
 					break;
@@ -149,10 +149,10 @@ public class DateTextFieldComposite extends TextFieldComposite {
 			}
 			public void mouseDown(MouseEvent e) {
 				Calendar cal = Calendar.getInstance();
-				cal.set(Calendar.YEAR, DateTextFieldComposite.this.datePicker.getYear());
-				cal.set(Calendar.MONTH, DateTextFieldComposite.this.datePicker.getMonth());
-				cal.set(Calendar.DAY_OF_MONTH, DateTextFieldComposite.this.datePicker.getDay());
-				DateTextFieldComposite.this.smartField.setContents(DateTextFieldComposite.DATE_FORMAT.format(cal.getTime()));
+				cal.set(Calendar.YEAR, DateWidget.this.datePicker.getYear());
+				cal.set(Calendar.MONTH, DateWidget.this.datePicker.getMonth());
+				cal.set(Calendar.DAY_OF_MONTH, DateWidget.this.datePicker.getDay());
+				DateWidget.this.smartField.setContents(DateWidget.DATE_FORMAT.format(cal.getTime()));
 			}
 			public void mouseUp(MouseEvent e) {
 				// Nothing here. Move along...
@@ -163,15 +163,15 @@ public class DateTextFieldComposite extends TextFieldComposite {
 		this.controlDecoration.addMenuDetectListener(new MenuDetectListener() {
 			public void menuDetected(MenuDetectEvent event) {
 				// no quick fix if we aren't in error state.
-				if (DateTextFieldComposite.this.smartField.isValid()) {
+				if (DateWidget.this.smartField.isValid()) {
 					return;
 				}
-				if (DateTextFieldComposite.this.smartField.quickFixMenu == null) {
-					DateTextFieldComposite.this.smartField.quickFixMenu = DateTextFieldComposite.this
-							.createQuickFixMenu((SmartDateField) DateTextFieldComposite.this.smartField);
+				if (DateWidget.this.smartField.quickFixMenu == null) {
+					DateWidget.this.smartField.quickFixMenu = DateWidget.this
+							.createQuickFixMenu((SmartDateField) DateWidget.this.smartField);
 				}
-				DateTextFieldComposite.this.smartField.quickFixMenu.setLocation(event.x, event.y);
-				DateTextFieldComposite.this.smartField.quickFixMenu.setVisible(true);
+				DateWidget.this.smartField.quickFixMenu.setLocation(event.x, event.y);
+				DateWidget.this.smartField.quickFixMenu.setVisible(true);
 			}
 		});
 	}
@@ -219,7 +219,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 		if (this.smartField.isValid()) {
 			Date date;
 			try {
-				date = DateTextFieldComposite.DATE_FORMAT.parse(this.smartField.getContents());
+				date = DateWidget.DATE_FORMAT.parse(this.smartField.getContents());
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(date);
 				this.datePicker
@@ -257,10 +257,10 @@ public class DateTextFieldComposite extends TextFieldComposite {
 
 		@Override
 		protected String getErrorMessage() {
-			String format = DateTextFieldComposite.VALID_DATE_FORMAT;
+			String format = DateWidget.VALID_DATE_FORMAT;
 			String error = NLS.bind(Messages.ERROR_DATE_FORMAT, format.toUpperCase());
-			if (DateTextFieldComposite.this.hasRegexValidation()) {
-				error += " " + DateTextFieldComposite.this.regexValidation.getMessage();
+			if (DateWidget.this.hasRegexValidation()) {
+				error += " " + DateWidget.this.regexValidation.getMessage();
 			}
 			return error;
 		}
@@ -277,7 +277,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 			// If the format of the string provided doesn't match the format we
 			// declared in SimpleDateFormat() we will get an exception
 			try {
-				testDate = DateTextFieldComposite.DATE_FORMAT.parse(this.getContents());
+				testDate = DateWidget.DATE_FORMAT.parse(this.getContents());
 			} catch (ParseException e) {
 				return false;
 			}
@@ -288,13 +288,13 @@ public class DateTextFieldComposite extends TextFieldComposite {
 			// This statement will make sure that once the string has been
 			// checked for proper formatting the date is still the date
 			// that was entered, if it's not, we assume that the date is invalid
-			if (!DateTextFieldComposite.DATE_FORMAT.format(testDate).equals(this.getContents())) {
+			if (!DateWidget.DATE_FORMAT.format(testDate).equals(this.getContents())) {
 				return false;
 			}
 
 			// Check for possible regex validation for dates
-			if (DateTextFieldComposite.this.hasRegexValidation()
-					&& !this.getContents().matches(DateTextFieldComposite.this.regexValidation.getPattern())) {
+			if (DateWidget.this.hasRegexValidation()
+					&& !this.getContents().matches(DateWidget.this.regexValidation.getPattern())) {
 				return false;
 			}
 
@@ -302,7 +302,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 		}
 		
 		/**
-		 * @see ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite.SmartField#hasQuickFix()
+		 * @see ch.unibe.iam.scg.archie.ui.widgets.TextWidget.SmartField#hasQuickFix()
 		 */
 		@Override
 		public boolean hasQuickFix() {
@@ -310,7 +310,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 		}
 		
 		/**
-		 * @see ch.unibe.iam.scg.archie.ui.fields.TextFieldComposite.SmartField#getQuickfixMessage()
+		 * @see ch.unibe.iam.scg.archie.ui.widgets.TextWidget.SmartField#getQuickfixMessage()
 		 */
 		@Override
 		protected String getQuickfixMessage() {
@@ -322,7 +322,7 @@ public class DateTextFieldComposite extends TextFieldComposite {
 		 */
 		protected void quickFix() {
 			Calendar cal = Calendar.getInstance();
-			this.setContents(DateTextFieldComposite.DATE_FORMAT.format(cal.getTime()));
+			this.setContents(DateWidget.DATE_FORMAT.format(cal.getTime()));
 		}
 	}
 }

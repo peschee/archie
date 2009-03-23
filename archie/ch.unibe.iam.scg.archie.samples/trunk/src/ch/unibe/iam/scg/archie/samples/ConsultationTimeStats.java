@@ -32,7 +32,7 @@ import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
-import ch.unibe.iam.scg.archie.ui.FieldTypes;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
  * <p>
@@ -213,7 +213,7 @@ public class ConsultationTimeStats extends AbstractTimeSeries {
 	 * 
 	 * @return whithTime True if time statistics are being included, false else.
 	 */
-	@GetProperty(name = "Include Time", index = 1, fieldType = FieldTypes.BUTTON_CHECKBOX, description = "Include time statistics for consultations.")
+	@GetProperty(name = "Include Time", index = 1, widgetType = WidgetTypes.BUTTON_CHECKBOX, description = "Include time statistics for consultations.")
 	public boolean getShowTime() {
 		return this.withTime;
 	}
