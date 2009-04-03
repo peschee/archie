@@ -123,7 +123,7 @@ public class ConsultationStats extends AbstractTimeSeries {
 			int lowerBound = ((age / this.cohortSize) * this.cohortSize); // gets
 			// rounded
 			// down
-			int upperBound = lowerBound + (this.cohortSize);
+			int upperBound = lowerBound + this.cohortSize - 1 ;
 
 			// Initialize empty cohort content, which we will fill with
 			// consultation costs and profits.
