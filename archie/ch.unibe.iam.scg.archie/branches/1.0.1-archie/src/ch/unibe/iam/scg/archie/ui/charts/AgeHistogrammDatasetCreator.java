@@ -104,7 +104,7 @@ public class AgeHistogrammDatasetCreator extends AbstractDatasetCreator {
 			int lowerBound = ((age / this.cohortSize) * this.cohortSize); // gets
 			// rounded
 			// down
-			int upperBound = lowerBound + (this.cohortSize);
+			int upperBound = lowerBound + this.cohortSize - 1;
 
 			Integer[] genderCount = new Integer[2]; // Empty integer array for
 			// male and female count.
