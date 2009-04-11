@@ -12,14 +12,13 @@
 package ch.unibe.iam.scg.archie.acl;
 
 import ch.elexis.Hub;
-import ch.elexis.admin.ACE;
 import ch.elexis.admin.IACLContributor;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.i18n.Messages;
 
 /**
  * <p>Handles the access to Archie based on access control lists defined in Elexis
- * properties.<br/>
+ * properties.</p>
  * 
  * $Id$
  * 
@@ -32,19 +31,19 @@ public class ArchieACL implements IACLContributor {
 	/**
 	 * Access control string that will be displayed in the ACL.
 	 */
-	public static final ACE USE_ARCHIE = new ACE(ACE.ACE_ROOT, "archie", ArchieActivator.PLUGIN_NAME + " " + Messages.ACL_ACCESS);
+	public static final String USE_ARCHIE = ArchieActivator.PLUGIN_NAME + " " + Messages.ACL_ACCESS;
 
 	/**
 	 * Returns the ACL for this plugin.
 	 * 
 	 * @return String[]
 	 */
-	public ACE[] getACL() {
-		return new ACE[] { ArchieACL.USE_ARCHIE };
+	public String[] getACL() {
+		return new String[] { ArchieACL.USE_ARCHIE };
 	}
 
 	/** {@inheritDoc} */
-	public ACE[] reject(final ACE[] acl) {
+	public String[] reject(final String[] acl) {
 		return null;
 	}
 
