@@ -155,6 +155,9 @@ public class DashboardOverview extends Composite {
 	 * @return float How much percent is givenAmount of totalAmount
 	 */
 	private float calculatePercent(final float givenAmount, final float totalAmount) {
+		if (totalAmount <= 0) {
+			return 0;
+		}
 		return (givenAmount / totalAmount) * 100;
 	}
 
