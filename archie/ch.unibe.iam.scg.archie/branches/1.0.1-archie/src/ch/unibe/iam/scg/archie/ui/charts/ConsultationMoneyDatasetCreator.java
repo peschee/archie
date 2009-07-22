@@ -45,11 +45,14 @@ public class ConsultationMoneyDatasetCreator extends AbstractDatasetCreator {
 	private static final String DATE_DB_FORMAT = "yyyyMMdd";
 	private static final String DATE_CONS_FORMAT = "dd.MM.yyyy";
 	
+	private boolean isEmpty;
+	
 	/**
 	 * @param jobName
 	 */
 	public ConsultationMoneyDatasetCreator(String jobName) {
 		super(jobName);
+		this.isEmpty = true;
 	}
 
 	/**
@@ -79,6 +82,8 @@ public class ConsultationMoneyDatasetCreator extends AbstractDatasetCreator {
 		
 		monitor.subTask("querying database");
 		final List<Konsultation> consults = query.execute();
+		
+		this.isEmpty = consults.size() <= 0;
 		
 		// size * 2, going over consultations twice
 		monitor.beginTask("doing calculations", query.size() * 2);
@@ -150,5 +155,13 @@ public class ConsultationMoneyDatasetCreator extends AbstractDatasetCreator {
         
         monitor.done();
         return Status.OK_STATUS;
+	}
+	
+	/**
+	 * @{inheritDoc}
+	 */
+	@Override
+	protected boolean isDatasetEmpty() {
+		return this.isEmpty;
 	}
 }
