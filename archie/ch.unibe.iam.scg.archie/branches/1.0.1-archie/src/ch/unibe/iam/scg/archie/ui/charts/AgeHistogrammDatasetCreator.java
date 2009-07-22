@@ -51,6 +51,8 @@ public class AgeHistogrammDatasetCreator extends AbstractDatasetCreator {
 	private final static int FEMALE_INDEX = 1;
 
 	private int cohortSize;
+	
+	private boolean isEmpty;
 
 	/**
 	 * Creates a AgeHistogrammDatasetCreator
@@ -61,6 +63,7 @@ public class AgeHistogrammDatasetCreator extends AbstractDatasetCreator {
 	public AgeHistogrammDatasetCreator(String jobName, int cohortSize) {
 		super(jobName);
 		this.setCohortSize(cohortSize);
+		this.isEmpty = true;
 	}
 
 	/**
@@ -72,6 +75,8 @@ public class AgeHistogrammDatasetCreator extends AbstractDatasetCreator {
 
 		Query<Patient> query = new Query<Patient>(Patient.class);
 		List<Patient> patients = query.execute();
+		
+		this.isEmpty = patients.size() <= 0;
 
 		monitor.beginTask("Querying Database...", patients.size());
 
@@ -166,5 +171,13 @@ public class AgeHistogrammDatasetCreator extends AbstractDatasetCreator {
 	 */
 	public void setCohortSize(int cohortSize) {
 		this.cohortSize = cohortSize;
+	}
+	
+	/**
+	 * @{inheritDoc}
+	 */
+	@Override
+	protected boolean isDatasetEmpty() {
+		return this.isEmpty;
 	}
 }

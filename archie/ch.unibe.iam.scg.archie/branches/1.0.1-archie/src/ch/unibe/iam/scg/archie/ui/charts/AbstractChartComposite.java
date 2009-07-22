@@ -95,16 +95,7 @@ public abstract class AbstractChartComposite extends Composite implements IJobCh
 	// ////////////////////////////////////////////////////////////////////////////
 	// PUBLIC METHODS
 	// ////////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * Display loading screen
-	 */
-	public void setLoadingMessage() {
-		new GraphicalMessage(this, ArchieActivator.getInstance().getImageRegistry().get(ArchieActivator.IMG_COFFEE),
-				Messages.WORKING);
-		this.layout();
-	}
-
+	
 	/**
 	 * Refreshes this objects dataset creator
 	 */
@@ -113,19 +104,7 @@ public abstract class AbstractChartComposite extends Composite implements IJobCh
 		this.setLoadingMessage();
 		this.creator.schedule();
 	}
-
-	/**
-	 * Cleans this AbstractChartComposite of all content.
-	 */
-	public void clean() {
-		if (this.chartComposite != null) {
-			this.chartComposite.dispose();
-		}
-		for (Control child : this.getChildren()) {
-			child.dispose();
-		}
-	}
-
+	
 	/**
 	 * Requests a cancellation of the dataset creator. It's the creators
 	 * responsibility however to properly react to this request.
@@ -159,6 +138,40 @@ public abstract class AbstractChartComposite extends Composite implements IJobCh
 		this.creator.removeJobChangeListener(listener);
 
 	}
+	
+	// ////////////////////////////////////////////////////////////////////////////
+	// PRIVATE METHODS
+	// ////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Display loading screen
+	 */
+	private void setLoadingMessage() {
+		new GraphicalMessage(this, ArchieActivator.getInstance().getImageRegistry().get(ArchieActivator.IMG_COFFEE),
+				Messages.WORKING);
+		this.layout();
+	}
+	
+	/**
+	 * Displays a message that a creators dataset is empty.
+	 */
+	private void setEmptyMessage() {
+		new GraphicalMessage(this, ArchieActivator.getInstance().getImageRegistry().get(ArchieActivator.IMG_INFO),
+				Messages.RESULT_EMPTY);
+		this.layout();
+	}
+
+	/**
+	 * Cleans this AbstractChartComposite of all content.
+	 */
+	private void clean() {
+		if (this.chartComposite != null) {
+			this.chartComposite.dispose();
+		}
+		for (Control child : this.getChildren()) {
+			child.dispose();
+		}
+	}
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// INTERFACE METHODS
@@ -177,10 +190,16 @@ public abstract class AbstractChartComposite extends Composite implements IJobCh
 		Desk.getDisplay().syncExec(new Runnable() {
 			public void run() {
 				AbstractChartComposite.this.clean();
-
-				AbstractChartComposite.this.chartComposite = new ChartComposite(AbstractChartComposite.this, SWT.NONE,
-						AbstractChartComposite.this.initializeChart());
-				AbstractChartComposite.this.chartComposite.setLayoutData(AbstractChartComposite.this.layoutData);
+				
+				// check if the creator has an empty dataset
+				if(AbstractChartComposite.this.creator.isDatasetEmpty()) {
+					AbstractChartComposite.this.setEmptyMessage();
+				} else {
+					// displa the chart else
+					AbstractChartComposite.this.chartComposite = new ChartComposite(AbstractChartComposite.this, SWT.NONE,
+							AbstractChartComposite.this.initializeChart());
+					AbstractChartComposite.this.chartComposite.setLayoutData(AbstractChartComposite.this.layoutData);					
+				}
 
 				AbstractChartComposite.this.layout();
 			}
