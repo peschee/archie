@@ -16,6 +16,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import ch.unibe.iam.scg.archie.ui.widgets.TextWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
@@ -90,4 +91,16 @@ public @interface GetProperty {
 	 * @return Array of strings, empty string array by default.
 	 */
 	public String[] items() default { "" };
+
+	/**
+	 * Custom widget implementors can define their own widget class and pass it
+	 * to the getter method. This property only needs to be set when you
+	 * implement your own widget, USE AT OWN RISK, the framework is not
+	 * responsible for UI inconsistencies caused by custom widgets.
+	 * 
+	 * Default widget class is <code>TextWidget</code> class.
+	 * 
+	 * @return The widget class defined by this annotation.
+	 */
+	public Class<?> vendorClass() default TextWidget.class;
 }
