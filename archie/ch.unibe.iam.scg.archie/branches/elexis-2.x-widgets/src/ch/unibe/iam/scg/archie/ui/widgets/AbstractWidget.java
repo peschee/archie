@@ -17,7 +17,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 /**
- * <p>An AbstractWidget has a label, a layout and any kind of control.</p>
+ * <p>
+ * An AbstractWidget has a label, a layout and any kind of control.
+ * </p>
  * 
  * $Id$
  * 
@@ -26,9 +28,10 @@ import org.eclipse.swt.widgets.Label;
  * @version $Rev$
  */
 public abstract class AbstractWidget extends Composite {
-	
+
 	/** Horizontal space between components in this composite. */
 	public final static int STD_COLUMN_HORIZONTAL_SPACING = 20;
+
 	protected GridLayout layout;
 	protected Label label;
 	protected Control control;
@@ -37,9 +40,12 @@ public abstract class AbstractWidget extends Composite {
 	 * Constructs a FieldComposite. Checks Arguments and creates a layout
 	 * (specified by implementor classes).
 	 * 
-	 * @param parent Composite
-	 * @param style Integer
-	 * @param labelText String
+	 * @param parent
+	 *            Composite
+	 * @param style
+	 *            Integer
+	 * @param labelText
+	 *            String
 	 */
 	public AbstractWidget(Composite parent, int style, final String labelText) {
 		super(parent, style);
@@ -71,7 +77,7 @@ public abstract class AbstractWidget extends Composite {
 	public Label getLabel() {
 		return this.label;
 	}
-	
+
 	/**
 	 * Standard implementation: GridLayout with two columns.
 	 */
@@ -81,25 +87,34 @@ public abstract class AbstractWidget extends Composite {
 		this.layout.marginWidth = 2;
 		this.setLayout(this.layout);
 	}
-	
+
 	/**
+	 * Returns a widget's value. This is usually the contents of the control
+	 * field in a widget. Depending on the widget type, different types of
+	 * values are returned (e.g. checkbox <code>true</code>, combo
+	 * <code>string</code> etc.).
+	 * 
 	 * @return text String
 	 */
 	abstract public Object getValue();
-	
 
 	/**
+	 * Set's a widget's value.
+	 * 
 	 * @param value
 	 */
 	abstract public void setValue(final Object value);
-	
+
 	/**
 	 * Describes this FieldComposites (e.g. for a ToolTip)
+	 * 
 	 * @param description
 	 */
 	abstract public void setDescription(final String description);
-	
+
 	/**
+	 * Returns true if the value in a widget's control field is valid.
+	 * 
 	 * @return true if this field is valid.
 	 */
 	abstract public boolean isValid();

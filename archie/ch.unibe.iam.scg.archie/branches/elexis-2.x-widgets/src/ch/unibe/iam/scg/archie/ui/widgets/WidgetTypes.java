@@ -41,5 +41,10 @@ public enum WidgetTypes {
 	/**
 	 * Checkbox Button
 	 */
-	BUTTON_CHECKBOX;
+	BUTTON_CHECKBOX,
+	
+	/**
+	 * Combo Drop Down Widget
+	 */
+	COMBO;
 }

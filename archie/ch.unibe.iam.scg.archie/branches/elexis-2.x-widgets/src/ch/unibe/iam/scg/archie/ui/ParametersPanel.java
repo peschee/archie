@@ -31,6 +31,7 @@ import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
 import ch.unibe.iam.scg.archie.model.RegexValidation;
 import ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.CheckboxWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.ComboWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.DateWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.NumericWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.TextWidget;
@@ -38,9 +39,11 @@ import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 import ch.unibe.iam.scg.archie.utils.ProviderHelper;
 
 /**
- * <p>A composite panel which contains all the parameter fields for a data
+ * <p>
+ * A composite panel which contains all the parameter fields for a data
  * provider. The parameters of a provider are set accordingly. Parameter fields
- * and their content are determined at runtime through annotations.</p>
+ * and their content are determined at runtime through annotations.
+ * </p>
  * 
  * $Id$
  * 
@@ -54,7 +57,7 @@ public class ParametersPanel extends Composite {
 	 * Map containing all text fields an their name. Used to feed the query with
 	 * the user input.
 	 */
-	private Map<String, AbstractWidget> fieldMap;
+	private Map<String, AbstractWidget> widgetMap;
 
 	/**
 	 * Map containing the getter method names and their default values. We need
@@ -96,11 +99,11 @@ public class ParametersPanel extends Composite {
 		}
 
 		// initialize an empty field map
-		this.fieldMap = new TreeMap<String, AbstractWidget>();
+		this.widgetMap = new TreeMap<String, AbstractWidget>();
 		this.defaultValuesMap = new HashMap<String, Object>();
 
 		// populate again
-		this.createParameterFields();
+		this.createWidgets();
 
 		// re-show everything
 		this.layout();
@@ -111,24 +114,24 @@ public class ParametersPanel extends Composite {
 		// abstract fields into one layout?
 		this.adjustLabelWidths();
 
+		// set default widget values
 		this.setDefaultValues();
 	}
 
 	/**
-	 * Adjusts the width of the labels left to the text fields in abstract field
-	 * composites.
+	 * Adjusts the width of the labels left to the text fields in widgets.
 	 */
 	private void adjustLabelWidths() {
 		// calculate max label width
 		int maxWidth = 0;
-		for (AbstractWidget field : this.fieldMap.values()) {
+		for (AbstractWidget field : this.widgetMap.values()) {
 			Label label = field.getLabel();
 			int width = label.getBounds().width;
 			maxWidth = (width > maxWidth) ? width : maxWidth;
 		}
 
 		// set all labels to that max width
-		for (AbstractWidget field : this.fieldMap.values()) {
+		for (AbstractWidget field : this.widgetMap.values()) {
 			Label label = field.getLabel();
 			GridData data = new GridData();
 			data.widthHint = maxWidth;
@@ -138,18 +141,19 @@ public class ParametersPanel extends Composite {
 	}
 
 	/**
-	 * Sets the default values of the text fields.
+	 * Sets the default values of the widgets.
 	 */
 	private void setDefaultValues() {
 		for (Entry<String, Object> name : this.defaultValuesMap.entrySet()) {
-			this.fieldMap.get(name.getKey()).setValue(name.getValue());
+			this.widgetMap.get(name.getKey()).setValue(name.getValue());
 		}
 	}
 
 	/**
-	 * Create Parameter Fields.
+	 * Create Parameter Fields. This method creates all the widgets based on the
+	 * annotations of the currently selected provider.
 	 */
-	private void createParameterFields() {
+	private void createWidgets() {
 		// get all getters
 		for (Method method : ProviderHelper.getGetterMethods(this.provider, true)) {
 			GetProperty getter = method.getAnnotation(GetProperty.class);
@@ -160,15 +164,24 @@ public class ParametersPanel extends Composite {
 			}
 
 			// create the appropriate text field
-			AbstractWidget fieldComposite = this.createTextField(this, ProviderHelper.getValue(method, this.provider),
-					getter.name(), getter.widgetType(), regex );
+			AbstractWidget widget = this.createWidget(this, getter.name(), getter.widgetType(), regex);
+
+			// set a description if not empty
+			if (!getter.description().equals("")) {
+				widget.setDescription(getter.description());
+			}
 			
-			if(!getter.description().equals("")) {
-				fieldComposite.setDescription(getter.description());
+			/* ****************************************************************
+			 * Get string array and set the items if we have a Combo
+			 * ****************************************************************/
+			if (getter.items().length > 0 && widget instanceof ComboWidget) {
+				((ComboWidget) widget).setItems(getter.items());
 			}
 
 			// put field and label title in the map
-			this.fieldMap.put(getter.name(), fieldComposite);
+			this.widgetMap.put(getter.name(), widget);
+			
+			// store widget default values in a map
 			this.defaultValuesMap.put(getter.name(), ProviderHelper.getValue(method, this.provider));
 		}
 	}
@@ -189,7 +202,7 @@ public class ParametersPanel extends Composite {
 	 * @return true if all fields are valid, false else.
 	 */
 	public boolean allFieldsValid() {
-		for (Map.Entry<String, AbstractWidget> entry : this.fieldMap.entrySet()) {
+		for (Map.Entry<String, AbstractWidget> entry : this.widgetMap.entrySet()) {
 			if (!entry.getValue().isValid()) {
 				return false;
 			}
@@ -207,24 +220,40 @@ public class ParametersPanel extends Composite {
 	@Override
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
-		if (this.fieldMap != null) {
-			for (Map.Entry<String, AbstractWidget> entry : this.fieldMap.entrySet()) {
+		if (this.widgetMap != null) {
+			for (Map.Entry<String, AbstractWidget> entry : this.widgetMap.entrySet()) {
 				entry.getValue().setEnabled(enabled);
 			}
 		}
 	}
 
-	private AbstractWidget createTextField(final Composite parent, Object value, final String label, 
-			WidgetTypes fieldType, final RegexValidation regex) {
-		switch (fieldType) {
+	/**
+	 * Creates a single widget based on the <code>fieldType</code> parameter
+	 * with given labels and values as well as a validation regex.
+	 * 
+	 * @param parent
+	 *            Composite container for the widget.
+	 * @param label
+	 *            Label for the widget.
+	 * @param widgetType
+	 *            Type of the widget to create.
+	 * @param regex
+	 *            A regex validation object.
+	 * @return An <code>AbstractWidget</code> object.
+	 */
+	private AbstractWidget createWidget(final Composite parent, final String label, WidgetTypes widgetType,
+			final RegexValidation regex) {
+		switch (widgetType) {
 		case TEXT_DATE:
 			return new DateWidget(parent, SWT.NONE, label, regex);
 		case TEXT_NUMERIC:
 			return new NumericWidget(parent, SWT.NONE, label, regex);
 		case BUTTON_CHECKBOX:
 			return new CheckboxWidget(parent, SWT.NONE, label);
+		case COMBO:
+			return new ComboWidget(parent, SWT.NONE, label);
 		case TEXT:
-		default: // Standard text field
+		default: // Text widget returned by default.
 			return new TextWidget(parent, SWT.NONE, label, regex);
 		}
 	}
@@ -242,7 +271,7 @@ public class ParametersPanel extends Composite {
 	private void setData(ArrayList<Method> setterList) throws Exception {
 		for (Method method : setterList) {
 			SetProperty setter = method.getAnnotation(SetProperty.class);
-			AbstractWidget field = this.fieldMap.get(setter.name());
+			AbstractWidget field = this.widgetMap.get(setter.name());
 			Object value = field.getValue();
 			ProviderHelper.setValue(this.provider, method, value);
 		}
