@@ -80,4 +80,14 @@ public @interface GetProperty {
 	 * @return String Validation error message.
 	 */
 	public String validationMessage() default "";
+
+	/**
+	 * Returns a list of items for a given getter method. This is only used if
+	 * the widget is of type <code>ComboWidget</code> (
+	 * <code>WidgetTypes.COMBO</code>). The default value is an empty string
+	 * array, the method is ignored for other types of widgets.
+	 * 
+	 * @return Array of strings, empty string array by default.
+	 */
+	public String[] items() default { "" };
 }

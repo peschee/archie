@@ -52,26 +52,23 @@ public class ComboWidget extends AbstractWidget {
 	}
 
 	/**
+	 * Sets the combox items (array of strings).
 	 * @param items
 	 *            String[] items
 	 */
-	public void setItem(String[] items) {
+	public void setItems(String[] items) {
 		((Combo) this.control).setItems(items);
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#getValue()
 	 */
 	@Override
 	public Object getValue() {
 		return ((Combo) this.control).getText();
 	}
-
+	
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#isValid()
 	 */
 	@Override
@@ -80,25 +77,23 @@ public class ComboWidget extends AbstractWidget {
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setValue(java.lang.Object)
 	 */
 	@Override
 	public void setValue(final Object value) {
-		((Combo) this.control).setText(value.toString());
+		if(value instanceof String) {
+			((Combo) this.control).setText(value.toString());	
+		} else {
+			throw new IllegalArgumentException("Must be a string.");	
+		}
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setDescription(java.lang.String)
 	 */
 	@Override
 	public void setDescription(final String description) {
 		this.label.setToolTipText(description);
 		this.control.setToolTipText(description);
-
 	}
-
 }
