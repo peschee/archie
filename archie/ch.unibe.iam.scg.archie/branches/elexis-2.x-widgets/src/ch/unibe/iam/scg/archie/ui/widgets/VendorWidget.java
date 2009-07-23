@@ -42,14 +42,14 @@ public class VendorWidget extends AbstractWidget {
 	 */
 	@SuppressWarnings("unchecked")
 	public VendorWidget(Composite parent, int style, final String labelText, RegexValidation regex, Class<?> vendorClass) {
-		super(parent, style, labelText);
+		super(parent, style, labelText, regex);
 
 		// instantiate vendor class
 		Class<AbstractWidget> abstractWidgetClass = (Class<AbstractWidget>) vendorClass;
 		try {
-			this.widget = abstractWidgetClass.getConstructor(new Class[] { Composite.class, int.class, String.class })
-					.newInstance(parent, style, labelText);
-			this.widget.setRegexValidation(regex);
+			this.widget = abstractWidgetClass.getConstructor(
+					new Class[] { Composite.class, int.class, String.class, RegexValidation.class }).newInstance(
+					parent, style, labelText, regex);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {

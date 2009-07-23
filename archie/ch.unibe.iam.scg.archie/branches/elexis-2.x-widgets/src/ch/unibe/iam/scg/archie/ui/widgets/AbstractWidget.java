@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 import ch.unibe.iam.scg.archie.model.RegexValidation;
-import ch.unibe.iam.scg.archie.tests.RegexValidationTest;
 
 /**
  * <p>
@@ -39,8 +38,8 @@ public abstract class AbstractWidget extends Composite {
 	protected Label label;
 	protected Control control;
 
-	/** abstract widgets can have regex validator objects */
-	protected RegexValidation regexValidation;
+	/** regex is final */
+	protected final RegexValidation regexValidation;
 
 	/**
 	 * Constructs a FieldComposite. Checks Arguments and creates a layout
@@ -53,45 +52,19 @@ public abstract class AbstractWidget extends Composite {
 	 * @param labelText
 	 *            String
 	 */
-	public AbstractWidget(Composite parent, int style, final String labelText) {
+	public AbstractWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
 		super(parent, style);
 
 		// Check Arguments
 		if (labelText == null || labelText.equals("")) {
 			throw new IllegalArgumentException("LabelText can not be null or empty!");
 		}
+		
+		// can be null
+		this.regexValidation = regex;
 
 		// Create Layout
 		this.createLayout();
-	}
-
-	/**
-	 * Enables or disables the control of this FieldComposite
-	 * 
-	 * @param enabled
-	 */
-	@Override
-	public void setEnabled(boolean enabled) {
-		this.control.setEnabled(enabled);
-	}
-
-	/**
-	 * Returns the label for this field composite.
-	 * 
-	 * @return label
-	 */
-	public Label getLabel() {
-		return this.label;
-	}
-
-	/**
-	 * Standard implementation: GridLayout with two columns.
-	 */
-	protected void createLayout() {
-		this.layout = new GridLayout();
-		this.layout.numColumns = 2;
-		this.layout.marginWidth = 2;
-		this.setLayout(this.layout);
 	}
 
 	/**
@@ -124,14 +97,43 @@ public abstract class AbstractWidget extends Composite {
 	 * @return true if this field is valid.
 	 */
 	abstract public boolean isValid();
+	
+	/**
+	 * Enables or disables the control of this FieldComposite
+	 * 
+	 * @param enabled
+	 */
+	@Override
+	public void setEnabled(boolean enabled) {
+		this.control.setEnabled(enabled);
+	}
 
 	/**
-	 * Sets the regex validator object for a widget.
+	 * Returns the label for this field composite.
 	 * 
-	 * @param regexValidation
-	 *            Regex validator object.
+	 * @return label
 	 */
-	protected void setRegexValidation(RegexValidation regexValidation) {
-		this.regexValidation = regexValidation;
+	public Label getLabel() {
+		return this.label;
+	}
+
+	/**
+	 * Standard implementation: GridLayout with two columns.
+	 */
+	protected void createLayout() {
+		this.layout = new GridLayout();
+		this.layout.numColumns = 2;
+		this.layout.marginWidth = 2;
+		this.setLayout(this.layout);
+	}
+	
+	/**
+	 * Checks whether we have a regexValidation or not.
+	 */
+	protected boolean hasRegexValidation() {
+		if (this.regexValidation == null) {
+			return false;
+		}
+		return true;
 	}
 }
