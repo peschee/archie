@@ -43,6 +43,10 @@ import ch.unibe.iam.scg.archie.utils.DatabaseHelper;
  */
 public class DashboardOverview extends Composite {
 
+	private Label patients;
+	private Label invoices;
+	private Label consultations;
+
 	/**
 	 * Public constructor.
 	 * 
@@ -67,6 +71,22 @@ public class DashboardOverview extends Composite {
 		this.createDescriptionPanel(overview);
 		this.createStatsPanel(overview);
 	}
+	
+	// ////////////////////////////////////////////////////////////////////////////
+	// PUBLIC METHODS
+	// ////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Triggers a refresh of this dashboard overview.
+	 * The values update with the latest values from the database.
+	 */
+	public void refresh() {
+		this.setValues();
+	}
+	
+	// ////////////////////////////////////////////////////////////////////////////
+	// PRIVATE METHODS
+	// ////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Creates the description panel for this dashboard overview. This is the
@@ -87,7 +107,7 @@ public class DashboardOverview extends Composite {
 
 		container.setLayout(layout);
 		container.setLayoutData(layoutData);
-	
+
 		Label introduction = new Label(container, SWT.NONE | SWT.WRAP);
 		introduction.setText(Messages.DASHBOARD_WELCOME);
 		introduction.setLayoutData(layoutData);
@@ -116,6 +136,22 @@ public class DashboardOverview extends Composite {
 		container.setLayout(layout);
 		container.setLayoutData(layoutData);
 
+		// Create labels
+		this.patients = new Label(container, SWT.NONE | SWT.WRAP);
+		this.invoices = new Label(container, SWT.NONE | SWT.WRAP);
+		this.consultations = new Label(container, SWT.NONE | SWT.WRAP);
+		this.consultations.setLayoutData(layoutData);
+		
+		// Set label values
+		this.setValues();
+
+		return container;
+	}
+
+	/**
+	 * Sets the values of all labels based on the values in the dabase.
+	 */
+	private void setValues() {
 		// Stats data
 		int patientsTotal = DatabaseHelper.getNumberOfPatients();
 		int patientsMale = DatabaseHelper.getNumberGenderPatients(Person.MALE);
@@ -128,21 +164,17 @@ public class DashboardOverview extends Composite {
 
 		int consultationsTotal = DatabaseHelper.getNumberOfConsultations();
 
-		Label patients = new Label(container, SWT.NONE | SWT.WRAP);
-		patients.setText(Messages.PATIENTS +": " + patientsTotal + "\n" + Messages.MALE + ": " + writePercent(patientsMale, patientsTotal)
-				+ "\n" + Messages.FEMALE +": " + writePercent(patientsFemale, patientsTotal) + "\n" + Messages.UNKNOWN +": "
+		this.patients.setText(Messages.PATIENTS + ": " + patientsTotal + "\n" + Messages.MALE + ": "
+				+ writePercent(patientsMale, patientsTotal) + "\n" + Messages.FEMALE + ": "
+				+ writePercent(patientsFemale, patientsTotal) + "\n" + Messages.UNKNOWN + ": "
 				+ writePercent(patientsTotal - patientsFemale - patientsMale, patientsTotal));
 
-		Label invoices = new Label(container, SWT.NONE | SWT.WRAP);
-		invoices.setText(Messages.INVOICES +": " + invoicesTotal + "\n" + Messages.PAID +": " + writePercent(invoicesPaid, invoicesTotal)
-				+ "\n" + Messages.OPEN +": " + writePercent(invoicesOpen, invoicesTotal) + "\n" + Messages.OTHER + ": "
+		this.invoices.setText(Messages.INVOICES + ": " + invoicesTotal + "\n" + Messages.PAID + ": "
+				+ writePercent(invoicesPaid, invoicesTotal) + "\n" + Messages.OPEN + ": "
+				+ writePercent(invoicesOpen, invoicesTotal) + "\n" + Messages.OTHER + ": "
 				+ writePercent(invoicesTotal - invoicesOpen - invoicesPaid, invoicesTotal));
 
-		Label consultations = new Label(container, SWT.NONE | SWT.WRAP);
-		consultations.setText(Messages.CONSULTATIONS + ": " + consultationsTotal + "\n");
-		consultations.setLayoutData(layoutData);
-
-		return container;
+		this.consultations.setText(Messages.CONSULTATIONS + ": " + consultationsTotal + "\n");
 	}
 
 	/**
@@ -174,6 +206,6 @@ public class DashboardOverview extends Composite {
 	private String writePercent(final float givenAmount, final float totalAmount) {
 		BigDecimal percent = new BigDecimal(calculatePercent(givenAmount, totalAmount));
 		percent = percent.setScale(1, BigDecimal.ROUND_HALF_UP);
-		return  percent.doubleValue() + " %";
+		return percent.doubleValue() + " %";
 	}
 }

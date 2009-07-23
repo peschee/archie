@@ -70,6 +70,11 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 	 * Composite container of all parts in this view.
 	 */
 	private Composite container;
+	
+	/**
+	 * Upper part of the dashboard containing the system overview.
+	 */
+	private DashboardOverview overview;
 
 	/**
 	 * The bottom part of the view.
@@ -86,7 +91,14 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 	 */
 	private int jobCounter;
 
+	/**
+	 * Action for refreshing the already created charts (and overview).
+	 */
 	private RefreshChartsAction refreshChartsAction;
+
+	/**
+	 * This action creates the charts initially.
+	 */
 	private CreateChartsAction createChartsAction;
 
 	/**
@@ -188,7 +200,7 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 	 * themselves.
 	 */
 	private void initializeParts() {
-		DashboardOverview overview = new DashboardOverview(this.container, SWT.NONE);
+		this.overview = new DashboardOverview(this.container, SWT.NONE);
 		this.bottomPart = new Composite(this.container, SWT.NONE);
 
 		GridLayout layout = new GridLayout();
@@ -199,10 +211,10 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 		this.bottomPart.setLayout(layout);
 		this.bottomPart.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		overview.setLayout(layout);
-		overview.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		this.overview.setLayout(layout);
+		this.overview.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
-		assert (overview != null);
+		assert (this.overview != null);
 		assert (this.bottomPart != null);
 	}
 
@@ -237,6 +249,16 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 		for (AbstractChartComposite chart : this.charts) {
 			chart.refresh();
 		}
+	}
+
+	/**
+	 * Triggers the update mechanism of the upper part of the dashboard
+	 * containing the system overview. This function should be called when the
+	 * overview should refresh (e.g. after DB changes) without having to restart
+	 * the program.
+	 */
+	public void updateOverview() {
+		this.overview.refresh();
 	}
 
 	/**
