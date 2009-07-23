@@ -47,9 +47,9 @@ public class VendorWidget extends AbstractWidget {
 		// instantiate vendor class
 		Class<AbstractWidget> abstractWidgetClass = (Class<AbstractWidget>) vendorClass;
 		try {
-			this.widget = abstractWidgetClass.getConstructor(
-					new Class[] { Composite.class, int.class, String.class, RegexValidation.class }).newInstance(
-					parent, style, labelText);
+			this.widget = abstractWidgetClass.getConstructor(new Class[] { Composite.class, int.class, String.class })
+					.newInstance(parent, style, labelText);
+			this.widget.setRegexValidation(regex);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
@@ -66,7 +66,7 @@ public class VendorWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @{inheritDoc
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Object getValue() {
@@ -74,7 +74,7 @@ public class VendorWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @{inheritDoc
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isValid() {
@@ -82,7 +82,7 @@ public class VendorWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @{inheritDoc
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDescription(String description) {
@@ -90,7 +90,7 @@ public class VendorWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @{inheritDoc
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setValue(Object value) {

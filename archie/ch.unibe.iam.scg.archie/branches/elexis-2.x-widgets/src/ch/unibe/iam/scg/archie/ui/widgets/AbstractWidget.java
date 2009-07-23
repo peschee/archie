@@ -16,6 +16,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
+import ch.unibe.iam.scg.archie.model.RegexValidation;
+import ch.unibe.iam.scg.archie.tests.RegexValidationTest;
+
 /**
  * <p>
  * An AbstractWidget has a label, a layout and any kind of control.
@@ -35,6 +38,9 @@ public abstract class AbstractWidget extends Composite {
 	protected GridLayout layout;
 	protected Label label;
 	protected Control control;
+
+	/** abstract widgets can have regex validator objects */
+	protected RegexValidation regexValidation;
 
 	/**
 	 * Constructs a FieldComposite. Checks Arguments and creates a layout
@@ -118,4 +124,14 @@ public abstract class AbstractWidget extends Composite {
 	 * @return true if this field is valid.
 	 */
 	abstract public boolean isValid();
+
+	/**
+	 * Sets the regex validator object for a widget.
+	 * 
+	 * @param regexValidation
+	 *            Regex validator object.
+	 */
+	protected void setRegexValidation(RegexValidation regexValidation) {
+		this.regexValidation = regexValidation;
+	}
 }

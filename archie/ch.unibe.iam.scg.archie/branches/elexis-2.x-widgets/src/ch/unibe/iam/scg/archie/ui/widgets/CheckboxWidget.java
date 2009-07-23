@@ -57,7 +57,7 @@ public class CheckboxWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#getValue()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Object getValue() {
@@ -74,7 +74,7 @@ public class CheckboxWidget extends AbstractWidget {
 
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setValue(java.lang.Object)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setValue(final Object value) {
@@ -86,7 +86,7 @@ public class CheckboxWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setDescription(java.lang.String)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDescription(String description) {
