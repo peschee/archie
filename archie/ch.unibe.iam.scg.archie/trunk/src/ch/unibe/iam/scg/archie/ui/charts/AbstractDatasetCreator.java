@@ -74,4 +74,17 @@ public abstract class AbstractDatasetCreator extends Job {
 	protected IStatus run(IProgressMonitor monitor) {
 		return this.createContent(monitor);
 	}
+	
+	/**
+	 * Method to work around the incapability of finding out whether the dataset
+	 * has any data in it or not. The method returns <code>false</code> by default
+	 * so that even empty dataset get rendered. If a subclass overrides this method,
+	 * other objects can check for it and e.g. display a warning or information message
+	 * instead of an empty graph. 
+	 *
+	 * @return True if the dataset is empty, false else. Returns false by default.
+	 */
+	protected boolean isDatasetEmpty() {
+		return false;
+	}
 }

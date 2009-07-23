@@ -47,5 +47,6 @@ public class RefreshChartsAction extends Action {
 	@Override
 	public void run() {
 		this.dashboard.redrawCharts();
+		this.dashboard.updateOverview();
 	}
 }
