@@ -73,7 +73,7 @@ public class ComboWidget extends AbstractWidget {
 	 */
 	@Override
 	public boolean isValid() {
-		return true;
+		return ((Combo) this.control).getSelectionIndex() > -1;
 	}
 
 	/**

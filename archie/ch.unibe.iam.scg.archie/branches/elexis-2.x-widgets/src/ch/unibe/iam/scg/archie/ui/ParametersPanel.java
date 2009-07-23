@@ -35,6 +35,7 @@ import ch.unibe.iam.scg.archie.ui.widgets.ComboWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.DateWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.NumericWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.TextWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.VendorWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 import ch.unibe.iam.scg.archie.utils.ProviderHelper;
 
@@ -164,23 +165,25 @@ public class ParametersPanel extends Composite {
 			}
 
 			// create the appropriate text field
-			AbstractWidget widget = this.createWidget(this, getter.name(), getter.widgetType(), regex);
+			AbstractWidget widget = this.createWidget(this, getter.name(), getter.widgetType(), regex, getter
+					.vendorClass());
 
 			// set a description if not empty
 			if (!getter.description().equals("")) {
 				widget.setDescription(getter.description());
 			}
-			
+
 			/* ****************************************************************
 			 * Get string array and set the items if we have a Combo
-			 * ****************************************************************/
+			 * ***************************************************************
+			 */
 			if (getter.items().length > 0 && widget instanceof ComboWidget) {
 				((ComboWidget) widget).setItems(getter.items());
 			}
 
 			// put field and label title in the map
 			this.widgetMap.put(getter.name(), widget);
-			
+
 			// store widget default values in a map
 			this.defaultValuesMap.put(getter.name(), ProviderHelper.getValue(method, this.provider));
 		}
@@ -242,7 +245,7 @@ public class ParametersPanel extends Composite {
 	 * @return An <code>AbstractWidget</code> object.
 	 */
 	private AbstractWidget createWidget(final Composite parent, final String label, WidgetTypes widgetType,
-			final RegexValidation regex) {
+			final RegexValidation regex, Class<?> vendorClass) {
 		switch (widgetType) {
 		case TEXT_DATE:
 			return new DateWidget(parent, SWT.NONE, label, regex);
@@ -252,6 +255,8 @@ public class ParametersPanel extends Composite {
 			return new CheckboxWidget(parent, SWT.NONE, label);
 		case COMBO:
 			return new ComboWidget(parent, SWT.NONE, label);
+		case VENDOR: // Vendor specific / custom widgets
+			return new VendorWidget(parent, SWT.NONE, label, regex, vendorClass);
 		case TEXT:
 		default: // Text widget returned by default.
 			return new TextWidget(parent, SWT.NONE, label, regex);
