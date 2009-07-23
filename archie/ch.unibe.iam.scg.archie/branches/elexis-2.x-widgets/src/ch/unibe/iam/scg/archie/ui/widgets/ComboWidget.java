@@ -61,7 +61,7 @@ public class ComboWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#getValue()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Object getValue() {
@@ -69,7 +69,7 @@ public class ComboWidget extends AbstractWidget {
 	}
 	
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#isValid()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isValid() {
@@ -77,7 +77,7 @@ public class ComboWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setValue(java.lang.Object)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setValue(final Object value) {
@@ -89,7 +89,7 @@ public class ComboWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setDescription(java.lang.String)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDescription(final String description) {
