@@ -242,6 +242,8 @@ public class ParametersPanel extends Composite {
 	 *            Type of the widget to create.
 	 * @param regex
 	 *            A regex validation object.
+	 * @param vendorClass
+	 *            Class of a vendor specific widget implementation.
 	 * @return An <code>AbstractWidget</code> object.
 	 */
 	private AbstractWidget createWidget(final Composite parent, final String label, WidgetTypes widgetType,
