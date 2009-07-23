@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import ch.unibe.iam.scg.archie.model.RegexValidation;
+
 /**
  * <p>
  * Combo box field composite. TODO: Test me, use me.
@@ -35,8 +37,8 @@ public class ComboWidget extends AbstractWidget {
 	 * @param style
 	 * @param labelText
 	 */
-	public ComboWidget(Composite parent, int style, final String labelText) {
-		super(parent, style, labelText);
+	public ComboWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
+		super(parent, style, labelText, regex);
 
 		// Create Label
 		this.label = new Label(this, SWT.NONE);

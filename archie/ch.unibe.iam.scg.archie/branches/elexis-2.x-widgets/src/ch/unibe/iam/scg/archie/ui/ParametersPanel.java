@@ -254,9 +254,9 @@ public class ParametersPanel extends Composite {
 		case TEXT_NUMERIC:
 			return new NumericWidget(parent, SWT.NONE, label, regex);
 		case BUTTON_CHECKBOX:
-			return new CheckboxWidget(parent, SWT.NONE, label);
+			return new CheckboxWidget(parent, SWT.NONE, label, regex);
 		case COMBO:
-			return new ComboWidget(parent, SWT.NONE, label);
+			return new ComboWidget(parent, SWT.NONE, label, regex);
 		case VENDOR: // Vendor specific / custom widgets
 			return new VendorWidget(parent, SWT.NONE, label, regex, vendorClass);
 		case TEXT:

@@ -48,8 +48,6 @@ public class TextWidget extends AbstractWidget {
 	// Margin between field and decoration image in pixels.
 	protected final static int DECORATION_HORIZONTAL_MARGIN = 3;
 
-	protected final RegexValidation regexValidation;
-
 	protected ControlDecoration controlDecoration;
 
 	protected SmartField smartField;
@@ -62,13 +60,11 @@ public class TextWidget extends AbstractWidget {
 	 * can be <code>null</code> if not desired.
 	 */
 	public TextWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
-		super(parent, style, labelText);
+		super(parent, style, labelText, regex);
 
 		// Create label
 		this.label = new Label(this, SWT.NONE);
 		this.label.setText(labelText);
-
-		this.regexValidation = regex; // Can be null.
 
 		this.layout.horizontalSpacing = AbstractWidget.STD_COLUMN_HORIZONTAL_SPACING;
 
@@ -299,16 +295,6 @@ public class TextWidget extends AbstractWidget {
 				this.showValid(smartField);
 			}
 		}
-	}
-
-	/**
-	 * Checks whether we have a regexValidation or not.
-	 */
-	protected boolean hasRegexValidation() {
-		if (this.regexValidation == null) {
-			return false;
-		}
-		return true;
 	}
 
 	/**
