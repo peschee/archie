@@ -24,8 +24,12 @@ import org.eclipse.core.runtime.Status;
 
 import ch.elexis.data.Prescription;
 import ch.elexis.data.Query;
+import ch.unibe.iam.scg.archie.annotations.GetProperty;
+import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
+import ch.unibe.iam.scg.archie.samples.widgets.CustomComboWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
  * <p>
@@ -44,12 +48,18 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 	private static final String DATE_PRESCRIPTION_FORMAT = "dd.MM.yyyy";
 	private static final String DB_START_DATE = "DatumVon";
 	private static final String DB_END_DATE = "DatumBis";
+	
+	private String comboValue;
+	private String customComboValue;
 
 	/**
 	 * Constructs Prescription Overview
 	 */
 	public PrescriptionsOverview() {
 		super(Messages.PRESCRIPTIONS_OVERVIEW_TITLE);
+		
+		this.comboValue = "Two";
+		this.customComboValue = CustomComboWidget.DEFAULT_SELECTED;
 	}
 
 	/**
@@ -150,6 +160,39 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 
 		// job finished successfully
 		monitor.done();
+		
 		return Status.OK_STATUS;
+	}
+	
+	/**
+	 * @return Value of the combo item set.
+	 */
+	@GetProperty(name = "Combo Test", index = 10, widgetType = WidgetTypes.COMBO, description = "Testing combo boxes.", items = {"One", "Two", "Three"})
+	public String getComboValue() {
+		return this.comboValue;
+	}
+
+	/**
+	 * @param Sets the combo value.
+	 */
+	@SetProperty(name = "Combo Test")
+	public void setComboValue(final String comboValue) {
+		this.comboValue = comboValue;
+	}
+	
+	/**
+	 * @return Value of the combo item set.
+	 */
+	@GetProperty(name = "Custom Combo Test", index = 11, widgetType = WidgetTypes.VENDOR, description = "Testing custom combos.", vendorClass = CustomComboWidget.class)
+	public String getCustomComboValue() {
+		return this.customComboValue;
+	}
+
+	/**
+	 * @param Sets the combo value.
+	 */
+	@SetProperty(name = "Custom Combo Test")
+	public void setCustomComboValue(final String comboValue) {
+		this.customComboValue = comboValue;
 	}
 }
