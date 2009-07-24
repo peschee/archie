@@ -28,6 +28,7 @@ import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractTimeSeries;
 import ch.unibe.iam.scg.archie.samples.i18n.Messages;
+import ch.unibe.iam.scg.archie.samples.widgets.CustomComboWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
