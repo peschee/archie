@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import ch.unibe.iam.scg.archie.model.RegexValidation;
+
 /**
  * <p>
  * Combo box field composite. TODO: Test me, use me.
@@ -35,8 +37,8 @@ public class ComboWidget extends AbstractWidget {
 	 * @param style
 	 * @param labelText
 	 */
-	public ComboWidget(Composite parent, int style, final String labelText) {
-		super(parent, style, labelText);
+	public ComboWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
+		super(parent, style, labelText, regex);
 
 		// Create Label
 		this.label = new Label(this, SWT.NONE);
@@ -52,53 +54,48 @@ public class ComboWidget extends AbstractWidget {
 	}
 
 	/**
+	 * Sets the combox items (array of strings).
 	 * @param items
 	 *            String[] items
 	 */
-	public void setItem(String[] items) {
+	public void setItems(String[] items) {
 		((Combo) this.control).setItems(items);
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#getValue()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Object getValue() {
 		return ((Combo) this.control).getText();
 	}
-
+	
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#isValid()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isValid() {
-		return true;
+		return ((Combo) this.control).getSelectionIndex() > -1;
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setValue(java.lang.Object)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setValue(final Object value) {
-		((Combo) this.control).setText(value.toString());
+		if(value instanceof String) {
+			((Combo) this.control).setText(value.toString());	
+		} else {
+			throw new IllegalArgumentException("Must be a string.");	
+		}
 	}
 
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setDescription(java.lang.String)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDescription(final String description) {
 		this.label.setToolTipText(description);
 		this.control.setToolTipText(description);
-
 	}
-
 }

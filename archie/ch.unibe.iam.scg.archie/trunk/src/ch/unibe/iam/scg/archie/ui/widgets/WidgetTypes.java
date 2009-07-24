@@ -12,8 +12,8 @@
 package ch.unibe.iam.scg.archie.ui.widgets;
 
 /**
- * Enum that stores available implementations of
- * <code>AbstractWidget</code> objects.
+ * Enum that stores available implementations of <code>AbstractWidget</code>
+ * objects.
  * 
  * $Id$
  * 
@@ -41,5 +41,15 @@ public enum WidgetTypes {
 	/**
 	 * Checkbox Button
 	 */
-	BUTTON_CHECKBOX;
+	BUTTON_CHECKBOX,
+
+	/**
+	 * Combo Drop Down Widget
+	 */
+	COMBO,
+
+	/**
+	 * Vendor specific widget.
+	 */
+	VENDOR
 }
