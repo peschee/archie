@@ -11,6 +11,7 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.ui;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +36,6 @@ import ch.unibe.iam.scg.archie.ui.widgets.ComboWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.DateWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.NumericWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.TextWidget;
-import ch.unibe.iam.scg.archie.ui.widgets.VendorWidget;
 import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 import ch.unibe.iam.scg.archie.utils.ProviderHelper;
 
@@ -246,6 +246,7 @@ public class ParametersPanel extends Composite {
 	 *            Class of a vendor specific widget implementation.
 	 * @return An <code>AbstractWidget</code> object.
 	 */
+	@SuppressWarnings("unchecked")
 	private AbstractWidget createWidget(final Composite parent, final String label, WidgetTypes widgetType,
 			final RegexValidation regex, Class<?> vendorClass) {
 		switch (widgetType) {
@@ -258,7 +259,7 @@ public class ParametersPanel extends Composite {
 		case COMBO:
 			return new ComboWidget(parent, SWT.NONE, label, regex);
 		case VENDOR: // Vendor specific / custom widgets
-			return new VendorWidget(parent, SWT.NONE, label, regex, vendorClass);
+			return this.createVendorWidget(parent, label, widgetType, regex, vendorClass);
 		case TEXT:
 		default: // Text widget returned by default.
 			return new TextWidget(parent, SWT.NONE, label, regex);
@@ -282,5 +283,46 @@ public class ParametersPanel extends Composite {
 			Object value = field.getValue();
 			ProviderHelper.setValue(this.provider, method, value);
 		}
+	}
+
+	/**
+	 * Creates a vendor widget object based on the given class. This method is
+	 * used to instantiate custom widgets.
+	 * 
+	 * @param parent
+	 *            Composite container for the widget.
+	 * @param label
+	 *            Label for the widget.
+	 * @param widgetType
+	 *            Type of the widget to create.
+	 * @param regex
+	 *            A regex validation object.
+	 * @param vendorClass
+	 *            Class of a vendor specific widget implementation.
+	 * @return An <code>AbstractWidget</code> object.
+	 * @return A vendor widget object, null else.
+	 */
+	@SuppressWarnings("unchecked")
+	private AbstractWidget createVendorWidget(final Composite parent, final String label, WidgetTypes widgetType,
+			final RegexValidation regex, Class<?> vendorClass) {
+		Class<AbstractWidget> abstractWidgetClass = (Class<AbstractWidget>) vendorClass;
+		try {
+			return abstractWidgetClass.getConstructor(
+					new Class[] { Composite.class, int.class, String.class, RegexValidation.class }).newInstance(
+					parent, SWT.NONE, label, regex);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

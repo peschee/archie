@@ -49,13 +49,16 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 	private static final String DB_END_DATE = "DatumBis";
 	
 	private String comboValue;
+	private String customComboValue;
 
 	/**
 	 * Constructs Prescription Overview
 	 */
 	public PrescriptionsOverview() {
 		super(Messages.PRESCRIPTIONS_OVERVIEW_TITLE);
+		
 		this.comboValue = "Two";
+		this.customComboValue = CustomComboWidget.DEFAULT_SELECTED;
 	}
 
 	/**
@@ -174,5 +177,21 @@ public class PrescriptionsOverview extends AbstractTimeSeries {
 	@SetProperty(name = "Combo Test")
 	public void setComboValue(final String comboValue) {
 		this.comboValue = comboValue;
+	}
+	
+	/**
+	 * @return Value of the combo item set.
+	 */
+	@GetProperty(name = "Custom Combo Test", index = 11, widgetType = WidgetTypes.VENDOR, description = "Testing custom combos.", vendorClass = CustomComboWidget.class)
+	public String getCustomComboValue() {
+		return this.customComboValue;
+	}
+
+	/**
+	 * @param Sets the combo value.
+	 */
+	@SetProperty(name = "Custom Combo Test")
+	public void setCustomComboValue(final String comboValue) {
+		this.customComboValue = comboValue;
 	}
 }
