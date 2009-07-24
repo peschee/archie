@@ -176,10 +176,15 @@ public class ParametersPanel extends Composite {
 			}
 
 			/* ****************************************************************
-			 * Get string array and set the items if we have a Combo
+			 * Get string array and set the items if we have a Combo, that is:
 			 * ***************************************************************
+			 * 
+			 * - if there are any items
+			 * - if the widget is our combo widget
+			 * - if the widget is not a custom vendor widget
+			 * 
 			 */
-			if (getter.items().length > 0 && widget instanceof ComboWidget) {
+			if (getter.items().length > 0 && widget instanceof ComboWidget && getter.widgetType() != WidgetTypes.VENDOR) {
 				((ComboWidget) widget).setItems(getter.items());
 			}
 
