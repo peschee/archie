@@ -11,14 +11,10 @@
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.samples;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 
 import ch.unibe.iam.scg.archie.model.RegexValidation;
-import ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget;
+import ch.unibe.iam.scg.archie.ui.widgets.ComboWidget;
 
 /**
  * <p>
@@ -31,10 +27,10 @@ import ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class CustomComboWidget extends AbstractWidget {
-	
+public class CustomComboWidget extends ComboWidget {
+
 	public static final String DEFAULT_SELECTED = "Twenty";
-	
+
 	/**
 	 * @param parent
 	 * @param style
@@ -43,58 +39,9 @@ public class CustomComboWidget extends AbstractWidget {
 	public CustomComboWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
 		super(parent, style, labelText, regex);
 
-		// Create Label
-		this.label = new Label(this, SWT.NONE);
-		this.label.setText(labelText);
-
-		// Create Combo
-		this.control = new Combo(this, SWT.READ_ONLY);
-
-		// Layout Data
-		GridData layoutData = new GridData(SWT.FILL, SWT.FILL, true, false);
-		this.layout.horizontalSpacing = AbstractWidget.STD_COLUMN_HORIZONTAL_SPACING;
-		this.control.setLayoutData(layoutData);
-
 		// Populate combo items in a custom fashion. This can come out of a
 		// file, database or wherever you like most.
 		String[] items = new String[] { "Twenty", "Thirty", "Fourty" };
-		((Combo) this.control).setItems(items);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Object getValue() {
-		return ((Combo) this.control).getText();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isValid() {
-		return ((Combo) this.control).getSelectionIndex() > -1;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setValue(final Object value) {
-		if (value instanceof String) {
-			((Combo) this.control).setText(value.toString());
-		} else {
-			throw new IllegalArgumentException("Must be a string.");
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDescription(final String description) {
-		this.label.setToolTipText(description);
-		this.control.setToolTipText(description);
+		this.setItems(items);
 	}
 }
