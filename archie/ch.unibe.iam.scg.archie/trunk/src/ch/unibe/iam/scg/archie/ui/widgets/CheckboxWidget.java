@@ -17,8 +17,12 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import ch.unibe.iam.scg.archie.model.RegexValidation;
+
 /**
- * <p>A simple FieldComposite containing a checkbox button.</p>
+ * <p>
+ * A simple FieldComposite containing a checkbox button.
+ * </p>
  * 
  * $Id$
  * 
@@ -27,28 +31,31 @@ import org.eclipse.swt.widgets.Label;
  * @version $Rev$
  */
 public class CheckboxWidget extends AbstractWidget {
-	
+
 	/**
-	 * @param parent Composite
-	 * @param style Integer
-	 * @param labelText String
+	 * @param parent
+	 *            Composite
+	 * @param style
+	 *            Integer
+	 * @param labelText
+	 *            String
 	 */
-	public CheckboxWidget(Composite parent, int style, final String labelText) {
-		super(parent, style, labelText);
+	public CheckboxWidget(Composite parent, int style, final String labelText, RegexValidation regex) {
+		super(parent, style, labelText, regex);
 
 		// Create Label
 		this.label = new Label(this, SWT.NONE);
 		this.label.setText(labelText);
-		
+
 		// Create Checkbox
 		this.control = new Button(this, SWT.CHECK);
-		
+
 		// Layout Data
 		GridData layoutData = new GridData(GridData.GRAB_HORIZONTAL);
 		this.layout.horizontalSpacing = AbstractWidget.STD_COLUMN_HORIZONTAL_SPACING;
 		this.control.setLayoutData(layoutData);
 	}
-	
+
 	/**
 	 * @return true if checkbox is selected, false else.
 	 */
@@ -57,7 +64,7 @@ public class CheckboxWidget extends AbstractWidget {
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#getValue()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Object getValue() {
@@ -72,21 +79,20 @@ public class CheckboxWidget extends AbstractWidget {
 		return true;
 	}
 
-
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setValue(java.lang.Object)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setValue(final Object value) {
-		if(value instanceof Boolean) {
-			((Button) this.control).setSelection((Boolean) value);	
+		if (value instanceof Boolean) {
+			((Button) this.control).setSelection((Boolean) value);
 		} else {
-			throw new IllegalArgumentException("Must be a boolean.");	
+			throw new IllegalArgumentException("Must be a boolean.");
 		}
 	}
 
 	/**
-	 * @see ch.unibe.iam.scg.archie.ui.widgets.AbstractWidget#setDescription(java.lang.String)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDescription(String description) {
