@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
+import ch.elexis.util.Log;
+import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.annotations.GetProperty;
 import ch.unibe.iam.scg.archie.annotations.SetProperty;
 import ch.unibe.iam.scg.archie.model.AbstractDataProvider;
@@ -246,7 +248,6 @@ public class ParametersPanel extends Composite {
 	 *            Class of a vendor specific widget implementation.
 	 * @return An <code>AbstractWidget</code> object.
 	 */
-	@SuppressWarnings("unchecked")
 	private AbstractWidget createWidget(final Composite parent, final String label, WidgetTypes widgetType,
 			final RegexValidation regex, Class<?> vendorClass) {
 		switch (widgetType) {
@@ -305,9 +306,10 @@ public class ParametersPanel extends Composite {
 	@SuppressWarnings("unchecked")
 	private AbstractWidget createVendorWidget(final Composite parent, final String label, WidgetTypes widgetType,
 			final RegexValidation regex, Class<?> vendorClass) {
+		AbstractWidget widget = null;
 		Class<AbstractWidget> abstractWidgetClass = (Class<AbstractWidget>) vendorClass;
 		try {
-			return abstractWidgetClass.getConstructor(
+			widget = abstractWidgetClass.getConstructor(
 					new Class[] { Composite.class, int.class, String.class, RegexValidation.class }).newInstance(
 					parent, SWT.NONE, label, regex);
 		} catch (IllegalArgumentException e) {
@@ -323,6 +325,13 @@ public class ParametersPanel extends Composite {
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
-		return null;
+
+		// Log error as FATAL
+		if (widget == null) {
+			ArchieActivator.LOG.log("Could not create custom vendor widget. Widget class was: ["
+					+ vendorClass.getName() + "]", Log.FATALS);
+		}
+
+		return widget;
 	}
 }
