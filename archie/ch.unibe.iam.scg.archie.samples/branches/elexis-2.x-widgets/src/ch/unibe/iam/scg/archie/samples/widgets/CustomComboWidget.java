@@ -9,7 +9,7 @@
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
  *******************************************************************************/
-package ch.unibe.iam.scg.archie.samples;
+package ch.unibe.iam.scg.archie.samples.widgets;
 
 import org.eclipse.swt.widgets.Composite;
 
