@@ -27,8 +27,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.part.ViewPart;
 
-import ch.elexis.actions.GlobalEvents;
-import ch.elexis.actions.GlobalEvents.UserListener;
+import ch.elexis.actions.ElexisEvent;
+import ch.elexis.actions.ElexisEventDispatcher;
+import ch.elexis.actions.ElexisEventListenerImpl;
+import ch.elexis.data.Anwender;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.acl.ArchieACL;
 import ch.unibe.iam.scg.archie.actions.NewStatisticsAction;
@@ -48,7 +50,7 @@ import ch.unibe.iam.scg.archie.ui.DetailsPanel;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class SidebarView extends ViewPart implements IPropertyChangeListener, UserListener {
+public class SidebarView extends ViewPart implements IPropertyChangeListener {
 
 	/**
 	 * ID of this view.
@@ -60,6 +62,34 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 	protected DetailsPanel details;
 
 	protected AutoCompleteField autoComplete;
+
+	private ElexisEventListenerImpl eeli_user = new ElexisEventListenerImpl(Anwender.class,
+			ElexisEvent.EVENT_USER_CHANGED) {
+
+		@Override
+		public void runInUi(ElexisEvent ev) {
+			// Set enabled according to ACL.
+			boolean accessEnabled = ArchieACL.userHasAccess();
+			setEnabled(accessEnabled);
+
+			// If a user has no access at all, disable everything.
+			if (!accessEnabled) {
+				details.setCancelButtonEnabled(accessEnabled);
+				details.setActionEnabled(accessEnabled);
+				// If there's a provider currently selected, enable the query
+				// action.
+			} else if (list.getSelectionIndex() != -1) {
+				details.setActionEnabled(accessEnabled);
+			}
+
+			// Cancel any previous job if running.
+			if (ProviderManager.getInstance().hasProvider()) {
+				ProviderManager.getInstance().getProvider().cancel();
+			}
+
+		}
+
+	};
 
 	/**
 	 * @see org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets.Composite)
@@ -119,7 +149,7 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 		this.setEnabled(ArchieACL.userHasAccess());
 
 		// Register this view for UserChanged events.
-		GlobalEvents.getInstance().addUserListener(this);
+		ElexisEventDispatcher.getInstance().addListeners(eeli_user);
 	}
 
 	/**
@@ -178,30 +208,8 @@ public class SidebarView extends ViewPart implements IPropertyChangeListener, Us
 	@Override
 	public void dispose() {
 		ProviderManager.getInstance().setProvider(null);
+		ElexisEventDispatcher.getInstance().removeListeners(eeli_user);
 		super.dispose();
 	}
 
-	/**
-	 * @see ch.elexis.actions.GlobalEvents.UserListener#UserChanged()
-	 */
-	public void UserChanged() {
-		// Set enabled according to ACL.
-		boolean accessEnabled = ArchieACL.userHasAccess();
-		this.setEnabled(accessEnabled);
-
-		// If a user has no access at all, disable everything.
-		if (!accessEnabled) {
-			this.details.setCancelButtonEnabled(accessEnabled);
-			this.details.setActionEnabled(accessEnabled);
-			// If there's a provider currently selected, enable the query
-			// action.
-		} else if (this.list.getSelectionIndex() != -1) {
-			this.details.setActionEnabled(accessEnabled);
-		}
-
-		// Cancel any previous job if running.
-		if (ProviderManager.getInstance().hasProvider()) {
-			ProviderManager.getInstance().getProvider().cancel();
-		}
-	}
 }

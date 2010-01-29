@@ -8,6 +8,7 @@
  * Contributors:
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
+ *     Gerry Weirich - modifications for API Changes in 2.1 (ElexisEventDispatcher)
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.ui.views;
 
@@ -17,8 +18,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.ViewPart;
 
-import ch.elexis.actions.GlobalEvents;
-import ch.elexis.actions.GlobalEvents.UserListener;
+import ch.elexis.actions.ElexisEvent;
+import ch.elexis.actions.ElexisEventDispatcher;
+import ch.elexis.actions.ElexisEventListenerImpl;
+import ch.elexis.data.Anwender;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.acl.ArchieACL;
 import ch.unibe.iam.scg.archie.actions.ChartWizardAction;
@@ -28,8 +31,10 @@ import ch.unibe.iam.scg.archie.ui.GraphicalMessage;
 import ch.unibe.iam.scg.archie.ui.ResultPanel;
 
 /**
- * <p>This class contains all methods needed to display the output created by any
- * query.</p>
+ * <p>
+ * This class contains all methods needed to display the output created by any
+ * query.
+ * </p>
  * 
  * $Id$
  * 
@@ -37,7 +42,7 @@ import ch.unibe.iam.scg.archie.ui.ResultPanel;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class StatisticsView extends ViewPart implements UserListener {
+public class StatisticsView extends ViewPart {
 
 	/**
 	 * ID of this view.
@@ -54,11 +59,21 @@ public class StatisticsView extends ViewPart implements UserListener {
 
 	private ChartWizardAction chartWizardAction;
 
+	private ElexisEventListenerImpl eeli_user = new ElexisEventListenerImpl(Anwender.class,
+			ElexisEvent.EVENT_USER_CHANGED) {
+
+		@Override
+		public void runInUi(ElexisEvent ev) {
+			clean();
+			initialize();
+		}
+
+	};
+
 	/**
 	 * Public constructor.
 	 */
 	public StatisticsView() {
-		GlobalEvents.getInstance().addUserListener(this);
 	}
 
 	/**
@@ -74,6 +89,13 @@ public class StatisticsView extends ViewPart implements UserListener {
 
 		// initialize view contents
 		this.initialize();
+		ElexisEventDispatcher.getInstance().addListeners(eeli_user);
+	}
+
+	@Override
+	public void dispose() {
+		ElexisEventDispatcher.getInstance().removeListeners(eeli_user);
+		super.dispose();
 	}
 
 	/**
@@ -135,8 +157,8 @@ public class StatisticsView extends ViewPart implements UserListener {
 	}
 
 	/**
-	 * Returns the container of this view. This composite is used to populate the
-	 * view with other components.
+	 * Returns the container of this view. This composite is used to populate
+	 * the view with other components.
 	 * 
 	 * @return The composite container of this view.
 	 */
@@ -185,11 +207,4 @@ public class StatisticsView extends ViewPart implements UserListener {
 		this.chartWizardAction.setEnabled(enabled);
 	}
 
-	/**
-	 * @see ch.elexis.actions.GlobalEvents.UserListener#UserChanged()
-	 */
-	public void UserChanged() {
-		this.clean();
-		this.initialize();
-	}
 }
