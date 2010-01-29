@@ -8,6 +8,7 @@
  * Contributors:
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
+ *     Gerry Weirich . modifications for API Change in 2.1 (ElexisEventDispatcher)
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.ui.views;
 
@@ -24,8 +25,10 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.ViewPart;
 
 import ch.elexis.Desk;
-import ch.elexis.actions.GlobalEvents;
-import ch.elexis.actions.GlobalEvents.UserListener;
+import ch.elexis.actions.ElexisEvent;
+import ch.elexis.actions.ElexisEventDispatcher;
+import ch.elexis.actions.ElexisEventListener;
+import ch.elexis.data.Anwender;
 import ch.unibe.iam.scg.archie.ArchieActivator;
 import ch.unibe.iam.scg.archie.acl.ArchieACL;
 import ch.unibe.iam.scg.archie.actions.CreateChartsAction;
@@ -54,7 +57,7 @@ import ch.unibe.iam.scg.archie.ui.charts.PatientsConsHistChart;
  * @author Dennis Schenk
  * @version $Rev$
  */
-public class Dashboard extends ViewPart implements UserListener, IJobChangeListener {
+public class Dashboard extends ViewPart implements IJobChangeListener, ElexisEventListener {
 
 	/**
 	 * ID of this view.
@@ -70,7 +73,7 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 	 * Composite container of all parts in this view.
 	 */
 	private Composite container;
-	
+
 	/**
 	 * Upper part of the dashboard containing the system overview.
 	 */
@@ -108,7 +111,7 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 		this.charts = new ArrayList<AbstractChartComposite>(4);
 		this.jobCounter = 0;
 
-		GlobalEvents.getInstance().addUserListener(this);
+		ElexisEventDispatcher.getInstance().addListeners(this);
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////
@@ -292,10 +295,7 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 		this.initialize();
 	}
 
-	/**
-	 * @see ch.elexis.actions.GlobalEvents.UserListener#UserChanged()
-	 */
-	public void UserChanged() {
+	private void userChanged() {
 		// reset job counter
 		this.jobCounter = 0;
 
@@ -386,5 +386,21 @@ public class Dashboard extends ViewPart implements UserListener, IJobChangeListe
 	 */
 	public void sleeping(IJobChangeEvent event) {
 		// Nothing here...
+	}
+
+	/**
+	 * @{inheritDoc
+	 */
+	public void catchElexisEvent(ElexisEvent ev) {
+		userChanged();
+	}
+
+	/**
+	 * @{inheritDoc
+	 */
+	private final ElexisEvent eetmpl = new ElexisEvent(null, Anwender.class, ElexisEvent.EVENT_USER_CHANGED);
+
+	public ElexisEvent getElexisEventFilter() {
+		return eetmpl;
 	}
 }
