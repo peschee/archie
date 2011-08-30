@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Archie Statistics Plugin
 Bundle-SymbolicName: ch.unibe.iam.scg.archie;singleton:=true
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.1
 Bundle-Localization: src/ch/unibe/iam/scg/archie/i18n/messages
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  ch.elexis;bundle-version="1.4.0",
  ch.rgw.utility;bundle-version="1.0.0",
- ch.elexis.core;bundle-version="0.0.1"
+ ch.elexis.core;bundle-version="0.0.3"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: ch.unibe.iam.scg.archie.ArchieActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
