@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Dennis Schenk, Peter Siska.
+ * Copyright (c) 2008-2011 Dennis Schenk, Peter Siska.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
  * Contributors:
  *     Dennis Schenk - initial implementation
  *     Peter Siska	 - initial implementation
+ *     Gerry Weirich - Adapt to API Changes for 2.2
  *******************************************************************************/
 package ch.unibe.iam.scg.archie.samples;
 
@@ -24,7 +25,8 @@ import org.eclipse.core.runtime.Status;
 import org.jfree.data.statistics.Statistics;
 
 import ch.elexis.Hub;
-import ch.elexis.data.IDiagnose;
+import ch.elexis.core.data.IReason;
+import ch.elexis.data.Fall;
 import ch.elexis.data.Konsultation;
 import ch.elexis.data.Patient;
 import ch.elexis.data.Query;
@@ -35,7 +37,9 @@ import ch.unibe.iam.scg.archie.samples.i18n.Messages;
 import ch.unibe.iam.scg.archie.ui.widgets.WidgetTypes;
 
 /**
- * <p>Provides statistics about diagnoses count and age distribution.</p>
+ * <p>
+ * Provides statistics about diagnoses count and age distribution.
+ * </p>
  * 
  * $Id$
  * 
@@ -77,41 +81,46 @@ public class DiagnoseStats extends AbstractTimeSeries {
 		final List<Konsultation> consults = query.execute();
 
 		monitor.beginTask(Messages.CALCULATING, consults.size());
-		
+
 		final TreeMap<String, List<Patient>> diagnoseMap = new TreeMap<String, List<Patient>>();
-		
+
 		// Get consultations and their patient and diagnoses stats and put them
 		// all in a map that we can process later.
 		monitor.subTask("Grouping Consultations");
 		for (Konsultation consult : consults) {
 			// Check for Cancellation.
-			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
-			
-			List<IDiagnose> diagnoses = consult.getDiagnosen();
-			Patient patient = consult.getFall().getPatient();
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
 
-			for (IDiagnose diagnose : diagnoses) {
-				List<Patient> patientList = diagnoseMap.get(diagnose.getLabel());
+			List<IReason> diagnoses = consult.getReasons();
+			Fall fall = (Fall) consult.getCustomerRelation();
+			if (fall != null && fall.exists()) {
+				Patient patient = fall.getPatient();
 
-				if (patientList != null) {
-					patientList.add(patient);
-				} else {
-					ArrayList<Patient> list = new ArrayList<Patient>();
-					list.add(patient);
-					diagnoseMap.put(diagnose.getLabel(), list);
+				for (IReason diagnose : diagnoses) {
+					List<Patient> patientList = diagnoseMap.get(diagnose.getLabel());
+
+					if (patientList != null) {
+						patientList.add(patient);
+					} else {
+						ArrayList<Patient> list = new ArrayList<Patient>();
+						list.add(patient);
+						diagnoseMap.put(diagnose.getLabel(), list);
+					}
 				}
 			}
 			monitor.worked(1);
 		}
 
 		final ArrayList<Comparable<?>[]> result = new ArrayList<Comparable<?>[]>();
-		
+
 		// Build up result list from diagnose map.
 		monitor.subTask("Computing Results");
 		for (Entry<String, List<Patient>> entry : diagnoseMap.entrySet()) {
 			// Check for cancellation.
-			if(monitor.isCanceled()) return Status.CANCEL_STATUS;
-			
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+
 			Comparable<?>[] row = new Comparable<?>[this.dataSet.getHeadings().size()];
 			List<Patient> patients = entry.getValue();
 			int column = 0;
@@ -143,7 +152,7 @@ public class DiagnoseStats extends AbstractTimeSeries {
 
 			result.add(row);
 		}
-		
+
 		// Set content.
 		this.dataSet.setContent(result);
 
